@@ -12,6 +12,7 @@ function App() {
       <Routes>
         //TODO create routes
       </Routes>
+      <body className='h-screen'></body>
     </>
   )
 }

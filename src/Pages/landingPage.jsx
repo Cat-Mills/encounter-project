@@ -3,13 +3,17 @@ import axios from "axios"
 
 
 const Landing = () => {   
-    //TODO make useState props for register, username and password
+    //TODO make useState props for register, togglePassword, username and password
 
 
     const handleFormSubmit = e => {
         e.preventDefault()
 
-        axios.post(register ? '/api/register' : '/api/login', {username, password})
+        axios
+        .post(register ? '/api/register' : '/api/login', {
+            username, 
+            password
+        })
         .then(res => {
             console.log(res.data)
         })
