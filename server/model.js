@@ -113,12 +113,19 @@ Player.init(
 User.hasMany(Campaign, {foreignKey: 'userId'})
 Campaign.belongsTo(User, {foreignKey: 'userId'})
 
+Campaign.hasMany(Encounter, {foreignKey: 'campaignId'})
+Encounter.belongsTo(Campaign, {foreignKey: 'campaignId'})
+
+Campaign.hasMany(Player, {foreignKey: 'campaignId'})
+Player.belongsTo(Campaign, {foreignKey: 'campaignId'})
+
 
 
 if(process.argv[1] === url.fileURLToPath(import.meta.url)) {
     console.log('Syncing database...');
     await db.sync();
     console.log('Finished syncing database!');
+    await db.close()
 }
 
 //export models

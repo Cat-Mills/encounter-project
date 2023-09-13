@@ -1,12 +1,12 @@
-import {Campaign} from '../model.js'
+import { Campaign } from '../model.js'
 
 export default {
     //create new campaign
     addCampaign: async (req, res) => {
         try {
             console.log('hit addCampaign')
-            const {campaignName} = req.body
-            await Campaign.create({campaignName})
+            const { campaignName } = req.body
+            await Campaign.create({ campaignName })
             res.send(200)
         } catch (err) {
             console.log(err)
@@ -18,7 +18,7 @@ export default {
         try {
             const campaigns = await Campaign.findAll()
             res.status(200).send(campaigns)
-        } catch(theseHands){
+        } catch (theseHands) {
             console.log(theseHands)
             res.sendStatus(500)
         }
