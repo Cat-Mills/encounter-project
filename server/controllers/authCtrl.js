@@ -32,13 +32,43 @@ export default {
 
     login: async (req, res) => {
         console.log('login')
+        try {
+            const {username, password} = req.body
+            const foundUser = await User.findOne({where: {username}})
+
+            if(!foundUser){
+                res.status(400).send('There was no user found with that username')
+            } else {
+                const isAuthenticated = bcrypt.compareSync(password, foundUser.hashedPass)
+                if(isAuthenticated){
+                    req.session.user = {
+                        userId: foundUser.userId,
+                        username: foundUser.username
+                    }
+                    res.status(200).send(req.session.user)
+                } else {
+                    res.status(401).send('Password is incorrect')
+                }
+            }
+
+        } catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
     },
 
     checkUser: async (req, res) => {
         console.log('checkUser')
+        if(req.session.user){
+            res.status(200).send(req.session.user)
+        } else {
+            res.status(400).send('There is no user on the session')
+        }
     },
 
     logout: async (req, res) => {
         console.log('logout')
+        req.session.destroy()
+        res.status(200).send('You have logged out')
     }
 }
