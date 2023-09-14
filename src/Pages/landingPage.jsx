@@ -3,14 +3,16 @@ import axios from "axios"
 import React from "react"
 import Register from "../Elements/Register.jsx"
 import Login from "../Elements/Login.jsx"
+import { useDispatch } from "react-redux"
 
 
 const Landing = () => {   
-    //TODO make useState props for register, togglePassword, username and password
+    
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [register, setRegister] = useState(true)
     const [togglePassword, setTogglePassword] = useState(false)
+    const dispatch = useDispatch()
     //TODO make a button that toggles visual passwords in input field.
     
 
@@ -25,12 +27,13 @@ const Landing = () => {
         .then(res => {
             console.log(res.data)
             //TODO dispatch redux to put the userId on global state, then redirect user to home page.
+            dispatch({type: "LOGIN", payload: res.data.userId})
         })
         .catch(err => console.log(err))
     }
 
 
-    //TODO render login and register components here //
+
     return (
         <>
         { register ? 

@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 import Header from "./Elements/Header"
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Landing from './Pages/landingPage.jsx'
 import Monsters from './Pages/monstersPage.jsx'
 import Encounters from './Pages/encountersPage.jsx'
@@ -11,17 +12,21 @@ import Profile from './Pages/profilePage.jsx'
 
 
 function App() {
+  const userId = useSelector(state => state.userId)
 
   return (
     <>
       <Header />
       <Routes>
-        //TODO create routes
-        <Route path='/' element={<Landing />}/>
-        <Route path='/monsters' element={<Monsters/>}/>
-        <Route path='/Encounters' element={<Encounters/>}/>
-        <Route path='/Campaigns' element={<Campaigns/>}/>
-        <Route path='/Profile' element={<Profile/>}/>
+        <Route path='/' index element={userId ? <Navigate to='/Encounters'/> : <Landing />} />
+
+        <Route path='/monsters' element={userId ? <Monsters/> : <Navigate to='/'/> }/>
+
+        <Route path='/Encounters' element={userId ? <Encounters/> : <Navigate to='/'/> }/>
+
+        <Route path='/Campaigns' element={userId ? <Campaigns/> : <Navigate to='/'/> }/>
+
+        <Route path='/Profile' element={userId ? <Profile/> : <Navigate to='/'/> }/>
       </Routes>
     </>
   )
