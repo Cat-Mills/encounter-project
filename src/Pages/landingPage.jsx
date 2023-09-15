@@ -26,7 +26,6 @@ const Landing = () => {
         })
         .then(res => {
             console.log(res.data)
-            //TODO dispatch redux to put the userId on global state, then redirect user to home page.
             dispatch({type: "LOGIN", payload: res.data.userId})
         })
         .catch(err => console.log(err))

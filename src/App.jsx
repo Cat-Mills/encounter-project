@@ -24,7 +24,7 @@ function App() {
 
         <Route path='/Encounters' element={userId ? <Encounters/> : <Navigate to='/'/> }/>
 
-        <Route path='/Campaigns' element={userId ? <Campaigns/> : <Navigate to='/'/> }/>
+        <Route path='/campaigns' element={userId ? <Campaigns/> : <Navigate to='/'/> }/>
 
         <Route path='/Profile' element={userId ? <Profile/> : <Navigate to='/'/> }/>
       </Routes>

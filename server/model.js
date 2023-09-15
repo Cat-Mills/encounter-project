@@ -45,7 +45,9 @@ Campaign.init(
         },
         campaignName: {
             type: DataTypes.STRING(30),
+            defaultValue: "Campaign",
             allowNull: false
+
         },
     },
     {

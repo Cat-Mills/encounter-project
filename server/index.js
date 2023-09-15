@@ -4,7 +4,7 @@ import session from "express-session";
 import campCtrl from './controllers/campaignCtrl.js'
 import authCtrl from './controllers/authCtrl.js'
 
-const {addCampaign, getAllCampaigns} = campCtrl
+const {addCampaign, getAllCampaigns, deleteCampaign} = campCtrl
 const {register, login, checkUser, logout} = authCtrl
 
 const app = express()
@@ -22,21 +22,21 @@ app.use(session({
     }
 }))
 
-//endpoints
-app.get('/campaigns', getAllCampaigns)
-app.post('/campaigns', addCampaign)
-app.put('/campaigns')
-app.delete('/campaigns')
+//TODO endpoints
+app.get('/api/campaigns', getAllCampaigns)
+app.post('/api/campaigns', addCampaign)
+// app.put('/api/campaigns')
+app.delete('/api/campaigns/:campaignId', deleteCampaign)
 
-app.get('/players')
-app.post('/players')
-app.put('/players')
-app.delete('/players')
+// app.get('/players')
+// app.post('/players')
+// app.put('/players')
+// app.delete('/players')
 
-app.get('/encounters')
-app.post('/encounters')
-app.put('/encounters')
-app.delete('/encounters')
+// app.get('/encounters')
+// app.post('/encounters')
+// app.put('/encounters')
+// app.delete('/encounters')
 
 //authentication endpoints
 app.post('/api/register', register)

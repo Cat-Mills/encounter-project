@@ -6,7 +6,7 @@ export default {
         try {
             console.log('hit addCampaign')
             const { campaignName } = req.body
-            await Campaign.create({ campaignName })
+            await Campaign.create({ campaignName, userId: req.session.user.userId })
             res.send(200)
         } catch (err) {
             console.log(err)
@@ -16,11 +16,22 @@ export default {
 
     getAllCampaigns: async (req, res) => {
         try {
-            const campaigns = await Campaign.findAll()
+            console.log(req.session.user)
+            const campaigns = await Campaign.findAll({where: {userId: req.session.user.userId}})
             res.status(200).send(campaigns)
         } catch (theseHands) {
             console.log(theseHands)
             res.sendStatus(500)
+        }
+    },
+
+    deleteCampaign: async (req, res) => {
+        try{
+            const {campaignId} = req.params
+            await Campaign.destroy({where: {campaignId: campaignId}})
+        } catch(err) {
+            console.log(err)
+            res.status(400).send("Couldn't delete campaign")
         }
     }
 }
