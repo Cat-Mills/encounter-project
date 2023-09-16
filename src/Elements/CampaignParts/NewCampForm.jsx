@@ -1,9 +1,11 @@
 import axios from "axios";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
-export default function NewCampForm({campaignName, setCampaignName, setShowModal}) {
+export default function NewCampForm({campaignName, setCampaignName, setShowModal, getCampaignTables}) {
+
 
     //axios func(like in landing page)
     const handleFormSubmit = e => {
@@ -15,6 +17,7 @@ export default function NewCampForm({campaignName, setCampaignName, setShowModal
             console.log(res.data)
             alert("Campaign Created!")
             setShowModal(false)
+            getCampaignTables()
         })
         .catch(err => console.log(err))
     }

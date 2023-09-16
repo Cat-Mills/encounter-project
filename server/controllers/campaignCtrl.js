@@ -26,9 +26,11 @@ export default {
     },
 
     deleteCampaign: async (req, res) => {
+        console.log('delete Campaign')
         try{
             const {campaignId} = req.params
             await Campaign.destroy({where: {campaignId: campaignId}})
+            res.sendStatus(200)
         } catch(err) {
             console.log(err)
             res.status(400).send("Couldn't delete campaign")

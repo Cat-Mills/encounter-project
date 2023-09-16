@@ -33,7 +33,7 @@ const CampTable = () => {
                 </div>
                 <div>
                     {campaignList.map(campaign => (
-                        <Rows campaign={campaign} />
+                        <Rows key={campaign.campaignId} campaign={campaign} getCampaignTables={getCampaignTables} />
                     ))}
                 </div>
             </div>
@@ -42,6 +42,7 @@ const CampTable = () => {
             setCampaignName={setCampaignName}
             campaignName={campaignName}
             setShowModal={setShowModal}
+            getCampaignTables={getCampaignTables}
             />) : (<button onClick={() => setShowModal(true)}>Create New Campaign</button>)}
         </div>
     )

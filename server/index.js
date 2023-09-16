@@ -3,9 +3,11 @@ import ViteExpress from 'vite-express'
 import session from "express-session";
 import campCtrl from './controllers/campaignCtrl.js'
 import authCtrl from './controllers/authCtrl.js'
+import playerCtrl from "./controllers/playerCtrl.js";
 
 const {addCampaign, getAllCampaigns, deleteCampaign} = campCtrl
 const {register, login, checkUser, logout} = authCtrl
+const {getPlayers, addPlayer, deletePlayer} = playerCtrl
 
 const app = express()
 const PORT = 2222
@@ -28,10 +30,10 @@ app.post('/api/campaigns', addCampaign)
 // app.put('/api/campaigns')
 app.delete('/api/campaigns/:campaignId', deleteCampaign)
 
-// app.get('/players')
-// app.post('/players')
-// app.put('/players')
-// app.delete('/players')
+app.get('/api/players', getPlayers)
+app.post('/api/players', addPlayer)
+app.put('/players')
+app.delete('/api/players/:playerId', deletePlayer)
 
 // app.get('/encounters')
 // app.post('/encounters')
