@@ -4,10 +4,10 @@ export default {
 
     getPlayers: async (req, res) => {
         try {
-            //BUG error: column player.userId does not exist
+            console.log(req.params)
             const players = await Player.findAll(
-                // {where: {userId: req.session.user.userId}}
-                )
+                {where: {campaignId: +req.params.campaignId}}
+            )
             res.status(200).send(players)
         } catch(theseHands) {
             console.log(theseHands) 
@@ -19,7 +19,8 @@ export default {
         try {
             console.log('hit addPlayer')
             const { playerName, playerLv, playerHP, playerAC, playerInit } = req.body
-            await Player.create({ playerName, playerLv, playerHP, playerAC, playerInit, campaignId: req.campaign.campaignId })
+            await Player.create({ playerName, playerLv, playerHP, playerAC, playerInit, campaignId: req.params.campaignId })
+            res.status(200).send("New Player Added")
         } catch(err) {
             console.log(err)
             res.sendStatus(500)

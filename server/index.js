@@ -30,8 +30,8 @@ app.post('/api/campaigns', addCampaign)
 // app.put('/api/campaigns')
 app.delete('/api/campaigns/:campaignId', deleteCampaign)
 
-app.get('/api/players', getPlayers)
-app.post('/api/players', addPlayer)
+app.get('/api/players/:campaignId', getPlayers)
+app.post('/api/players/:campaignId', addPlayer)
 app.put('/players')
 app.delete('/api/players/:playerId', deletePlayer)
 

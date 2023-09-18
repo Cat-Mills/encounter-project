@@ -1,5 +1,6 @@
 import connectToDB from "./db.js";
 import {Campaign, User} from './model.js'
+import bcrypt from 'bcryptjs'
 
 const db = await connectToDB('postgresql:///encounterdb')
 

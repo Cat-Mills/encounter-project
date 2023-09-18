@@ -6,13 +6,25 @@ import DisplayPlayers from "./DisplayPlayers.jsx";
 
 export default function CampRows({campaign, getCampaignTables}){
     const navigate = useNavigate()
+    const [isEditing, setIsEditing] = useState(false)
     const [showPlayers, setShowPlayers] = useState(false)
     const [playerRows, setPlayerRows] = useState([])
-    const [playerName, setPlayerName] = useState('')
-    const [playerLv, setPlayerLv] = useState(null)
-    const [playerHP, setPlayerHP] = useState(null)
-    const [playerAC, setPlayerAC] = useState(null)
-    const [playerInit, setPlayerInit] = useState(null)
+
+    const getPlayerRows = () => {
+        axios.get(`/api/players/${campaign.campaignId}`)
+            .then(res => setPlayerRows(res.data))
+            .catch(err => console.log(err))
+    }
+    useEffect(()=>{getPlayerRows()}, [])
+
+    const addPlayer = (e) => {
+        e.preventDefault()
+        axios
+        .post(`/api/players/${campaign.campaignId}`,
+        {playerName}
+        )
+    }
+
 
     const deleteCampaign = () => {
         axios.delete(`/api/campaigns/${campaign.campaignId}`)
@@ -24,19 +36,6 @@ export default function CampRows({campaign, getCampaignTables}){
         .catch(err => console.log(err))
     }
 
-    const getPlayerRows = () => {
-        axios.get('/api/players')
-            .then(res => setPlayerRows(res.data))
-            .catch(err => console.log(err))
-    }
-
-    useEffect(()=>{getPlayerRows()}, [])
-
-
-    const AddPlayer = () => {
-
-    }
-
     return(
         <div>
             <div className="border-solid border border-spacing-1 flex justify-between">
@@ -44,17 +43,31 @@ export default function CampRows({campaign, getCampaignTables}){
                 {/* <p> Players: array.length </p> */}
                 <button onClick={deleteCampaign}>Delete</button>
             </div>
-                {showPlayers ? 
-                // playerRows.map(player => 
+                {showPlayers && playerRows[0] && 
+                playerRows.map(player => 
                 (
-                    <DisplayPlayers setShowPlayers={setShowPlayers}
-                    // key={player.playerId} player={player} getPlayerRows={getPlayerRows} 
+                    
+                <div key={player.playerId}>
+                    <DisplayPlayers  
+                    setShowPlayers={setShowPlayers}
+                    player={player} 
+                    setIsEditing={setIsEditing}
+                    isEditing={isEditing}
+                    campaign={campaign}
+                    getPlayerRows={getPlayerRows}
                     />
-                    )
-                // )
-                : 
-                (<button onClick={() => setShowPlayers(true)}>v</button>) }
+                </div>))}
+                
+                {!showPlayers && <button onClick={() => {setShowPlayers(true)}}>v</button>}
+                
+            
 
+            {showPlayers && 
+            <div>
+                <button >add</button>
+                <button onClick={() => setShowPlayers(false)}>X</button>
+            </div>
+            } 
         </div>
     )
 }
