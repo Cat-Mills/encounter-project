@@ -27,6 +27,19 @@ export default {
         }
     },
 
+    editPlayer: async (req, res) => {
+        try {
+            console.log("hit editPlayer")
+            const { playerId, playerName, playerLv, playerHP, playerAC, playerInit } = req.body
+            await Player.update({playerName, playerLv, playerHP, playerAC, playerInit}, {where: {playerId: playerId}})
+            const updatedPlayer = await Player.findOne()
+            res.status(200).send(updatedPlayer)
+        } catch(err){
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
     deletePlayer: async (req, res) => {
         console.log('delete player')
         try{

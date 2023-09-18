@@ -58,8 +58,8 @@ export default function CampRows({campaign, getCampaignTables}){
 
     return(
         <div>
-            <div className="border-solid border border-spacing-1 flex justify-between">
-                <h2>{campaign.campaignName}</h2>
+            <div className="border-solid border border-spacing-1 flex justify-around bg-red-900">
+                <h2 className="font-bold capitalize text-lg">{campaign.campaignName}</h2>
                 {/* <p> Players: array.length </p> */}
                 <button onClick={deleteCampaign}>Delete</button>
             </div>
