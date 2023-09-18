@@ -6,23 +6,35 @@ import DisplayPlayers from "./DisplayPlayers.jsx";
 
 export default function CampRows({campaign, getCampaignTables}){
     const navigate = useNavigate()
-    const [isEditing, setIsEditing] = useState(false)
+    
     const [showPlayers, setShowPlayers] = useState(false)
     const [playerRows, setPlayerRows] = useState([])
+    const [playerName, setPlayerName] = useState('')
+    const [playerLv, setPlayerLv] = useState('')
+    const [playerHP, setPlayerHP] = useState('')
+    const [playerAC, setPlayerAC] = useState('')
+    const [playerInit, setPlayerInit] = useState('')
+    const [showPlayerForm, setShowPlayerForm] = useState(false)
 
     const getPlayerRows = () => {
         axios.get(`/api/players/${campaign.campaignId}`)
             .then(res => setPlayerRows(res.data))
             .catch(err => console.log(err))
     }
-    useEffect(()=>{getPlayerRows()}, [])
 
-    const addPlayer = (e) => {
-        e.preventDefault()
+    useEffect(()=>{getPlayerRows()}, [])
+    
+    const addPlayer = () => {
         axios
         .post(`/api/players/${campaign.campaignId}`,
-        {playerName}
+        {playerName, playerLv, playerHP, playerAC, playerInit}
         )
+        .then(res => {
+            console.log(res.data)
+            alert("Player Added!")
+            getPlayerRows()
+            clear()
+        })
     }
 
 
@@ -34,6 +46,14 @@ export default function CampRows({campaign, getCampaignTables}){
             getCampaignTables()
         })
         .catch(err => console.log(err))
+    }
+
+    function clear(){
+        setPlayerName('')
+        setPlayerLv('')
+        setPlayerHP('')
+        setPlayerAC('')
+        setPlayerInit('')
     }
 
     return(
@@ -51,8 +71,6 @@ export default function CampRows({campaign, getCampaignTables}){
                     <DisplayPlayers  
                     setShowPlayers={setShowPlayers}
                     player={player} 
-                    setIsEditing={setIsEditing}
-                    isEditing={isEditing}
                     campaign={campaign}
                     getPlayerRows={getPlayerRows}
                     />
@@ -64,10 +82,22 @@ export default function CampRows({campaign, getCampaignTables}){
 
             {showPlayers && 
             <div>
-                <button >add</button>
+                <button onClick={() => setShowPlayerForm(true)}>+</button>
                 <button onClick={() => setShowPlayers(false)}>X</button>
             </div>
             } 
+            {showPlayerForm &&
+            <form onSubmit={e => {addPlayer(e); setShowPlayerForm(false)}}>
+            <h3>Create a new player</h3>
+            <input type="text" placeholder="Name" value={playerName} onChange={e => setPlayerName(e.target.value)} />
+            <input type="text" placeholder="Level" value={playerLv} onChange={e => setPlayerLv(e.target.value)} />
+            <input type="text" placeholder="HP" value={playerHP} onChange={e => setPlayerHP(e.target.value)} />
+            <input type="text" placeholder="AC" value={playerAC} onChange={e => setPlayerAC(e.target.value)} />
+            <input type="text" placeholder="Initiative Bonus" value={playerInit} onChange={e => setPlayerInit(e.target.value)} />
+
+            <button type="submit" >Submit</button>
+            <button onClick={() => setShowPlayerForm(false)}>Cancel</button>
+        </form>}
         </div>
     )
 }

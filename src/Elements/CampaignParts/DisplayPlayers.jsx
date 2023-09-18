@@ -1,13 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 
-const DisplayPlayers = ({setIsEditing, isEditing, player, setPlayerRows, campaign, getPlayerRows}) => {
-    const [playerName, setPlayerName] = useState('')
-    const [playerLv, setPlayerLv] = useState(null)
-    const [playerHP, setPlayerHP] = useState(null)
-    const [playerAC, setPlayerAC] = useState(null)
-    const [playerInit, setPlayerInit] = useState(null)
-
+const DisplayPlayers = ({player, campaign, getPlayerRows}) => {
+    
+    const [isEditing, setIsEditing] = useState(false)
     
 
 
@@ -25,14 +21,26 @@ const DisplayPlayers = ({setIsEditing, isEditing, player, setPlayerRows, campaig
 
     return(
         <div className="flex flex-col">
-            <div className="flex flex-row">
-            {/* <div>Player1  lv:__ HP:__ AC:__ Init:__</div> */}
-            <div> {player.playerName} </div>
-            <button onClick={() => setIsEditing(true)}>edit</button>
-            <button onClick={() => deletePlayer()}>del</button>
+            {!isEditing &&
+            <div className="flex flex-row justify-evenly p-1">
+                <div className="p-2"> {player.playerName} </div>
+                <div className="p-2"> Lv: {player.playerLv} </div>
+                <div className="p-2"> HP: {player.playerHP} </div>
+                <div className="p-2"> AC: {player.playerAC} </div>
+                <div className="p-2"> +{player.playerInit} initiative </div>
+                <button onClick={() => setIsEditing(true)}>edit</button>
+                <button onClick={() => deletePlayer()}>del</button>
+            </div>}
+            {isEditing &&
+            <div className="flex flex-row justify-evenly p-1">
+                <button 
+                onClick={() => {
+                    setIsEditing(false)
+                    
+                    }}
+                >Save</button>
             </div>
-            <div>
-            </div>
+            }
         </div>
     )
 }
