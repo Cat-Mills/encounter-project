@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import PlayerForm from "./PlayerForm.jsx"
 
 const DisplayPlayers = ({player, campaign, getPlayerRows}) => {
     
@@ -21,7 +22,7 @@ const DisplayPlayers = ({player, campaign, getPlayerRows}) => {
 
     return(
         <div className="flex flex-col">
-            {!isEditing &&
+            {!isEditing ?
             <div className="flex flex-row justify-evenly p-1">
                 <div className="p-2"> {player.playerName} </div>
                 <div className="p-2"> Lv: {player.playerLv} </div>
@@ -30,15 +31,19 @@ const DisplayPlayers = ({player, campaign, getPlayerRows}) => {
                 <div className="p-2"> +{player.playerInit} initiative </div>
                 <button onClick={() => setIsEditing(true)}>edit</button>
                 <button onClick={() => deletePlayer()}>del</button>
-            </div>}
-            {isEditing &&
+            </div>
+            :
             <div className="flex flex-row justify-evenly p-1">
-                <button 
+                <PlayerForm
+                setShowPlayerForm={setIsEditing}
+                getPlayerRows={getPlayerRows}
+                player={player}
+                />
+                {/* <button 
                 onClick={() => {
                     setIsEditing(false)
-                    
                     }}
-                >Save</button>
+                >cancel</button> */}
             </div>
             }
         </div>

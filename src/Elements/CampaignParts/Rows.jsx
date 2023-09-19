@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DisplayPlayers from "./DisplayPlayers.jsx";
+import PlayerForm from "./PlayerForm.jsx";
 
 export default function CampRows({campaign, getCampaignTables}){
     const navigate = useNavigate()
@@ -23,7 +24,7 @@ export default function CampRows({campaign, getCampaignTables}){
     }
 
     useEffect(()=>{getPlayerRows()}, [])
-    
+
     const addPlayer = () => {
         axios
         .post(`/api/players/${campaign.campaignId}`,
@@ -37,6 +38,13 @@ export default function CampRows({campaign, getCampaignTables}){
         })
     }
 
+    function clear(){
+        setPlayerName('')
+        setPlayerLv('')
+        setPlayerHP('')
+        setPlayerAC('')
+        setPlayerInit('')
+    }
 
     const deleteCampaign = () => {
         axios.delete(`/api/campaigns/${campaign.campaignId}`)
@@ -48,20 +56,14 @@ export default function CampRows({campaign, getCampaignTables}){
         .catch(err => console.log(err))
     }
 
-    function clear(){
-        setPlayerName('')
-        setPlayerLv('')
-        setPlayerHP('')
-        setPlayerAC('')
-        setPlayerInit('')
-    }
-
     return(
         <div>
             <div className="border-solid border border-spacing-1 flex justify-around bg-red-900">
                 <h2 className="font-bold capitalize text-lg">{campaign.campaignName}</h2>
                 {/* <p> Players: array.length </p> */}
                 <button onClick={deleteCampaign}>Delete</button>
+                {!showPlayers && <button onClick={() => {setShowPlayers(true)}}>v</button>}
+                {showPlayers && <button onClick={() => setShowPlayers(false)}>X</button>}
             </div>
                 {showPlayers && playerRows[0] && 
                 playerRows.map(player => 
@@ -76,28 +78,48 @@ export default function CampRows({campaign, getCampaignTables}){
                     />
                 </div>))}
                 
-                {!showPlayers && <button onClick={() => {setShowPlayers(true)}}>v</button>}
                 
             
 
             {showPlayers && 
             <div>
-                <button onClick={() => setShowPlayerForm(true)}>+</button>
-                <button onClick={() => setShowPlayers(false)}>X</button>
+                <button className="bg-green-500" onClick={() => setShowPlayerForm(true)}>Add Player</button>
             </div>
             } 
             {showPlayerForm &&
-            <form onSubmit={e => {addPlayer(e); setShowPlayerForm(false)}}>
-            <h3>Create a new player</h3>
-            <input type="text" placeholder="Name" value={playerName} onChange={e => setPlayerName(e.target.value)} />
-            <input type="text" placeholder="Level" value={playerLv} onChange={e => setPlayerLv(e.target.value)} />
-            <input type="text" placeholder="HP" value={playerHP} onChange={e => setPlayerHP(e.target.value)} />
-            <input type="text" placeholder="AC" value={playerAC} onChange={e => setPlayerAC(e.target.value)} />
-            <input type="text" placeholder="Initiative Bonus" value={playerInit} onChange={e => setPlayerInit(e.target.value)} />
+            <div>
+                {/* <PlayerForm
+                setShowPlayerForm={setShowPlayerForm}
+                getPlayerRows={getPlayerRows}
+                playerName={playerName}
+                playerLv={playerLv}
+                playerHP={playerHP}
+                playerInit={playerInit}
+                setPlayerName={setPlayerHP}
+                setPlayerLv={setPlayerLv}
+                setPlayerHP={setPlayerHP}
+                playerAC={playerAC}
+                setPlayerAC={setPlayerAC}
+                setPlayerInit={setPlayerInit}
+                campaign={campaign}
+                />  */}
+                <form onSubmit={e => {addPlayer(e) ; setShowPlayerForm(false)}}>
+    <h3>Create a new player</h3>
+    <input type="text" placeholder="Name" value={playerName} onChange={e => setPlayerName(e.target.value)} />
 
-            <button type="submit" >Submit</button>
-            <button onClick={() => setShowPlayerForm(false)}>Cancel</button>
-        </form>}
+    <input type="text" placeholder="Level" value={playerLv} onChange={e => setPlayerLv(e.target.value)} />
+
+    <input type="text" placeholder="HP" value={playerHP} onChange={e => setPlayerHP(e.target.value)} />
+
+    <input type="text" placeholder="AC" value={playerAC} onChange={e => setPlayerAC(e.target.value)} />
+
+    <input type="text" placeholder="Initiative Bonus" value={playerInit} onChange={e => setPlayerInit(e.target.value)} />
+
+    <button type="submit" >Submit</button>
+    <button onClick={() => setShowPlayerForm(false)}>Cancel</button>
+</form>
+            </div>
+}
         </div>
-    )
+)
 }

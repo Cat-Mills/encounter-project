@@ -1,6 +1,6 @@
 
 export default function TableHeader(){
     return(
-        <h4>Table header?</h4>
+        <h4></h4>
     )
 }

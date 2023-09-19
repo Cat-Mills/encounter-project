@@ -26,7 +26,7 @@ const CampTable = () => {
 
 
     return (
-        <div>
+        <div className="min-w-full">
             <div>
                 <div>
                     <TableHeader />

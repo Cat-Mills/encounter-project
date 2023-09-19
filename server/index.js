@@ -7,7 +7,7 @@ import playerCtrl from "./controllers/playerCtrl.js";
 
 const {addCampaign, getAllCampaigns, deleteCampaign} = campCtrl
 const {register, login, checkUser, logout} = authCtrl
-const {getPlayers, addPlayer, deletePlayer} = playerCtrl
+const {getPlayers, addPlayer, deletePlayer, editPlayer} = playerCtrl
 
 const app = express()
 const PORT = 2222
@@ -32,7 +32,7 @@ app.delete('/api/campaigns/:campaignId', deleteCampaign)
 
 app.get('/api/players/:campaignId', getPlayers)
 app.post('/api/players/:campaignId', addPlayer)
-app.put('/players')
+app.put('/api/players/:playerId', editPlayer)
 app.delete('/api/players/:playerId', deletePlayer)
 
 // app.get('/encounters')

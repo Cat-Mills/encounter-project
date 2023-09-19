@@ -30,9 +30,11 @@ export default {
     editPlayer: async (req, res) => {
         try {
             console.log("hit editPlayer")
-            const { playerId, playerName, playerLv, playerHP, playerAC, playerInit } = req.body
+            const { playerName, playerLv, playerHP, playerAC, playerInit } = req.body
+            const {playerId} = req.params
             await Player.update({playerName, playerLv, playerHP, playerAC, playerInit}, {where: {playerId: playerId}})
-            const updatedPlayer = await Player.findOne()
+
+            const updatedPlayer = await Player.findOne({where: {playerId}})
             res.status(200).send(updatedPlayer)
         } catch(err){
             console.log(err)
