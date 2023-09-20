@@ -9,20 +9,22 @@ const EncTable = () => {
     const [encounterList, setEncounterList] = useState([])
     const [encounterName, setEncounterName] = useState('')
     const [showModal, setShowModal] = useState(false)
-
-
+    const [usersCampaigns, setUsersCampaigns] = useState([])
+    const [campaignKey, setCampaignKey] = useState(undefined)
+    
+    
     const getEncounterTables = () => {
-        //TODO fix the req.session so it saves the userId
-        // const userId = useSelector(state => state.userId)
-        const userId = 1
-
-        axios.get(`/api/encounters/${userId}`)
-            .then(res => setEncounterList(res.data))
-            .catch(err => console.log(err))
+        axios.get(`/api/encounters`)
+        .then(res => setEncounterList(res.data))
+        .catch(err => console.log(err))
+        
     }
-
-    const deleteEncounter = () => {
-        axios.delete(`api/encounters/${encounter.encounterId}`)
+    useEffect(() => { getEncounterTables() }, [])
+    
+//TODO fix deleteEncounter func(encounter is undefined)
+    const deleteEncounter = (encounter) => {
+        // console.log(encounterList)
+        axios.delete(`/api/encounters/${encounter.encounterId}`)
         .then(res => {
             console.log(res)
             alert("Encounter Deleted!")
@@ -30,12 +32,11 @@ const EncTable = () => {
         })
         .catch(err => console.log(err))
     }
-    
-    const handleFormSubmit = e => {
+    //create an encounter
+    const handleAddEncounter = e => {
         e.preventDefault()
-        const userId = 1
         axios
-        .post(`/api/encounters/${userId}`,{encounterName})
+        .post(`/api/encounters`,{encounterName, campaignId: campaignKey})
         .then(res => {
             console.log(res.data)
             alert("Encounter Created!")
@@ -44,29 +45,59 @@ const EncTable = () => {
         })
         .catch(err => console.log(err))
     }
+    const getCampaignTables = () => {
+        axios.get('/api/campaigns')
+            .then(res => {
+                setUsersCampaigns(res.data)
+                setCampaignKey(res.data[0] ? res.data[0].campaignId : null)
+            })
+            .catch(err => console.log(err))
+    }
+
+    const handleCampaignKey = e => {
+        e.preventDefault()
+        console.log('hit handleCampaignKey')
+        setCampaignKey(e.target.value)
+        console.log(campaignKey)
+    }
+    useEffect(()=>{getCampaignTables()}, [])
     
-    useEffect(() => { getEncounterTables() }, [])
+    // console.log(encounterList)
 
     return (
         <div>--Encounters go here--
             <div >
-                {encounterList.map(encounter => (
+                {encounterList.map((encounter) => (
                     <div key={encounter.encounterId} className="border-solid border border-spacing-1 flex justify-between m-2">
+                        <div>
                         <h2 className="font-bold capitalize text-lg">{encounter.encounterName}</h2>
-                        <button onClick={deleteEncounter}>Delete</button>
+                        {/* TODO render assigned campaign by its name */}
+                        {console.log(encounter.enccamps)}
+                        {encounter.enccamps.length > 0 ?
+                        (<p>{encounter.enccamps.map(encCampObj=> (
+                            <span>{encCampObj.campaign.campaignName}</span>
+                        ))}</p>) : (<p></p>)
+                        } 
+                        </div>
+                        <button onClick={() => deleteEncounter(encounter)}>Delete</button>
                     </div>
                 ))}
             </div>
             {showModal ? (
-            <form onSubmit={e => handleFormSubmit(e)}>
+            <form onSubmit={e => handleAddEncounter(e)}>
                 <h3>Create a new Encounter</h3>
                 <input type="text" placeholder="Encounter Name" value={encounterName} onChange={e => setEncounterName(e.target.value)} />
-                <select placeholder="Campaign">
                     {/* TODO render users existing campaigns and have an option for each */}
-                    <option >Campy1</option>
-                    <option >Campy2</option>
-                </select>
-                <button>Submit</button>
+                    <div >
+                        <select value={campaignKey} onChange={e => handleCampaignKey(e)} placeholder="Campaign">
+                        {usersCampaigns.map(campaign => (
+                            <option key={campaign.campaignId}value={campaign.campaignId}>{campaign.campaignName}</option>
+                        ))}
+                        </select>
+
+                        <button>Submit</button>
+                        
+                    </div>
             </form>) 
             : (<button onClick={() => setShowModal(true)}>Create New Encounter</button>)}
             

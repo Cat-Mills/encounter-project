@@ -7,11 +7,23 @@ const Monsters = () => {
   const [Monsters, setMonsters] = useState([])
   const MONSTER_COLLECTION = 'https://www.dnd5eapi.co/api/monsters'
 
-  function getMonsters(){
+  const handleSearch = (e) => {
+    const monsterName = monsterInput.value.toLowerCase()
+    if(monsterName) {
+      getMonsters(monsterName)
+    } else {
+      monsterResult.innerHTML = "Please enter a monster name."
+    }
+  } 
+
+  function getMonsters(monsterName){
     axios
     .get(MONSTER_COLLECTION)
     .then(res => {
-      console.log(res.data)
+      const monsters = response.data.results;
+      const matchedMonster = monsters.find(
+        (monster) => monster.name.loLowerCase() === monsterName
+      )
       setMonsters(res.data)
     })
     .catch(err => console.log(err))

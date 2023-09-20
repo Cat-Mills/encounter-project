@@ -14,12 +14,13 @@ const campaignData = [
         userId: 1
     }
 ]
-const encounterData = [
-    {
-        encounterName: 'enc1',
-        userId: 1
-    }
-]
+// const encounterData = [
+//     {
+//         encounterName: 'enc1',
+//         userId: 1
+        
+//     }
+// ]
 
 await db.sync({force: true}).then(async () => {
     const salt = bcrypt.genSaltSync(10)
@@ -27,7 +28,7 @@ await db.sync({force: true}).then(async () => {
 
     await User.create({username: 'tester', hashedPass: hash})
     await Campaign.bulkCreate(campaignData)
-    await Encounter.bulkCreate(encounterData)
+    // await Encounter.bulkCreate(encounterData)
     console.log('db has been successfully reset and seeded!')
 })
 

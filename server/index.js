@@ -6,7 +6,7 @@ import authCtrl from './controllers/authCtrl.js'
 import playerCtrl from "./controllers/playerCtrl.js";
 import encounterCtrl from "./controllers/encounterCtrl.js";
 
-const {addCampaign, getAllCampaigns, deleteCampaign} = campCtrl
+const {addCampaign, getAllCampaigns, deleteCampaign, editCampaign} = campCtrl
 const {register, login, checkUser, logout} = authCtrl
 const {getPlayers, addPlayer, deletePlayer, editPlayer} = playerCtrl
 const {getEncounters, addEncounter, editEncounter, deleteEncounter} = encounterCtrl
@@ -28,8 +28,8 @@ app.use(session({
 
 //TODO endpoints
 app.get('/api/campaigns', getAllCampaigns)
-app.post('/api/campaigns/:userId', addCampaign)
-// app.put('/api/campaigns')
+app.post('/api/campaigns', addCampaign)
+app.put('/api/campaigns/:campaignId', editCampaign)
 app.delete('/api/campaigns/:campaignId', deleteCampaign)
 
 
@@ -39,11 +39,10 @@ app.put('/api/players/:playerId', editPlayer)
 app.delete('/api/players/:playerId', deletePlayer)
 
 
-app.get('/api/encounters/:userId', getEncounters)
-app.post('/api/encounters/:userId', addEncounter)
+app.get('/api/encounters', getEncounters)
+app.post('/api/encounters', addEncounter)
 app.put('/api/encounters/:encounterId', editEncounter)
 app.delete('/api/encounters/:encounterId', deleteEncounter)
-
 
 //authentication endpoints
 app.post('/api/register', register)
