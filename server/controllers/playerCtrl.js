@@ -6,8 +6,8 @@ export default {
         try {
             console.log(req.params)
             const players = await Player.findAll(
-                {where: {campaignId: +req.params.campaignId}}
-            )
+                {where: {campaignId: +req.params.campaignId}})
+                
             res.status(200).send(players)
         } catch(theseHands) {
             console.log(theseHands) 

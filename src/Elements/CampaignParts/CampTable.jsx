@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios'
-import Rows from "./Rows.jsx";
+import PlayerRows from "./PlayerRows.jsx";
 import NewCampForm from "./NewCampForm.jsx";
-import TableHeader from "./TableHeader.jsx";
 import React, { Component } from "react";
 
 
@@ -29,11 +28,10 @@ const CampTable = () => {
         <div className="min-w-full">
             <div>
                 <div>
-                    <TableHeader />
-                </div>
-                <div>
                     {campaignList.map(campaign => (
-                        <Rows key={campaign.campaignId} campaign={campaign} getCampaignTables={getCampaignTables} />
+                        <PlayerRows key={campaign.campaignId} 
+                        campaign={campaign} 
+                        getCampaignTables={getCampaignTables} />
                     ))}
                 </div>
             </div>

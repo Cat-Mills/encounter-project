@@ -31,8 +31,8 @@ a:hover {
 body {
     margin: 0;
     display: flex;
-    /* place-items: center; */
-    min-width: 1200px;
+    place-items: center;
+    min-width: 600px;
     min-height: 100vh;
 }
 

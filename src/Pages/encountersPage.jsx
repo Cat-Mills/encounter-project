@@ -1,8 +1,11 @@
 import React from 'react'
+import EncTable from '../Elements/EncounterParts/EncounterTable.jsx'
 
 const Encounters = () => {
   return (
-    <div>Encounters</div>
+    <div>
+      <EncTable/>
+    </div>
   )
 }
 

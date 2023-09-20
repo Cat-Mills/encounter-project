@@ -1,16 +1,22 @@
 import connectToDB from "./db.js";
-import {Campaign, User} from './model.js'
+import {Campaign, User, Encounter} from './model.js'
 import bcrypt from 'bcryptjs'
 
 const db = await connectToDB('postgresql:///encounterdb')
 
 const campaignData = [
     {
-        campaignName: 'campTest1',
+        campaignName: 'campy1',
         userId: 1
     },
     {
-        campaignName: 'campTest2',
+        campaignName: 'campy2',
+        userId: 1
+    }
+]
+const encounterData = [
+    {
+        encounterName: 'enc1',
         userId: 1
     }
 ]
@@ -19,8 +25,9 @@ await db.sync({force: true}).then(async () => {
     const salt = bcrypt.genSaltSync(10)
     const hash = bcrypt.hashSync('test', salt)
 
-    await User.create({username: 'tester1', hashedPass: hash})
-    const newCampaigns = await Campaign.bulkCreate(campaignData)
+    await User.create({username: 'tester', hashedPass: hash})
+    await Campaign.bulkCreate(campaignData)
+    await Encounter.bulkCreate(encounterData)
     console.log('db has been successfully reset and seeded!')
 })
 

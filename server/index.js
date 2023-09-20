@@ -4,10 +4,12 @@ import session from "express-session";
 import campCtrl from './controllers/campaignCtrl.js'
 import authCtrl from './controllers/authCtrl.js'
 import playerCtrl from "./controllers/playerCtrl.js";
+import encounterCtrl from "./controllers/encounterCtrl.js";
 
 const {addCampaign, getAllCampaigns, deleteCampaign} = campCtrl
 const {register, login, checkUser, logout} = authCtrl
 const {getPlayers, addPlayer, deletePlayer, editPlayer} = playerCtrl
+const {getEncounters, addEncounter, editEncounter, deleteEncounter} = encounterCtrl
 
 const app = express()
 const PORT = 2222
@@ -26,19 +28,22 @@ app.use(session({
 
 //TODO endpoints
 app.get('/api/campaigns', getAllCampaigns)
-app.post('/api/campaigns', addCampaign)
+app.post('/api/campaigns/:userId', addCampaign)
 // app.put('/api/campaigns')
 app.delete('/api/campaigns/:campaignId', deleteCampaign)
+
 
 app.get('/api/players/:campaignId', getPlayers)
 app.post('/api/players/:campaignId', addPlayer)
 app.put('/api/players/:playerId', editPlayer)
 app.delete('/api/players/:playerId', deletePlayer)
 
-// app.get('/encounters')
-// app.post('/encounters')
-// app.put('/encounters')
-// app.delete('/encounters')
+
+app.get('/api/encounters/:userId', getEncounters)
+app.post('/api/encounters/:userId', addEncounter)
+app.put('/api/encounters/:encounterId', editEncounter)
+app.delete('/api/encounters/:encounterId', deleteEncounter)
+
 
 //authentication endpoints
 app.post('/api/register', register)

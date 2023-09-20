@@ -6,7 +6,9 @@ export default {
         try {
             console.log('hit addCampaign')
             const { campaignName } = req.body
-            await Campaign.create({ campaignName, userId: req.session.user.userId })
+            const {userId} = req.params
+            
+            await Campaign.create({ campaignName, userId: userId })
             res.send(200)
         } catch (err) {
             console.log(err)

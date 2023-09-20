@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import DisplayPlayers from "./DisplayPlayers.jsx";
 import PlayerForm from "./PlayerForm.jsx";
 
-export default function CampRows({campaign, getCampaignTables}){
+export default function PlayerRows({campaign, getCampaignTables}){
     const navigate = useNavigate()
     
     const [showPlayers, setShowPlayers] = useState(false)
@@ -63,7 +63,7 @@ export default function CampRows({campaign, getCampaignTables}){
                 {/* <p> Players: array.length </p> */}
                 <button onClick={deleteCampaign}>Delete</button>
                 {!showPlayers && <button onClick={() => {setShowPlayers(true)}}>v</button>}
-                {showPlayers && <button onClick={() => setShowPlayers(false)}>X</button>}
+                {showPlayers && <button onClick={() => setShowPlayers(false)}>-</button>}
             </div>
                 {showPlayers && playerRows[0] && 
                 playerRows.map(player => 

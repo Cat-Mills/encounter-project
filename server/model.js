@@ -121,6 +121,10 @@ Encounter.belongsTo(Campaign, {foreignKey: 'campaignId'})
 Campaign.hasMany(Player, {foreignKey: 'campaignId'})
 Player.belongsTo(Campaign, {foreignKey: 'campaignId'})
 
+User.hasMany(Encounter, {foreignKey: 'userId'})
+Encounter.belongsTo(User, {foreignKey: 'userId'})
+
+
 
 
 if(process.argv[1] === url.fileURLToPath(import.meta.url)) {

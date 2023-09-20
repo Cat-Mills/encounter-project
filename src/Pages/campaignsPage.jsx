@@ -7,8 +7,7 @@ import '../index.css'
 const Campaigns = () => {
   return (
     <div>
-      <CampTable
-      />
+      <CampTable/>
     </div>
   
   )
