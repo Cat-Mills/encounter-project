@@ -18,11 +18,11 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path='/' index element={userId ? <Navigate to='/Encounters'/> : <Landing />} />
+        <Route path='/' index element={userId ? <Navigate to='/monsters'/> : <Landing />} />
 
         <Route path='/monsters' element={userId ? <Monsters/> : <Navigate to='/'/> }/>
 
-        <Route path='/Encounters' element={userId ? <Encounters/> : <Navigate to='/'/> }/>
+        <Route path='/encounters' element={userId ? <Encounters/> : <Navigate to='/'/> }/>
 
         <Route path='/campaigns' element={userId ? <Campaigns/> : <Navigate to='/'/> }/>
 

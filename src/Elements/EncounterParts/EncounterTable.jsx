@@ -72,10 +72,10 @@ const EncTable = () => {
                         <div>
                         <h2 className="font-bold capitalize text-lg">{encounter.encounterName}</h2>
                         {/* TODO render assigned campaign by its name */}
-                        {console.log(encounter.enccamps)}
+                        
                         {encounter.enccamps.length > 0 ?
                         (<p>{encounter.enccamps.map(encCampObj=> (
-                            <span>{encCampObj.campaign.campaignName}</span>
+                            <span key={encCampObj.campaignId}>{encCampObj.campaign.campaignName}</span>
                         ))}</p>) : (<p></p>)
                         } 
                         </div>

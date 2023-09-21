@@ -14,11 +14,14 @@
     "initdb": "npm run createdb && npm run seedModels && npm run seedData"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.4",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.5.0",
     "bcryptjs": "^2.4.3",
     "express": "^4.18.2",
+    "express-graphql": "^0.12.0",
     "express-session": "^1.17.3",
+    "graphql": "^15.8.0",
     "nodemon": "^3.0.1",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",

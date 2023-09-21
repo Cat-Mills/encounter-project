@@ -1,4 +1,4 @@
-import  express  from "express";
+import express from "express";
 import ViteExpress from 'vite-express'
 import session from "express-session";
 import campCtrl from './controllers/campaignCtrl.js'
@@ -6,16 +6,17 @@ import authCtrl from './controllers/authCtrl.js'
 import playerCtrl from "./controllers/playerCtrl.js";
 import encounterCtrl from "./controllers/encounterCtrl.js";
 
-const {addCampaign, getAllCampaigns, deleteCampaign, editCampaign} = campCtrl
-const {register, login, checkUser, logout} = authCtrl
-const {getPlayers, addPlayer, deletePlayer, editPlayer} = playerCtrl
-const {getEncounters, addEncounter, editEncounter, deleteEncounter} = encounterCtrl
+
+const { addCampaign, getAllCampaigns, deleteCampaign, editCampaign } = campCtrl
+const { register, login, checkUser, logout } = authCtrl
+const { getPlayers, addPlayer, deletePlayer, editPlayer } = playerCtrl
+const { getEncounters, addEncounter, editEncounter, deleteEncounter } = encounterCtrl
 
 const app = express()
 const PORT = 2222
 
 //top level middleware
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(session({
     saveUninitialized: true,
