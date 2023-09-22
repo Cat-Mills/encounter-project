@@ -13,11 +13,10 @@ const [showMonsterStats, setShowMonsterStats] = useState(false)
         setMonsterStats(res.data)
     })
     .catch(err => console.log(err))
+    // console.log(monsterStats.armor_class)
     }
-    function getAC(){
-        monsterStats.armor_class.map(armor)
-        return [armor.type,armor.value].join(" ")}
-        // console.log(getAC())
+    useEffect(() => {getStats()}, [])
+
     return(
         <div>
         <div>
@@ -30,18 +29,33 @@ const [showMonsterStats, setShowMonsterStats] = useState(false)
         </div>
             {showMonsterStats && (
             <div className="flex-wrap m-2 p-2 justify-start space-x-2">
-                {/* TAB Top line stats  */}
+
+{/*BOOK ~~~ ~~~ ~~~ Monster Details ~~~ ~~~ ~~~*/}
+
+{/*TAB  Type/Alignment  */}
                 <div className="flex justify-around mb-3 border-b-2 border-solid capitalize">
                     <div>{monsterStats.size} </div>
                     <div>{monsterStats.type} </div>
                     {monsterStats.subtype && <div>{monsterStats.subtype} </div>}
                     <div>{monsterStats.alignment} </div>
                 </div>
-                {/* TAB Mid line Stats */}
-                <div className="font-bold">
-                    {/* <div>{console.log(monsterStats.armor_class)}</div> */}
-                    <div>HP: {monsterStats.hit_points} ({monsterStats.hit_points_roll})</div>
-                    <div>Speed: </div>
+                
+{/*TAB  Armor */}
+                <div>
+                    <div className="flex justify-center font-bold">Armor Class: {(monsterStats.armor_class[0].value)} 
+                    {monsterStats.armor_class[0].type && <div className="capitalize pl-1 font-normal italic">({monsterStats.armor_class[0].type})</div>}
+                    </div>
+
+{/*TAB Hit Points */}
+                    <div className="font-bold flex justify-center">HP: {monsterStats.hit_points} 
+                    <div className="font-normal italic ml-1">({monsterStats.hit_points_roll})</div>
+                    </div>
+
+{/*TAB Speed */}
+                    <div> Speed: {monsterStats.speed.walk} </div>
+                    {monsterStats.speed.fly && <div>(Fly: {monsterStats.speed.fly})</div>}
+                    {monsterStats.speed.swim && <div>(Swim: {monsterStats.speed.swim})</div>}
+                    {monsterStats.speed.climb && <div>(Climb: {monsterStats.speed.climb})</div>}
                     
                 </div>
                 <div className="">{monsterStats.desc}</div>

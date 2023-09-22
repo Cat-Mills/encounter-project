@@ -34,7 +34,6 @@ return(
                 <h2 className="font-bold capitalize text-lg">{monster.name} </h2>
                 <div><Plus/></div>
                 </div>
-
                 <StatBlock url={monster.url} />
             </div>
         </div>

@@ -76,6 +76,7 @@ Encounter.init(
     },
 )
 //TAB Player model
+
 class Player extends Model {}
 Player.init(
     {
