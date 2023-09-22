@@ -38,22 +38,22 @@ const [filteredMonsterList, setFilteredMonsterList] = useState({})
   useEffect(()=> getMonsters(), [])
   
   return (
-    <div>
-      <div className='flex justify-center min-w-full items-center p-3'>
-        <input className=' w-full'
+    <div className='border p-5 '>
+      <div className='flex justify-center min-w-full items-center p-3 relative'>
+        <input className='block w-full p-px mb border bg-grey-800 border-gray-300'
           onChange={(e) => {
           setSearchText(e.target.value) }} 
           value={searchText} 
           type="text" 
           id="monsterInput"
-          placeholder=' search'
         />
-        
-        <SearchIcon className='z-10 '/>
-        
+        <div className='absolute inset-y-0 right-0 flex items-center pr-4 opacity-50'>
+        <SearchIcon/>
+        </div>
       </div>
-      <h2 className='flex justify-start p-3'>Monsters:</h2>
+      <h2 className='flex justify-start p-3 mt-10'>Monsters:</h2>
       {showMonsterList && <MonsterRows
+      itemsPerPage={25}
       filteredMonsterList={filteredMonsterList}
       setFilteredMonsterList={setFilteredMonsterList}
       monsterList={searchText ? filterResults(searchText) : monsterList}

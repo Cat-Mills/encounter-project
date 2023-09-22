@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header/>
       <Routes>
         <Route path='/' index element={userId ? <Navigate to='/monsters'/> : <Landing />} />
 

@@ -1,37 +1,51 @@
 import React from "react"
 import { useState } from "react"
 import StatBlock from "./StatBlock"
+import { ChevronLeft, ChevronRight } from "../../icons"
 
 
-export default function MonsterRows({monsterList}) {
+export default function MonsterRows({monsterList, itemsPerPage}) {
+    const [currentPage, setCurrentPage] = useState(1)
+    const totalPages = Math.ceil(monsterList.length / itemsPerPage)
+    const indexOfLastItem = currentPage * itemsPerPage
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage
+    const currentItems = monsterList.slice(indexOfFirstItem, indexOfLastItem)
+    const paginate = pageNumber => setCurrentPage(pageNumber)
 
-    const [showMonsterStats, setShowMonsterStats] = useState(false)
-
-    const handleClick = () =>{
-        if(showMonsterStats){
-            return
+    const previousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
         }
-        return(setShowMonsterStats(true))
     }
 
-    return(
+    const nextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    }
+
+return(
 <div>
     {/* <div>{filteredMonsterList} </div> */}
-    {monsterList.map((monster) => (
+    {currentItems.map((monster) => (
         <div key={monster.url}>
-            <div className="border-solid border border-spacing-1 flex justify-around m-2 p-2">
+            <div className="border-solid border border-spacing-1 flex justify-between m-2 p-2">
                 <h2 className="font-bold capitalize text-lg">{monster.name} </h2>
-                {!showMonsterStats ?
-                    <button onClick={() => handleClick()}>details</button>
-                    :
-                    <div key={monster.url}>
-                        <StatBlock
-                            url={monster.url} />
-                        <button onClick={() => setShowMonsterStats(false)}>close</button>
-                    </div>}
+                <StatBlock url={monster.url} />
             </div>
         </div>
     ))}
+    <div className="flex gap-2 justify-around mx-14 my-4">
+        <button className={currentPage === 1 ? `text-gray-500`: ``} onClick={previousPage} disabled={currentPage === 1}><ChevronLeft/></button>
+        {Array.from({ length: totalPages }).map((_, index) => (
+            <div key={index} className="">
+                <button className={index+1===currentPage?`text-blue-600`:``} onClick={() => paginate(index + 1)}>
+                    {index + 1}
+                </button>
+            </div>
+        ))}
+        <button className={currentPage === totalPages ? `text-gray-500`: ``} onClick={nextPage} disabled={currentPage === totalPages} ><ChevronRight/></button>
+    </div>
 </div>
     )
 }
