@@ -27,11 +27,11 @@ const Header = () => {
     return (
         <>
             {userId ? (
-                <div className="flex justify-evenly pb-6 pt-6 mb-10">
-                    <NavLink className={currPage === 'Mons' && 'text-red-900'} to='/monsters' onClick={() => setCurrPage('Mons')}>Monsters</NavLink>
-                    <NavLink className={currPage === 'Enc' && 'text-red-900'} to='/encounters' onClick={() => setCurrPage('Enc')}>Encounters</NavLink>
-                    <NavLink className={currPage === 'Cam' && 'text-red-900'} to='/campaigns' onClick={() => setCurrPage('Cam')}>Campaigns</NavLink>
-                    <NavLink className={currPage === 'Prof' && 'text-red-900'} to='/profile' onClick={() => setCurrPage('Prof')}>Profile</NavLink>
+                <div className="flex justify-evenly pb-6 pt-6 mb-10 ">
+                    <NavLink className={currPage === 'Mons' && 'text-blue-300'} to='/monsters' onClick={() => setCurrPage('Mons')}>Monsters</NavLink>
+                    <NavLink className={currPage === 'Enc' && 'text-blue-300'} to='/encounters' onClick={() => setCurrPage('Enc')}>Encounters</NavLink>
+                    <NavLink className={currPage === 'Cam' && 'text-blue-300'} to='/campaigns' onClick={() => setCurrPage('Cam')}>Campaigns</NavLink>
+                    <NavLink className={currPage === 'Prof' && 'text-blue-300'} to='/profile' onClick={() => setCurrPage('Prof')}>Profile</NavLink>
                 </div>
             ) : null}
         </>

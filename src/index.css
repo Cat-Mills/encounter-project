@@ -6,7 +6,6 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     /* line-height: 1.5; */
     /* font-weight: 400; */
-
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
     background-color: #242424;
@@ -25,15 +24,18 @@
 } */
 
 a:hover {
-    color: rgb(168, 11, 11);
+    color: rgb(37, 118, 240);
 }
 
 body {
-    margin: 0;
+    
+    justify-content: center;
     display: flex;
     place-items: center;
     min-width: 200px;
     min-height: 100vh;
+    background-color: #3d404e;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%233e3d3f' fill-opacity='0.43' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
 /* h1 {

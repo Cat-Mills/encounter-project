@@ -1,7 +1,7 @@
 import React from "react"
 import { useState } from "react"
 import StatBlock from "./StatBlock"
-import { ChevronLeft, ChevronRight } from "../../icons"
+import { ChevronLeft, ChevronRight, Plus } from "../../icons"
 
 
 export default function MonsterRows({monsterList, itemsPerPage}) {
@@ -26,15 +26,21 @@ export default function MonsterRows({monsterList, itemsPerPage}) {
 
 return(
 <div>
-    {/* <div>{filteredMonsterList} </div> */}
+
     {currentItems.map((monster) => (
         <div key={monster.url}>
-            <div className="border-solid border border-spacing-1 flex justify-between m-2 p-2">
+            <div className="border-solid border m-2">
+                <div className="border-solid border border-spacing-1 flex justify-between m-1 p-2 bg-gray-700  hover:bg-gray-500">
                 <h2 className="font-bold capitalize text-lg">{monster.name} </h2>
+                <div><Plus/></div>
+                </div>
+
                 <StatBlock url={monster.url} />
             </div>
         </div>
     ))}
+
+{/* Page navigation tabs */}
     <div className="flex gap-2 justify-around mx-14 my-4">
         <button className={currentPage === 1 ? `text-gray-500`: ``} onClick={previousPage} disabled={currentPage === 1}><ChevronLeft/></button>
         {Array.from({ length: totalPages }).map((_, index) => (

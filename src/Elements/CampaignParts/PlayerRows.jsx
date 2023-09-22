@@ -58,7 +58,7 @@ export default function PlayerRows({campaign, getCampaignTables}){
 
     return(
         <div>
-            <div className="border-solid border border-spacing-1 flex justify-around bg-red-900">
+            <div className="border-solid border border-spacing-1 flex justify-around bg-blue-900">
                 <h2 className="font-bold capitalize text-lg">{campaign.campaignName}</h2>
                 {/* <p> Players: array.length </p> */}
                 <button onClick={deleteCampaign}>Delete</button>
@@ -83,7 +83,7 @@ export default function PlayerRows({campaign, getCampaignTables}){
 
             {showPlayers && 
             <div>
-                <button className="bg-green-500" onClick={() => setShowPlayerForm(true)}>Add Player</button>
+                <button className="bg-blue-800" onClick={() => setShowPlayerForm(true)}>Add Player</button>
             </div>
             } 
             {showPlayerForm &&
