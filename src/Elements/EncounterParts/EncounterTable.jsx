@@ -71,7 +71,6 @@ const EncTable = () => {
                     <div key={encounter.encounterId} className="border-solid border border-spacing-1 flex justify-between m-2">
                         <div>
                         <h2 className="font-bold capitalize text-lg">{encounter.encounterName}</h2>
-                        {/* TODO render assigned campaign by its name */}
                         
                         {encounter.enccamps.length > 0 ?
                         (<p>{encounter.enccamps.map(encCampObj=> (

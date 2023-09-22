@@ -88,21 +88,7 @@ export default function PlayerRows({campaign, getCampaignTables}){
             } 
             {showPlayerForm &&
             <div>
-                {/* <PlayerForm
-                setShowPlayerForm={setShowPlayerForm}
-                getPlayerRows={getPlayerRows}
-                playerName={playerName}
-                playerLv={playerLv}
-                playerHP={playerHP}
-                playerInit={playerInit}
-                setPlayerName={setPlayerHP}
-                setPlayerLv={setPlayerLv}
-                setPlayerHP={setPlayerHP}
-                playerAC={playerAC}
-                setPlayerAC={setPlayerAC}
-                setPlayerInit={setPlayerInit}
-                campaign={campaign}
-                />  */}
+                
                 <form onSubmit={e => {addPlayer(e) ; setShowPlayerForm(false)}}>
     <h3>Create a new player</h3>
     <input type="text" placeholder="Name" value={playerName} onChange={e => setPlayerName(e.target.value)} />

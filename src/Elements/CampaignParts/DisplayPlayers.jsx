@@ -28,7 +28,7 @@ const DisplayPlayers = ({player, campaign, getPlayerRows}) => {
                 <div className="p-2"> Lv: {player.playerLv} </div>
                 <div className="p-2"> HP: {player.playerHP} </div>
                 <div className="p-2"> AC: {player.playerAC} </div>
-                <div className="p-2"> +{player.playerInit} initiative </div>
+                <div className="p-2"> +{player.playerInit} to initiative </div>
                 <button onClick={() => setIsEditing(true)}>edit</button>
                 <button onClick={() => deletePlayer()}>del</button>
             </div>

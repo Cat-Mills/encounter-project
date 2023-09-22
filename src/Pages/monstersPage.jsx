@@ -2,13 +2,18 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import MonsterRows from '../Elements/MonsterParts/MonsterRows.jsx'
-import SearchMonsters from '../Elements/MonsterParts/SearchMonsters.jsx'
+import SearchMonsters from '../Elements/MonsterParts/StatBlock.jsx'
+import {SearchIcon} from '../icons.jsx'
+
 
 const Monsters = () => {
 
   const [monsterList, setMonsterList] = useState([])
   const MONSTER_COLLECTION = 'https://www.dnd5eapi.co/api/monsters'
-  const [monsterName, setMonsterName] = useState('')
+  const [showMonsterList, setShowMonsterList] = useState(true)
+  const [searchText, setSearchText] = useState('')
+
+const [filteredMonsterList, setFilteredMonsterList] = useState({})
 
   function getMonsters(){
     axios
@@ -17,49 +22,43 @@ const Monsters = () => {
       setMonsterList(res.data.results)
     })
     .catch(err => console.log(err))
-    // console.log(monsterList)
   }
-  
-  // function displayMonsters(){
-  //   //? loop over monsters
-  //   monsterList.map((monster) => {
-  //     <ul key={monster.index}>
-  //       <p>{console.log(monster.index)}</p>
-  //       <li > {monster.index} </li>
-  //     </ul>
-  //   })}
+
+
+
+  function filterResults(){
     
-    //? grab first 25
-
-// 1st page:
-// query {
-//   monsters(limit: 100) {
-//     name
-//   }
-// }
-// 2nd page:
-// query {
-//   monsters(limit: 100, skip: 100) {
-//     name
-//   }
-// }
-
-    //? display on page
-    //? have an onClick for each that sends new axios request to get specific monster data
-  
+    return monsterList.filter((monster) => {
+      return(monster.name.toLowerCase().includes(searchText.toLowerCase()))
+    })
+  }
+  // console.log("monster list")
+  // console.log(filterResults(searchText))
   
   useEffect(()=> getMonsters(), [])
   
   return (
     <div>
-      <SearchMonsters/>
-      <h2>Monsters:</h2>
-      <MonsterRows
-      monsterList={monsterList}
+      <div className='flex justify-center min-w-full items-center p-3'>
+        <input className=' w-full'
+          onChange={(e) => {
+          setSearchText(e.target.value) }} 
+          value={searchText} 
+          type="text" 
+          id="monsterInput"
+          placeholder=' search'
+        />
+        
+        <SearchIcon className='z-10 '/>
+        
+      </div>
+      <h2 className='flex justify-start p-3'>Monsters:</h2>
+      {showMonsterList && <MonsterRows
+      filteredMonsterList={filteredMonsterList}
+      setFilteredMonsterList={setFilteredMonsterList}
+      monsterList={searchText ? filterResults(searchText) : monsterList}
       setMonsterList={setMonsterList}
-      />
-      {/* <button onClick={() => displayMonsters()}></button> */}
-      {/* make a next and back button for 25 mons */}
+      />}
     </div>
   )
 }
