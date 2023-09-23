@@ -44,7 +44,7 @@ return(
         <button className={currentPage === 1 ? `text-gray-500`: ``} onClick={previousPage} disabled={currentPage === 1}><ChevronLeft/></button>
         {Array.from({ length: totalPages }).map((_, index) => (
             <div key={index} className="">
-                <button className={index+1===currentPage?`text-blue-600`:``} onClick={() => paginate(index + 1)}>
+                <button className={index+1===currentPage?`text-blue-400`:``} onClick={() => paginate(index + 1)}>
                     {index + 1}
                 </button>
             </div>
