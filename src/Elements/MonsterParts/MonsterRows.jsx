@@ -30,9 +30,9 @@ return(
     {currentItems.map((monster) => (
         <div key={monster.url}>
             <div className="border-solid border m-2">
-                <div className="border-solid border border-spacing-1 flex justify-between m-1 p-2 bg-gray-700  hover:bg-gray-500">
+                <div className="border-solid border border-spacing-1 flex justify-between m-1 p-2 bg-gray-700 ">
                 <h2 className="font-bold capitalize text-lg">{monster.name} </h2>
-                <div><Plus/></div>
+                <button className=" hover:bg-gray-500"><Plus/></button>
                 </div>
                 <StatBlock url={monster.url} />
             </div>
