@@ -13,6 +13,7 @@ const Monsters = () => {
   const [showMonsterList, setShowMonsterList] = useState(true)
   const [searchText, setSearchText] = useState('')
 
+
 const [filteredMonsterList, setFilteredMonsterList] = useState({})
 
   function getMonsters(){
@@ -23,9 +24,7 @@ const [filteredMonsterList, setFilteredMonsterList] = useState({})
     })
     .catch(err => console.log(err))
   }
-
-
-
+  
   function filterResults(){
     
     return monsterList.filter((monster) => {

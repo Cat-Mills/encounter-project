@@ -5,12 +5,14 @@ import campCtrl from './controllers/campaignCtrl.js'
 import authCtrl from './controllers/authCtrl.js'
 import playerCtrl from "./controllers/playerCtrl.js";
 import encounterCtrl from "./controllers/encounterCtrl.js";
+import monstersCtrl from "./controllers/monstersCtrl.js";
 
 
 const { addCampaign, getAllCampaigns, deleteCampaign, editCampaign } = campCtrl
 const { register, login, checkUser, logout } = authCtrl
 const { getPlayers, addPlayer, deletePlayer, editPlayer } = playerCtrl
 const { getEncounters, addEncounter, editEncounter, deleteEncounter } = encounterCtrl
+const {addMonster, getMonsters} = monstersCtrl
 
 const app = express()
 const PORT = 2222
@@ -44,6 +46,10 @@ app.get('/api/encounters', getEncounters)
 app.post('/api/encounters', addEncounter)
 app.put('/api/encounters/:encounterId', editEncounter)
 app.delete('/api/encounters/:encounterId', deleteEncounter)
+
+app.get('/api/monsters/:encounterId', getMonsters)
+app.post('/api/monsters/:encounterId', addMonster)
+
 
 //authentication endpoints
 app.post('/api/register', register)

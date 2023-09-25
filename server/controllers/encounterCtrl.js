@@ -38,7 +38,7 @@ export default {
             console.log(campaignId)
             await Encounter.create({ encounterName, userId })
             .then(async(info) => {
-                console.log(info.dataValues.encounterId)
+                console.log("encounterId:", info.dataValues.encounterId)
                 if(campaignId){
                     await EncCamp.create({encounterId: info.dataValues.encounterId, campaignId })
                 }

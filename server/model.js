@@ -132,6 +132,24 @@ EncCamp.init(
     }
 )
 
+class Monster extends Model {}
+Monster.init(
+    {
+        monsterId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        monsterUrl: {
+            type: DataTypes.STRING
+        },
+    },
+    {
+        modelName: 'monster',
+        sequelize: db
+    }
+)
+
 
 // Association methods here (relationships, foreign keys)
 User.hasMany(Campaign, {foreignKey: 'userId'})
@@ -152,6 +170,9 @@ Player.belongsTo(Campaign, {foreignKey: 'campaignId'})
 User.hasMany(Encounter, {foreignKey: 'userId'})
 Encounter.belongsTo(User, {foreignKey: 'userId'})
 
+Encounter.hasMany(Monster, {foreignKey: 'encounterId'})
+Monster.belongsTo(Encounter, {foreignKey: 'encounterId'})
+
 
 
 
@@ -163,4 +184,4 @@ if(process.argv[1] === url.fileURLToPath(import.meta.url)) {
 }
 
 //export models
-export {User, Campaign, Encounter, Player, EncCamp}
+export {User, Campaign, Encounter, Player, EncCamp, Monster}

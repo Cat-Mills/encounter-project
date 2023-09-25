@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import React from "react";
+import MonstersInEnc from "./MonstersInEnc.jsx";
 
 
 
@@ -11,6 +12,8 @@ const EncTable = () => {
     const [showModal, setShowModal] = useState(false)
     const [usersCampaigns, setUsersCampaigns] = useState([])
     const [campaignKey, setCampaignKey] = useState(undefined)
+    
+    
     
     
     const getEncounterTables = () => {
@@ -53,6 +56,7 @@ const EncTable = () => {
             })
             .catch(err => console.log(err))
     }
+    
 
     const handleCampaignKey = e => {
         e.preventDefault()
@@ -62,13 +66,14 @@ const EncTable = () => {
     }
     useEffect(()=>{getCampaignTables()}, [])
     
+    
     // console.log(encounterList)
 
     return (
-        <div>--Encounters go here--
+        <div>
             <div >
                 {encounterList.map((encounter) => (
-                    <div key={encounter.encounterId} className="border-solid border border-spacing-1 flex justify-between m-2">
+                    <div key={encounter.encounterId} className="border-solid border border-spacing-1 flex justify-between m-2 px-2">
                         <div>
                         <h2 className="font-bold capitalize text-lg">{encounter.encounterName}</h2>
                         
@@ -77,6 +82,12 @@ const EncTable = () => {
                             <span key={encCampObj.campaignId}>{encCampObj.campaign.campaignName}</span>
                         ))}</p>) : (<p></p>)
                         } 
+                        </div>
+                        <div>
+                            {
+                            <MonstersInEnc key={encounter.encounterId}
+                            encounter={encounter}/> 
+                            }
                         </div>
                         <button onClick={() => deleteEncounter(encounter)}>Delete</button>
                     </div>
