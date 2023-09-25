@@ -28,7 +28,7 @@ return (
     <div>
         <div>
             {!showMonsterStats ?
-                <button className="hover:text-gray-400" onClick={() => { setShowMonsterStats(!showMonsterStats); getStats()}}>details</button>
+                <button className="hover:text-gray-400" onClick={() => { setShowMonsterStats(!showMonsterStats); getStats(); console.log(monsterStats); console.log()}}>details</button>
                 :
                 <div>
                     <button className="hover:text-gray-400" onClick={() => setShowMonsterStats(false)}>close</button>
@@ -80,18 +80,33 @@ return (
                     <div className="font-bold">CHA<div className="font-normal">{monsterStats.charisma}</div></div>
                 </div>
                 <div className="cardLine"></div>
-                <div className="flex justify-start font-bold">Saving Throws:
+                {<div className="flex justify-start font-bold">Saving Throws:
                 {profs.map((prof) => {
                     if(prof.save.includes("Saving")) {
-                        return <div className="mx-2 font-normal" key={prof.save}>{prof.save.slice(13)} +{prof.val}</div>
+                        return (<div className="mx-2 font-normal" key={prof.save}>{prof.save.slice(13)} +{prof.val}</div>)
                     } else {return}})}
-                </div>
+                </div>}
                 <div className="flex justify-start font-bold">Skills:
                 {profs.map((prof) => {
                     if(prof.save.includes("Skill")){
                         return <div className="mx-2 font-normal" key={prof.save}>{prof.save.slice(6)} +{prof.val} </div>
                     } else {return}})}
                 </div>
+
+                {monsterStats.damage_immunities[0] && <div className="flex font-bold">Damage Immunities:  
+                <div className="flex font-normal ml-1">
+                {monsterStats.damage_immunities.map((type, index) => ( 
+                    <div className="" key={type}>{(index ? ', ': '') + type}</div>))}
+                </div>
+                </div>}
+                
+                {monsterStats.condition_immunities[0] && <div className="flex font-bold">Condition Immunities:  
+                <div className="flex font-normal ml-1">
+                {monsterStats.condition_immunities.map((type, index) => ( 
+                    <div className="lowercase" key={type.index}>{(index ? ', ': '') + type.name}</div>))}
+                </div>
+                </div>}
+
                 <div className="">{monsterStats.desc}</div>
 
             </div>)}
