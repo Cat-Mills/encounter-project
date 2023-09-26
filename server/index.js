@@ -12,7 +12,7 @@ const { addCampaign, getAllCampaigns, deleteCampaign, editCampaign } = campCtrl
 const { register, login, checkUser, logout } = authCtrl
 const { getPlayers, addPlayer, deletePlayer, editPlayer } = playerCtrl
 const { getEncounters, addEncounter, editEncounter, deleteEncounter } = encounterCtrl
-const {addMonster, getMonsters} = monstersCtrl
+const {addMonster, getMonsters, deleteMonster} = monstersCtrl
 
 const app = express()
 const PORT = 2222
@@ -49,6 +49,7 @@ app.delete('/api/encounters/:encounterId', deleteEncounter)
 
 app.get('/api/monsters/:encounterId', getMonsters)
 app.post('/api/monsters/:encounterId', addMonster)
+app.delete('/api/monsters/:monsterId', deleteMonster)
 
 
 //authentication endpoints

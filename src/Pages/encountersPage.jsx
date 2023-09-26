@@ -3,7 +3,7 @@ import EncTable from '../Elements/EncounterParts/EncounterTable.jsx'
 
 const Encounters = () => {
   return (
-    <div>
+    <div className='border p-5 bg-gray-700'>
       <EncTable/>
     </div>
   )

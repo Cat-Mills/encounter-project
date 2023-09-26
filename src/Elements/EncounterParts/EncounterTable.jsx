@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import React from "react";
 import MonstersInEnc from "./MonstersInEnc.jsx";
+import { Trash } from "../../icons.jsx";
 
 
 
@@ -70,10 +71,10 @@ const EncTable = () => {
     // console.log(encounterList)
 
     return (
-        <div>
+        <div className="">
             <div >
                 {encounterList.map((encounter) => (
-                    <div key={encounter.encounterId} className="border-solid border border-spacing-1 flex justify-between m-2 px-2">
+                    <div key={encounter.encounterId} className="border border-spacing-1 flex justify-between m-2 p-2 bg-gray-600">
                         <div>
                         <h2 className="font-bold capitalize text-lg">{encounter.encounterName}</h2>
                         
@@ -89,7 +90,7 @@ const EncTable = () => {
                             encounter={encounter}/> 
                             }
                         </div>
-                        <button onClick={() => deleteEncounter(encounter)}>Delete</button>
+                        <button className="hover:text-gray-400" onClick={() => deleteEncounter(encounter)}><Trash/> </button>
                     </div>
                 ))}
             </div>
@@ -109,7 +110,7 @@ const EncTable = () => {
                         
                     </div>
             </form>) 
-            : (<button onClick={() => setShowModal(true)}>Create New Encounter</button>)}
+            : (<button className="hover:border-blue-400 hover:text-blue-400 border border-solid border-grey-500 p-2 mb-2" onClick={() => setShowModal(true)}>Create New Encounter</button>)}
             
         </div>
     )

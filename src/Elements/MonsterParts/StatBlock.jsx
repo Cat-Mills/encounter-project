@@ -2,12 +2,16 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import MonsterRows from "./MonsterRows.jsx"
+import { More, Plus, X } from "../../icons.jsx"
 
-export default function StatBlock({ url }) {
+export default function StatBlock({ url, showBlock }) {
     const [monsterStats, setMonsterStats] = useState({})
     const [showMonsterStats, setShowMonsterStats] = useState(false)
     const [profs, setProfs] = useState({})
     const [specials, setSpecials] = useState({})
+    const [showModal, setShowModal] = useState(false)
+    const [encounterKey, setEncounterKey] = useState(undefined)
+    const [usersEncounters, setUsersEncounters] = useState([])
 
     async function getStats() {
         axios
@@ -16,33 +20,82 @@ export default function StatBlock({ url }) {
                 setMonsterStats(res.data)
                 setProfs(res.data.proficiencies.map(prof => (
                     {save: prof.proficiency.name, val: prof.value}
-                )))
-                setSpecials(res.data.special_abilities.map(special => (
-                    {name: special.name, desc: special.desc}
-                )))
+                    )))
+                    setSpecials(res.data.special_abilities.map(special => (
+                        {name: special.name, desc: special.desc}
+                        )))
+                if(showBlock){
+                    setShowMonsterStats(true)
+                }
                 
             })
             .catch(err => console.log(err))
             // console.log(specs)
+            // setShowMonsterStats(true)
     }
+    function getEncounterTables() {
+        axios.get('/api/encounters')
+            .then(res => {
+                setUsersEncounters(res.data)
+                setEncounterKey(res.data[0] ? res.data[0].encounterId : null)
+            }).catch(err => console.log(err))
+    }
+    const handleEncounterKey = e => {
+        e.preventDefault()
+        console.log('hit handleEncounterKey')
+        setEncounterKey(e.target.value)
+        console.log(encounterKey)
+    }
+    const handleAddToEncounter = (e, monsterUrl) => {
+        e.preventDefault()
+        axios.post(`/api/monsters/${encounterKey}`, {monsterUrl,  encounterId: encounterKey})
+        .then(res => {
+            console.log(res.data)
+            alert("Monster added!")
+            setShowModal(false)
+            getEncounterTables()
+        }).catch(err => console.log(err))
+    }
+    useEffect(() => { getEncounterTables() }, [])
+    useEffect(() => { 
+        getStats()
+        // if(showBlock){
+        //     setShowMonsterStats(true)
+        // } 
+    }, [])
     
-    useEffect(() => { getStats() }, [])
-                
 return (
     <div>
-        <div>
+        {!showBlock && <div className="flex relative w-11/12 ml-10">
             {!showMonsterStats ?
-                <button className="hover:text-gray-400" onClick={() => { setShowMonsterStats(!showMonsterStats); getStats(); console.log(monsterStats); console.log()}}>details</button>
+                <button className="hover:text-blue-400 flex absolute justify-center  bottom-4 left-full" onClick={() => { setShowMonsterStats(!showMonsterStats); getStats(); console.log(monsterStats); console.log()}}><More/></button>
                 :
                 <div>
-                    <button className="hover:text-gray-400" onClick={() => setShowMonsterStats(false)}>close</button>
+                    <button className="hover:text-blue-400 flex absolute justify-center bottom-4 left-full" onClick={() => setShowMonsterStats(false)}><More/></button>
                 </div>}
-        </div>
+        </div>}
+                {showModal ? (
+                    <div className="flex relative w-11/12 ml-1 ">
+                        <button className=" flex absolute justify-center left-full bottom-4 hover:text-blue-400" onClick={() => setShowModal(false)}><X/> </button> 
+                        <form className="ml-16 flex absolute justify-center bottom-4 left-3/4" onSubmit={e => handleAddToEncounter(e, monster.url)}> 
+                            <button className="mr-2 hover:text-blue-400">Add to</button>
+                            <select className=" bg-gray-700 focus: outline-none" value={encounterKey} onChange={e => handleEncounterKey(e)} placeholder="Encounter">
+                            {usersEncounters.map(encounter => (
+                                <option key={encounter.encounterId} value={encounter.encounterId}>{encounter.encounterName}</option>
+                            ))}
+                            </select>
+                        </form>
+                </div> 
+                ) :
+                <div className="flex relative w-11/12 ml-1">
+                    <button onClick={() => setShowModal(true)} className="flex absolute justify-center left-full bottom-4 hover:text-blue-400"><Plus/></button>
+                </div>
+                }
 
         {/*BOOK ~~~ ~~~ ~~~ Monster Details ~~~ ~~~ ~~~*/}
 
-        {showMonsterStats && (
-            <div className="flex-wrap m-2 p-2 justify-around">
+        {showMonsterStats &&  (
+            <div className="flex-wrap m-2 p-2 justify-around bg-gray-600">
 
                 {/*TAB  Type/Alignment  */}
                 <div className="flex justify-center mb-3 capitalize">

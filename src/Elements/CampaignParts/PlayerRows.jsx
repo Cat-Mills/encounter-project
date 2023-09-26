@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DisplayPlayers from "./DisplayPlayers.jsx";
 import PlayerForm from "./PlayerForm.jsx";
+import { More, X } from "../../icons.jsx";
 
 export default function PlayerRows({campaign, getCampaignTables}){
     const navigate = useNavigate()
@@ -58,12 +59,12 @@ export default function PlayerRows({campaign, getCampaignTables}){
 
     return(
         <div>
-            <div className="border-solid border border-spacing-1 flex justify-around bg-blue-900">
+            <div className="border border-spacing-1 flex justify-between m-2 p-2 bg-gray-600">
                 <h2 className="font-bold capitalize text-lg">{campaign.campaignName}</h2>
                 {/* <p> Players: array.length </p> */}
                 <button onClick={deleteCampaign}>Delete</button>
-                {!showPlayers && <button onClick={() => {setShowPlayers(true)}}>v</button>}
-                {showPlayers && <button onClick={() => setShowPlayers(false)}>-</button>}
+                {!showPlayers && <button onClick={() => {setShowPlayers(true)}}><More/> </button>}
+                {showPlayers && <button onClick={() => setShowPlayers(false)}><More/> </button>}
             </div>
                 {showPlayers && playerRows[0] && 
                 playerRows.map(player => 
@@ -83,7 +84,7 @@ export default function PlayerRows({campaign, getCampaignTables}){
 
             {showPlayers && 
             <div>
-                <button className="bg-blue-800" onClick={() => setShowPlayerForm(true)}>Add Player</button>
+                <button className="" onClick={() => setShowPlayerForm(true)}>Add Player</button>
             </div>
             } 
             {showPlayerForm &&

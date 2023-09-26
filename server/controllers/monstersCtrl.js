@@ -30,5 +30,17 @@ export default {
             console.log(err)
             res.status(500).send("Something went wrong")
         }
+    },
+
+    deleteMonster: async (req, res) => {
+        console.log("delete monster")
+        try{
+            const {monsterId} = req.params
+            await Monster.destroy({where: {monsterId: monsterId}})
+            res.sendStatus(200)
+        }catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
     }
 }

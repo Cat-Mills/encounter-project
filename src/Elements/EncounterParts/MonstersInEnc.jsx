@@ -6,23 +6,8 @@ import MonsterCards from "./monsterCards.jsx";
 export default function MonstersInEnc({encounter}){
     const [encountersMonsters, setEncountersMonsters] = useState([])
     const [monsterUrl, setMonsterUrl] = useState('')
-    const [monsterStats, setMonsterStats] = useState([])
 
-    // const getMonsters = async () => {
-    //     const res = await axios.get(`/api/monsters/${encounter.encounterId}`)
-    //     .catch(err => console.log(err))
-    //     if(res.data){
-    //         const monStats = []
-    //         res.data.forEach(async (monster)=> {
-    //             const stats = await axios.get(`https://www.dnd5eapi.co${monster.monsterUrl}`)
-    //             .catch(err => console.log(err))
-    //             // console.log(stats.data)
-    //             monStats.push(stats.data)
-    //         })
-    //         setMonsterStats(monStats)
-    //     }
-    // }
-    console.log(monsterStats)
+    
     const getMonsters = () => {
         axios.get(`/api/monsters/${encounter.encounterId}`)
             .then(res => {
@@ -30,29 +15,32 @@ export default function MonstersInEnc({encounter}){
                 // console.log(res.data)
             }).catch(err => console.log(err))
     }
-    async function getStats() {
-        const data = []
-        encountersMonsters.map(monster => {
-            axios
-            .get(`https://www.dnd5eapi.co${monster.monsterUrl}`)
-            .then(res => {
-                // console.log(res.data)
-                data.push(res.data)
-            })
-            .catch(err => console.log(err))
-            })
-            // console.log(data)
-            setMonsterStats(data)
-        }
+    // async function getStats() {
+    //     const data = []
+    //     encountersMonsters.map(monster => {
+    //         axios
+    //         .get(`https://www.dnd5eapi.co${monster.monsterUrl}`)
+    //         .then(res => {
+    //             // console.log(res.data)
+    //             data.push(res.data)
+    //         })
+    //         .catch(err => console.log(err))
+    //         })
+    //         // console.log(data)
+    //     }
     
     useEffect(()=>{getMonsters()}, [])
     
-console.log(monsterStats)
+
     return(
         <div>
-            {monsterStats[0] && monsterStats.map(monster => (
-                <div key={monster.index}>
-                    
+            {encountersMonsters.map(monster => (
+                <div key={monster.monsterId}>
+                    <MonsterCards 
+                    monsterUrl={monster.monsterUrl}
+                    monsterId={monster.monsterId}
+                    getMonsters={getMonsters}
+                    />
                 </div>
             ))}
         </div>

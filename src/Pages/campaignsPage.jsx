@@ -6,7 +6,7 @@ import '../index.css'
 
 const Campaigns = () => {
   return (
-    <div>
+    <div className='border p-5 bg-gray-700'>
       <CampTable/>
     </div>
   
