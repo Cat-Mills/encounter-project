@@ -11,6 +11,7 @@ function ActiveEncounters() {
     const [activeEncounter, setActiveEncounter] = useState({});
     const [campaignName, setCampaignName] = useState('');
     const [monsters, setMonsters] = useState([]);
+    const [totalXP, setTotalXP] = useState(0)
 
 
 
@@ -24,12 +25,14 @@ function ActiveEncounters() {
             .catch(err => console.log(err));
     };
 
-    
+    const updateTotalXP = (num) => {
+        setTotalXP(prevState => prevState + num)
+    }
 
 
     useEffect(() => { getActiveEncounter(); }, []);
     // console.log("activeEncounter",activeEncounter)
-    // console.log("monsters", monsters)
+    console.log(totalXP)
     return (activeEncounter &&
         <div className="border p-5 bg-gray-700 ">
             <div> </div>
@@ -47,7 +50,7 @@ function ActiveEncounters() {
                                 monsterUrl={monster.monsterUrl}
                                 monsterId={monster.monsterId}
                                 activeEncounter={true}
-                                
+                                updateTotalXP={updateTotalXP}
                             />
                         </div>
                     ))}

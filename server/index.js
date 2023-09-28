@@ -29,7 +29,7 @@ app.use(session({
     }
 }))
 
-//TODO endpoints
+
 app.get('/api/campaigns', getAllCampaigns)
 app.post('/api/campaigns', addCampaign)
 app.put('/api/campaigns/:campaignId', editCampaign)

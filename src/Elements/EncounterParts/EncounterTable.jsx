@@ -89,7 +89,7 @@ const EncTable = () => {
     // console.log(encounterList)
 
     return (
-        <div className="">
+        <div className="flex-col h-screen">
             <div >
                 {encounterList.map((encounter) => (
                     <div key={encounter.encounterId} className="border border-spacing-1 flex justify-center m-2 p-2 bg-gray-600 relative">
@@ -103,7 +103,7 @@ const EncTable = () => {
                             }
                         </div>}
                         {isEditing === encounter.encounterId &&
-                            <div className=" w-28 text-start absolute left-2">
+                            <div className="w-28 text-start absolute left-2">
                                 <form className="font-bold capitalize text-lg w-20" onSubmit={e => { e.preventDefault(); editEncounter(encounter) }}>
                                     <input className=" bg-gray-700" type="text" placeholder="Encounter Name" value={encounterName} onChange={e => setEncounterName(e.target.value)} />
                                     <div >

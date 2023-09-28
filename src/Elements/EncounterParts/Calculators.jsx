@@ -2,11 +2,12 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+//TODO Make a calculator for CR, XP, and initiative 
 
 export default function Calculators({monsters}){
     const [monsterXP, setMonsterXP] = useState([])
     const [monsterCR, setMonsterCR] = useState([])
-    const [totalXP, setTotalXP] = useState(0)
+    // const [totalXP, setTotalXP] = useState(0)
 
     async function getStats() {
         try{
@@ -24,6 +25,7 @@ export default function Calculators({monsters}){
         setMonsterXP(xpContainer)
         calculateXP()
     } catch(err){ console.log(err)}
+
     function calculateXP(){
         console.log('hit calc')
         
@@ -35,11 +37,11 @@ useEffect(() => { getStats() }, [])
 // useEffect(()=> { }, [])
 // {monsterXP && console.log(monsterXP)}
 // {monsterCR && console.log(monsterCR)}
-console.log(totalXP)
+// console.log(monsterXP)
 
     // calculateXP()
 
     return (
-        totalXP !== 0 ? <div>Total xp: {totalXP} </div> : <div>Calculating xp...</div>
+        <div>Total xp: {monsterXP.reduce((totalXP, value)=> value + totalXP, 0)} </div> 
     )
 }

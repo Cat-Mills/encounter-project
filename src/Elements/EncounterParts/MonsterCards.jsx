@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Trash, More, ChevronRight, Down, Up } from "../../icons.jsx";
 import StatBlock from "../MonsterParts/StatBlock.jsx";
 
-export default function MonsterCards({ monsterUrl,monsterId, getMonsters, activeEncounter,}) {
+export default function MonsterCards({ monsterUrl,monsterId, getMonsters, activeEncounter,updateTotalXP}) {
     const [monsterStats, setMonsterStats] = useState([])
     const [showModal, setShowModal] = useState(false)
     const [showStatBlock, setShowStatBlock] = useState(false)
@@ -14,6 +14,7 @@ export default function MonsterCards({ monsterUrl,monsterId, getMonsters, active
             .get(`https://www.dnd5eapi.co${monsterUrl}`)
             .then(res => {
                 setMonsterStats(res.data)
+                updateTotalXP(res.data.xp)
                 // console.log(res.data)
             })
             .catch(err => console.log(err))
