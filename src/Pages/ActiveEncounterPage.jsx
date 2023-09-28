@@ -11,7 +11,8 @@ function ActiveEncounters() {
     const [activeEncounter, setActiveEncounter] = useState({});
     const [campaignName, setCampaignName] = useState('');
     const [monsters, setMonsters] = useState([]);
-    const [totalXP, setTotalXP] = useState(0)
+    // const [totalXP, setTotalXP] = useState(0)
+    let totalXP = 0
 
 
 
@@ -19,15 +20,17 @@ function ActiveEncounters() {
         await axios.get(`/api/active/${id}`)
             .then(res => {
                 setActiveEncounter(res.data);
+                console.log(res.data)
                 setCampaignName(res.data.enccamps[0].campaign.campaignName);
                 setMonsters(res.data.monsters);
             })
             .catch(err => console.log(err));
     };
 
-    const updateTotalXP = (num) => {
-        setTotalXP(prevState => prevState + num)
-    }
+    // const updateTotalXP = (num) => {
+    //     totalXP = (totalXP + num)
+    //     console.log(num)
+    // }
 
 
     useEffect(() => { getActiveEncounter(); }, []);
@@ -50,7 +53,7 @@ function ActiveEncounters() {
                                 monsterUrl={monster.monsterUrl}
                                 monsterId={monster.monsterId}
                                 activeEncounter={true}
-                                updateTotalXP={updateTotalXP}
+                                // updateTotalXP={updateTotalXP}
                             />
                         </div>
                     ))}
@@ -59,6 +62,7 @@ function ActiveEncounters() {
             <div>
                 <Calculators monsters={monsters}/>
             </div>
+            <p>{totalXP} </p>
             <div className="flex justify-center">
                 <NavLink className="hover:text-blue-400 mt-4" to="/encounters">End Encounter</NavLink>
             </div>

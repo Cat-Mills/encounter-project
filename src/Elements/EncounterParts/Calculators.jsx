@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 export default function Calculators({monsters}){
     const [monsterXP, setMonsterXP] = useState([])
     const [monsterCR, setMonsterCR] = useState([])
-    // const [totalXP, setTotalXP] = useState(0)
+    const [totalXP, setTotalXP] = useState(0)
 
     async function getStats() {
         try{
@@ -23,17 +23,22 @@ export default function Calculators({monsters}){
         }
         setMonsterCR(crContainer)
         setMonsterXP(xpContainer)
-        calculateXP()
+        console.log(monsterXP)
     } catch(err){ console.log(err)}
 
-    function calculateXP(){
-        console.log('hit calc')
+    // function calculateXP(){
+    //     console.log('hit calc')
         
-        let sum = 0
-        monsterXP.forEach(num => {setTotalXP(sum += num)})
-    }
+    //     let sum = 0
+    //     monsterXP.forEach(num => {setTotalXP(sum += num)})
+    // }
 }
 useEffect(() => { getStats() }, [])
+
+useEffect(() => {
+    let red = monsterXP.reduce((totalXP, value)=> value + totalXP, 0)
+    setTotalXP(red)
+}, [])
 // useEffect(()=> { }, [])
 // {monsterXP && console.log(monsterXP)}
 // {monsterCR && console.log(monsterCR)}
@@ -42,6 +47,10 @@ useEffect(() => { getStats() }, [])
     // calculateXP()
 
     return (
-        <div>Total xp: {monsterXP.reduce((totalXP, value)=> value + totalXP, 0)} </div> 
+        <>
+        {totalXP > 0 && <div>Total xp: {totalXP} </div>}
+        {/* {monsterXP.length > 0 && <div>Total xp: {setTotalXP(monsterXP.reduce((totalXP, value)=> value + totalXP, 0))} </div>} */}
+        </>
+        
     )
 }

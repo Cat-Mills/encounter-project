@@ -14,7 +14,8 @@ export default function MonsterCards({ monsterUrl,monsterId, getMonsters, active
             .get(`https://www.dnd5eapi.co${monsterUrl}`)
             .then(res => {
                 setMonsterStats(res.data)
-                updateTotalXP(res.data.xp)
+                console.log(res.data)
+                // updateTotalXP(res.data.xp)
                 // console.log(res.data)
             })
             .catch(err => console.log(err))

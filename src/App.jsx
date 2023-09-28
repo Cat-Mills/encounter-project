@@ -14,14 +14,14 @@ import ActiveEncounters from './Pages/ActiveEncounterPage'
 
 function App() {
   const userId = useSelector(state => state.userId)
-
+  console.log(userId)
   return (
     <>
       <Header/>
       <Routes>
         <Route path='/' index element={userId ? <Navigate to='/campaigns'/> : <Landing />} />
 
-        <Route path='/monsters' element={userId ? <Monsters/> : <Navigate to='/'/> }/>
+        <Route path='/monsters' element={ <Monsters/> }/>
 
         <Route path='/encounters' element={userId ? <Encounters/> : <Navigate to='/'/> }/>
 
@@ -29,7 +29,7 @@ function App() {
 
         <Route path='/profile' element={userId ? <Profile/> : <Navigate to='/'/> }/>
 
-        <Route path='/active/:id' element={<ActiveEncounters/>}/>
+        <Route path='/active/:id' element={userId ? <ActiveEncounters/> : <Navigate to='/'/>}/>
       </Routes>
     </>
   )

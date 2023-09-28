@@ -14,6 +14,7 @@ export default function StatBlock({ url, showBlock }) {
     const [usersEncounters, setUsersEncounters] = useState([])
 
     async function getStats() {
+        console.log("logging getStats")
         axios
             .get(`https://www.dnd5eapi.co${url}`)
             .then(res => {
@@ -30,12 +31,11 @@ export default function StatBlock({ url, showBlock }) {
                 
             })
             .catch(err => console.log(err))
-            // console.log(specs)
-            // setShowMonsterStats(true)
     }
     function getEncounterTables() {
         axios.get('/api/encounters')
             .then(res => {
+                console.log("logging encounters")
                 setUsersEncounters(res.data)
                 setEncounterKey(res.data[0] ? res.data[0].encounterId : null)
             }).catch(err => console.log(err))
@@ -46,9 +46,11 @@ export default function StatBlock({ url, showBlock }) {
         setEncounterKey(e.target.value)
         console.log(encounterKey)
     }
-    const handleAddToEncounter = (e, monsterUrl) => {
+    const handleAddToEncounter = (e) => {
         e.preventDefault()
-        axios.post(`/api/monsters/${encounterKey}`, {monsterUrl,  encounterId: encounterKey})
+        console.log("hit addToEncounter")
+        // e.preventDefault()
+        axios.post(`/api/monsters/${encounterKey}`, {monsterUrl: url,  encounterId: encounterKey})
         .then(res => {
             console.log(res.data)
             alert("Monster added!")
@@ -56,8 +58,7 @@ export default function StatBlock({ url, showBlock }) {
             // getEncounterTables()
         }).catch(err => console.log(err))
     }
-    useEffect(() => { getEncounterTables() }, [])
-    useEffect(() => { getStats() }, [])
+    useEffect(() => { getStats(), getEncounterTables() }, [])
     
 return (
     <div>
@@ -72,12 +73,16 @@ return (
                 {showModal ? (
                     <div className="flex relative w-11/12 -ml-3 ">
                         <button className=" flex absolute justify-center left-full bottom-4 hover:text-blue-400" onClick={() => setShowModal(false)}><X/> </button> 
-                        <form className="ml-16 flex absolute justify-center bottom-4 left-3/4" onSubmit={e => handleAddToEncounter(e, monster.url)}> 
-                            <button className="mr-2 hover:text-blue-400">Add to</button>
-                            <select className=" bg-gray-700 focus: outline-none" value={encounterKey} onChange={e => {handleEncounterKey(e);e.preventDefault()}} placeholder="Encounter">
+
+                        <form className="ml-16 flex absolute justify-center bottom-4 left-3/4" onSubmit={(e) =>{console.log(url) ; handleAddToEncounter(e,"asdf"); }}> 
+                            <button type="submit" className="mr-2 hover:text-blue-400">Add to</button>
+
+                            <select className=" bg-gray-700 focus: outline-none" value={encounterKey} onChange={e => {handleEncounterKey(e)}} placeholder="Encounter">
+
                             {usersEncounters.map(encounter => (
                                 <option key={encounter.encounterId} value={encounter.encounterId}>{encounter.encounterName}</option>
                             ))}
+
                             </select>
                         </form>
                 </div> 

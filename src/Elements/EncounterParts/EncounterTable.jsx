@@ -92,9 +92,9 @@ const EncTable = () => {
         <div className="flex-col h-screen">
             <div >
                 {encounterList.map((encounter) => (
-                    <div key={encounter.encounterId} className="border border-spacing-1 flex justify-center m-2 p-2 bg-gray-600 relative">
-                        {isEditing !== encounter.encounterId && <div className=" w-28 text-start absolute left-2">
-                            <h2 className="font-bold capitalize text-lg ">{encounter.encounterName}</h2>
+                    <div key={encounter.encounterId} className="border border-spacing-1 flex justify-start items-center m-2 p-2 bg-gray-600 relative">
+                        {isEditing !== encounter.encounterId && <div className=" w-28 text-start self-start">
+                            <h2 className="font-bold capitalize text-lg">{encounter.encounterName}</h2>
 
                             {encounter.enccamps.length > 0 ?
                                 (<p>{encounter.enccamps.map(encCampObj => (
@@ -103,7 +103,7 @@ const EncTable = () => {
                             }
                         </div>}
                         {isEditing === encounter.encounterId &&
-                            <div className="w-28 text-start absolute left-2">
+                            <div className="w-28 text-start left-2">
                                 <form className="font-bold capitalize text-lg w-20" onSubmit={e => { e.preventDefault(); editEncounter(encounter) }}>
                                     <input className=" bg-gray-700" type="text" placeholder="Encounter Name" value={encounterName} onChange={e => setEncounterName(e.target.value)} />
                                     <div >
@@ -119,7 +119,7 @@ const EncTable = () => {
                                 </form>
                             </div>
                         }
-                        <div>
+                        <div className=" self-center align-middle justify-center ml-20">
                             {
                                 <MonstersInEnc key={encounter.encounterId}
                                     encounter={encounter} />
