@@ -15,25 +15,12 @@ export default function MonstersInEnc({encounter}){
                 // console.log(res.data)
             }).catch(err => console.log(err))
     }
-    // async function getStats() {
-    //     const data = []
-    //     encountersMonsters.map(monster => {
-    //         axios
-    //         .get(`https://www.dnd5eapi.co${monster.monsterUrl}`)
-    //         .then(res => {
-    //             // console.log(res.data)
-    //             data.push(res.data)
-    //         })
-    //         .catch(err => console.log(err))
-    //         })
-    //         // console.log(data)
-    //     }
+    
     
     useEffect(()=>{getMonsters()}, [])
     
-
     return(
-        <div>
+        <div className=" bg-gray-600 z-10">
             {encountersMonsters.map(monster => (
                 <div key={monster.monsterId}>
                     <MonsterCards 

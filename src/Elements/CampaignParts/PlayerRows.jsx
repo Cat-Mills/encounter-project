@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DisplayPlayers from "./DisplayPlayers.jsx";
 import PlayerForm from "./PlayerForm.jsx";
-import { More, X } from "../../icons.jsx";
+import { Plus, X, Trash, Up, Down } from "../../icons.jsx";
 
 export default function PlayerRows({campaign, getCampaignTables}){
     const navigate = useNavigate()
@@ -59,18 +59,18 @@ export default function PlayerRows({campaign, getCampaignTables}){
 
     return(
         <div>
-            <div className="border border-spacing-1 flex justify-between m-2 p-2 bg-gray-600">
-                <h2 className="font-bold capitalize text-lg">{campaign.campaignName}</h2>
-                {/* <p> Players: array.length </p> */}
-                <button onClick={deleteCampaign}>Delete</button>
-                {!showPlayers && <button onClick={() => {setShowPlayers(true)}}><More/> </button>}
-                {showPlayers && <button onClick={() => setShowPlayers(false)}><More/> </button>}
+            <div className="border border-spacing-1 flex justify-end m-2 p-2 bg-gray-600 relative align-middle">
+                <h2 className="font-bold capitalize text-lg absolute left-4 self-center">{campaign.campaignName}</h2>
+                <p className="flex self-center mr-6"> Players: {playerRows.length} </p>
+                <button className="mx-4 hover:text-blue-400" onClick={deleteCampaign}><Trash/></button>
+                {!showPlayers && <button className="hover:text-blue-400 mr-2" onClick={() => {setShowPlayers(true)}}><Down/> </button>}
+                {showPlayers && <button className="hover:text-blue-400 mr-2" onClick={() => setShowPlayers(false)}><Up/> </button>}
             </div>
                 {showPlayers && playerRows[0] && 
                 playerRows.map(player => 
                 (
                     
-                <div key={player.playerId}>
+                <div className=" bg-gray-600 mx-4 mb-1" key={player.playerId}>
                     <DisplayPlayers  
                     setShowPlayers={setShowPlayers}
                     player={player} 
@@ -84,7 +84,7 @@ export default function PlayerRows({campaign, getCampaignTables}){
 
             {showPlayers && 
             <div>
-                <button className="" onClick={() => setShowPlayerForm(true)}>Add Player</button>
+                <button className="hover:text-blue-400" onClick={() => setShowPlayerForm(true)}><Plus/></button>
             </div>
             } 
             {showPlayerForm &&

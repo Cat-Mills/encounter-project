@@ -11,7 +11,7 @@ import monstersCtrl from "./controllers/monstersCtrl.js";
 const { addCampaign, getAllCampaigns, deleteCampaign, editCampaign } = campCtrl
 const { register, login, checkUser, logout } = authCtrl
 const { getPlayers, addPlayer, deletePlayer, editPlayer } = playerCtrl
-const { getEncounters, addEncounter, editEncounter, deleteEncounter } = encounterCtrl
+const { getEncounters, addEncounter, editEncounter, deleteEncounter, getActiveEncounter } = encounterCtrl
 const {addMonster, getMonsters, deleteMonster} = monstersCtrl
 
 const app = express()
@@ -46,6 +46,7 @@ app.get('/api/encounters', getEncounters)
 app.post('/api/encounters', addEncounter)
 app.put('/api/encounters/:encounterId', editEncounter)
 app.delete('/api/encounters/:encounterId', deleteEncounter)
+app.get('/api/active/:encounterId', getActiveEncounter)
 
 app.get('/api/monsters/:encounterId', getMonsters)
 app.post('/api/monsters/:encounterId', addMonster)

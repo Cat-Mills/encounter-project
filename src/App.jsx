@@ -8,6 +8,7 @@ import Monsters from './Pages/monstersPage.jsx'
 import Encounters from './Pages/encountersPage.jsx'
 import Campaigns from './Pages/campaignsPage.jsx'
 import Profile from './Pages/profilePage.jsx'
+import ActiveEncounters from './Pages/ActiveEncounterPage'
 
 
 
@@ -18,7 +19,7 @@ function App() {
     <>
       <Header/>
       <Routes>
-        <Route path='/' index element={userId ? <Navigate to='/monsters'/> : <Landing />} />
+        <Route path='/' index element={userId ? <Navigate to='/campaigns'/> : <Landing />} />
 
         <Route path='/monsters' element={userId ? <Monsters/> : <Navigate to='/'/> }/>
 
@@ -26,7 +27,9 @@ function App() {
 
         <Route path='/campaigns' element={userId ? <Campaigns/> : <Navigate to='/'/> }/>
 
-        <Route path='/Profile' element={userId ? <Profile/> : <Navigate to='/'/> }/>
+        <Route path='/profile' element={userId ? <Profile/> : <Navigate to='/'/> }/>
+
+        <Route path='/active/:id' element={<ActiveEncounters/>}/>
       </Routes>
     </>
   )

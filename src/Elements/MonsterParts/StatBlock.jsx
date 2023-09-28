@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import MonsterRows from "./MonsterRows.jsx"
-import { More, Plus, X } from "../../icons.jsx"
+import { More, Plus, X, Down, Up } from "../../icons.jsx"
 
 export default function StatBlock({ url, showBlock }) {
     const [monsterStats, setMonsterStats] = useState({})
@@ -53,33 +53,28 @@ export default function StatBlock({ url, showBlock }) {
             console.log(res.data)
             alert("Monster added!")
             setShowModal(false)
-            getEncounterTables()
+            // getEncounterTables()
         }).catch(err => console.log(err))
     }
     useEffect(() => { getEncounterTables() }, [])
-    useEffect(() => { 
-        getStats()
-        // if(showBlock){
-        //     setShowMonsterStats(true)
-        // } 
-    }, [])
+    useEffect(() => { getStats() }, [])
     
 return (
     <div>
-        {!showBlock && <div className="flex relative w-11/12 ml-10">
+        {!showBlock && <div className="flex relative w-11/12 ml-8">
             {!showMonsterStats ?
-                <button className="hover:text-blue-400 flex absolute justify-center  bottom-4 left-full" onClick={() => { setShowMonsterStats(!showMonsterStats); getStats(); console.log(monsterStats); console.log()}}><More/></button>
+                <button className="hover:text-blue-400 flex absolute justify-center  bottom-4 left-full" onClick={() => { setShowMonsterStats(!showMonsterStats); getStats(); console.log(monsterStats); console.log()}}><Down/></button>
                 :
                 <div>
-                    <button className="hover:text-blue-400 flex absolute justify-center bottom-4 left-full" onClick={() => setShowMonsterStats(false)}><More/></button>
+                    <button className="hover:text-blue-400 flex absolute justify-center bottom-4 left-full" onClick={() => setShowMonsterStats(false)}><Up/></button>
                 </div>}
         </div>}
                 {showModal ? (
-                    <div className="flex relative w-11/12 ml-1 ">
+                    <div className="flex relative w-11/12 -ml-3 ">
                         <button className=" flex absolute justify-center left-full bottom-4 hover:text-blue-400" onClick={() => setShowModal(false)}><X/> </button> 
                         <form className="ml-16 flex absolute justify-center bottom-4 left-3/4" onSubmit={e => handleAddToEncounter(e, monster.url)}> 
                             <button className="mr-2 hover:text-blue-400">Add to</button>
-                            <select className=" bg-gray-700 focus: outline-none" value={encounterKey} onChange={e => handleEncounterKey(e)} placeholder="Encounter">
+                            <select className=" bg-gray-700 focus: outline-none" value={encounterKey} onChange={e => {handleEncounterKey(e);e.preventDefault()}} placeholder="Encounter">
                             {usersEncounters.map(encounter => (
                                 <option key={encounter.encounterId} value={encounter.encounterId}>{encounter.encounterName}</option>
                             ))}
@@ -87,15 +82,15 @@ return (
                         </form>
                 </div> 
                 ) :
-                <div className="flex relative w-11/12 ml-1">
-                    <button onClick={() => setShowModal(true)} className="flex absolute justify-center left-full bottom-4 hover:text-blue-400"><Plus/></button>
+                <div className="flex relative w-11/12 -ml-3">
+                    {!showBlock && <button onClick={() => setShowModal(true)} className="flex absolute justify-center left-full bottom-4 hover:text-blue-400"><Plus/></button>}
                 </div>
                 }
 
         {/*BOOK ~~~ ~~~ ~~~ Monster Details ~~~ ~~~ ~~~*/}
 
         {showMonsterStats &&  (
-            <div className="flex-wrap m-2 p-2 justify-around bg-gray-600">
+            <div className="flex-wrap m-2 p-2 justify-around bg-gray-600 z-10">
 
                 {/*TAB  Type/Alignment  */}
                 <div className="flex justify-center mb-3 capitalize">

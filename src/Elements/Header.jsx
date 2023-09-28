@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 
-//TODO Render tabs if signed in.
+
 //useEffect to check if there is a user on the session
 //if user, render Header. if not, do not display tabs.
 //apply style difference to current page
@@ -33,7 +33,7 @@ const Header = () => {
                     <NavLink className={currPage === 'Cam' && 'text-blue-300'} to='/campaigns' onClick={() => setCurrPage('Cam')}>Campaigns</NavLink>
                     <NavLink className={currPage === 'Prof' && 'text-blue-300'} to='/profile' onClick={() => setCurrPage('Prof')}>Profile</NavLink>
                 </div>
-            ) : null}
+            ) : <div></div>}
         </>
     )
 }
