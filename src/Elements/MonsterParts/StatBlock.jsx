@@ -53,7 +53,7 @@ export default function StatBlock({ url, showBlock }) {
         axios.post(`/api/monsters/${encounterKey}`, {monsterUrl: url,  encounterId: encounterKey})
         .then(res => {
             console.log(res.data)
-            alert("Monster added!")
+            
             setShowModal(false)
             // getEncounterTables()
         }).catch(err => console.log(err))

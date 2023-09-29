@@ -20,7 +20,7 @@ export default function MonstersInEnc({encounter}){
     useEffect(()=>{getMonsters()}, [])
     
     return(
-        <div className=" bg-gray-600 z-10">
+        <div className="  z-10">
             {encountersMonsters.map(monster => (
                 <div key={monster.monsterId}>
                     <MonsterCards 

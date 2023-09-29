@@ -89,11 +89,11 @@ const EncTable = () => {
     // console.log(encounterList)
 
     return (
-        <div className="flex-col h-screen">
+        <div className="flex-col">
             <div >
                 {encounterList.map((encounter) => (
-                    <div key={encounter.encounterId} className="border border-spacing-1 flex justify-start items-center m-2 p-2 bg-gray-600 relative">
-                        {isEditing !== encounter.encounterId && <div className=" w-28 text-start self-start">
+                    <div key={encounter.encounterId} className="border border-spacing-1 flex justify-between items-center m-2 p-2 bg-gray-600 relative">
+                        {isEditing !== encounter.encounterId && <div className=" w-28 text-start self-start z-20 bg-gray-600 p-2">
                             <h2 className="font-bold capitalize text-lg">{encounter.encounterName}</h2>
 
                             {encounter.enccamps.length > 0 ?
@@ -119,7 +119,7 @@ const EncTable = () => {
                                 </form>
                             </div>
                         }
-                        <div className=" self-center align-middle justify-center ml-20">
+                        <div className=" -ml-16 text-start">
                             {
                                 <MonstersInEnc key={encounter.encounterId}
                                     encounter={encounter} />
