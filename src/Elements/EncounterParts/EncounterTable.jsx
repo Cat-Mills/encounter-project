@@ -32,7 +32,7 @@ const EncTable = () => {
         axios.delete(`/api/encounters/${encounter.encounterId}`)
             .then(res => {
                 console.log(res)
-                alert("Encounter Deleted!")
+                
                 getEncounterTables()
             })
             .catch(err => console.log(err))
@@ -56,7 +56,7 @@ const EncTable = () => {
             .post(`/api/encounters`, { encounterName, campaignId: campaignKey })
             .then(res => {
                 console.log(res.data)
-                alert("Encounter Created!")
+                
                 setShowModal(false)
                 getEncounterTables()
             })
@@ -90,10 +90,10 @@ const EncTable = () => {
 
     return (
         <div className="flex-col">
-            <div >
+            <div className="flex-col" >
                 {encounterList.map((encounter) => (
                     <div key={encounter.encounterId} className="border border-spacing-1 flex justify-between items-center m-2 p-2 bg-gray-600 relative">
-                        {isEditing !== encounter.encounterId && <div className=" w-28 text-start self-start z-20 bg-gray-600 p-2">
+                        {isEditing !== encounter.encounterId && <div className=" w-28 text-start self-start z-30 p-2">
                             <h2 className="font-bold capitalize text-lg">{encounter.encounterName}</h2>
 
                             {encounter.enccamps.length > 0 ?
@@ -119,7 +119,7 @@ const EncTable = () => {
                                 </form>
                             </div>
                         }
-                        <div className=" -ml-16 text-start">
+                        <div className=" -ml-16 text-start z-20">
                             {
                                 <MonstersInEnc key={encounter.encounterId}
                                     encounter={encounter} />
@@ -127,11 +127,11 @@ const EncTable = () => {
                         </div>
                         {/* TAB Buttons */}
                         {isEditing !== encounter.encounterId &&
-                            <div className="flex">
+                            <div className="flex z-10">
 
                                 <button className="hover:text-blue-400 absolute self-center right-24" onClick={() => startEncounter(encounter)}><Play /></button>
 
-                                <button className="hover:text-blue-400 absolute self-center right-14" onClick={() => setIsEditing(encounter.encounterId)}><Edit /></button>
+                                <button className="hover:text-blue-400 absolute self-center right-14" onClick={() => {setIsEditing(encounter.encounterId); setEncounterName(encounter.encounterName)}}><Edit /></button>
 
                                 <button className="hover:text-blue-400 absolute self-center right-4" onClick={() => deleteEncounter(encounter)}><Trash /> </button>
                             </div>

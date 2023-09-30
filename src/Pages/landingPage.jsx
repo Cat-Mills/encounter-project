@@ -36,7 +36,7 @@ const Landing = () => {
 
 
     return (
-        <>
+        <div className="mt-32">
         { register ? 
             <Register 
                 setPassword={setPassword}
@@ -55,7 +55,7 @@ const Landing = () => {
             />
         }
         <button onClick={()=> setRegister(!register)}>Need to {register ? 'login?' : 'make an account?'} </button>
-        </>
+        </div>
     )
 }
 

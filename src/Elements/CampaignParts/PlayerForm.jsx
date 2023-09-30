@@ -19,7 +19,7 @@ export default function PlayerForm ({setShowPlayerForm, getPlayerRows, player}) 
         )
         .then(res => {
             console.log(res.data)
-            alert("Player Edited!")
+            
             getPlayerRows()
         })
     }

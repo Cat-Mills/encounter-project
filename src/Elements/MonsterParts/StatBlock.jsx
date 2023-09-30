@@ -12,9 +12,11 @@ export default function StatBlock({ url, showBlock }) {
     const [showModal, setShowModal] = useState(false)
     const [encounterKey, setEncounterKey] = useState(undefined)
     const [usersEncounters, setUsersEncounters] = useState([])
+    const [monsterImage, setMonsterImage] = useState('')
 
     async function getStats() {
-        console.log("logging getStats")
+        let getImg = ''
+        // console.log(url)
         axios
             .get(`https://www.dnd5eapi.co${url}`)
             .then(res => {
@@ -22,20 +24,22 @@ export default function StatBlock({ url, showBlock }) {
                 setProfs(res.data.proficiencies.map(prof => (
                     {save: prof.proficiency.name, val: prof.value}
                     )))
-                    setSpecials(res.data.special_abilities.map(special => (
-                        {name: special.name, desc: special.desc}
-                        )))
+                setSpecials(res.data.special_abilities.map(special => (
+                    {name: special.name, desc: special.desc}
+                    )))
+                getImg = res.data.image ? res.data.image : null
+                // console.log(res.data)
                 if(showBlock){
                     setShowMonsterStats(true)
                 }
-                
+                if(getImg){setMonsterImage(`https://www.dnd5eapi.co${getImg}`)} else {setMonsterImage(null)}
             })
             .catch(err => console.log(err))
     }
     function getEncounterTables() {
         axios.get('/api/encounters')
             .then(res => {
-                console.log("logging encounters")
+                // console.log("logging encounters")
                 setUsersEncounters(res.data)
                 setEncounterKey(res.data[0] ? res.data[0].encounterId : null)
             }).catch(err => console.log(err))
@@ -59,7 +63,7 @@ export default function StatBlock({ url, showBlock }) {
         }).catch(err => console.log(err))
     }
     useEffect(() => { getStats(), getEncounterTables() }, [])
-    
+    // console.log(monsterStats)
 return (
     <div>
         {!showBlock && <div className="flex relative w-11/12 ml-8">
@@ -68,42 +72,51 @@ return (
                 :
                 <div>
                     <button className="hover:text-blue-400 flex absolute justify-center bottom-4 left-full" onClick={() => setShowMonsterStats(false)}><Up/></button>
-                </div>}
-        </div>}
-                {showModal ? (
-                    <div className="flex relative w-11/12 -ml-3 ">
-                        <button className=" flex absolute justify-center left-full bottom-4 hover:text-blue-400" onClick={() => setShowModal(false)}><X/> </button> 
-
-                        <form className="ml-16 flex absolute justify-center bottom-4 left-3/4" onSubmit={(e) =>{console.log(url) ; handleAddToEncounter(e,"asdf"); }}> 
-                            <button type="submit" className="mr-2 hover:text-blue-400">Add to</button>
-
-                            <select className=" bg-gray-700 focus: outline-none" value={encounterKey} onChange={e => {handleEncounterKey(e)}} placeholder="Encounter">
-
-                            {usersEncounters.map(encounter => (
-                                <option key={encounter.encounterId} value={encounter.encounterId}>{encounter.encounterName}</option>
-                            ))}
-
-                            </select>
-                        </form>
-                </div> 
-                ) :
-                <div className="flex relative w-11/12 -ml-3">
-                    {!showBlock && <button onClick={() => setShowModal(true)} className="flex absolute justify-center left-full bottom-4 hover:text-blue-400"><Plus/></button>}
                 </div>
-                }
+            }
+        </div>}
+
+        {showModal ? (
+            <div className="flex relative w-11/12 -ml-3 ">
+                <button className=" flex absolute justify-center left-full bottom-4 hover:text-blue-400" onClick={() => setShowModal(false)}><X/> </button> 
+
+                <form className="ml-16 flex absolute justify-center bottom-4 left-3/4" onSubmit={(e) =>{console.log(url) ; handleAddToEncounter(e,"asdf"); }}> 
+                    <button type="submit" className="mr-2 hover:text-blue-400">Add to</button>
+
+                    <select className=" bg-gray-700 focus: outline-none" value={encounterKey} onChange={e => {handleEncounterKey(e)}} placeholder="Encounter">
+
+                    {usersEncounters.map(encounter => (
+                        <option key={encounter.encounterId} value={encounter.encounterId}>{encounter.encounterName}</option>
+                    ))}
+
+                    </select>
+                </form>
+        </div> 
+        ) :
+        <div className="flex relative w-11/12 -ml-3">
+            {!showBlock && <button onClick={() => setShowModal(true)} className="flex absolute justify-center left-full bottom-4 hover:text-blue-400"><Plus/></button>}
+        </div>
+        }
 
         {/*BOOK ~~~ ~~~ ~~~ Monster Details ~~~ ~~~ ~~~*/}
 
         {showMonsterStats &&  (
-            <div className="flex-wrap m-2 p-2 justify-around bg-gray-600 z-10">
+            <div className="flex-wrap m-2 my-5 p-5 justify-around bg-gray-600 z-20 shadow-inner shadow-gray-800">
 
+                {monsterImage && 
+                <div className="flex justify-center h-60 mt-3 ">
+                    <img className="rounded-3xl border-2 border-double border-gray-700 shadow-md shadow-gray-900" src={monsterImage} alt={monsterImage} />
+                </div>
+                }
                 {/*TAB  Type/Alignment  */}
-                <div className="flex justify-center mb-3 capitalize">
+                <div className="flex justify-center my-3 capitalize">
                     <div>{monsterStats.size} </div>
                     <div className="ml-2">{monsterStats.type} </div>
                     {monsterStats.subtype && <div className="ml-1">({monsterStats.subtype}) </div>}
                     <div className="ml-2">{monsterStats.alignment} </div>
                 </div>
+                
+                
                 
                     <div className="cardLine"></div>
 

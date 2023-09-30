@@ -34,7 +34,6 @@ export default function MonsterCards({ monsterUrl,monsterId, getMonsters, active
         axios.delete(`/api/monsters/${monsterId}`)
         .then(res => {
             console.log(res)
-            alert("monster removed")
             getMonsters()
         })
         .catch(err => console.log(err))
@@ -43,44 +42,36 @@ export default function MonsterCards({ monsterUrl,monsterId, getMonsters, active
     useEffect(() => { getStats() }, [])
     // console.log(showStatBlock)
     return(
-        <div className="flex justify-center ">
-            
-            {!activeEncounter && 
-            <button 
-            onClick={() => {setShowModal(current => !current) }} 
-            className="mr-3 my-1 hover:ring-gray-500 hover:text-blue-400 hover:ring-2 focus:ring-2 focus:ring-gray-300 focus: outline-none font-medium px-3 py-1 text-center inline-flex items-center justify-between " type="button">{monsterStats.name}<ChevronRight /></button>
-            }
-            
-            {showModal && !activeEncounter && 
-            <div className="flex ">
-                <button className="mr-2 hover:text-blue-400" onClick={() => {setShowStatBlock(current => !current) }}>{showStatBlock ? <Up/> :<Down/>}</button>
+        <><div className="flex justify-center ">
 
-                <button className="ml-2 hover:text-blue-400" onClick={() => deleteMonster()}><Trash/> </button>
-            </div>
-            }
-            {activeEncounter &&
-            <div className="flex-col m-1">
-                <div className="flex align-middle justify-center">
-                    <div className="mx-1 font-bold text-lg self-center">{monsterStats.name}</div>
-                    <div className="mx-2 self-center">HP: {monsterStats.hit_points} </div>
-                    <div className="mx-2 self-center">AC: {monsterAC} </div>
-                    <div className="mx-2 self-center">+ {monsterDexMod} to initiative</div>
+            {!activeEncounter &&
+                <button
+                    onClick={() => { setShowModal(current => !current); } }
+                    className={`${showStatBlock===true ? ' hidden' : 'font-medium no-underline' } mr-3 my-4 hover:ring-gray-500 hover:text-blue-400 hover:ring-2 focus:ring-2 focus:ring-gray-300 focus: outline-none font-medium px-3 py-1  text-center flex items-center justify-between `}
+                    type="button">{monsterStats.name}</button>}
+
+            {showModal &&
+                <div className="flex ">
+                    <button className="mr-2 hover:text-blue-400" onClick={() => { setShowStatBlock(current => !current); } }>{showStatBlock ? <p>Hide</p> : <p>Details</p>}</button>
+
+                    {!showStatBlock && <button className="ml-2 hover:text-blue-400" onClick={() => deleteMonster()}><Trash /> </button>}
+                </div>}
+
+            
                 </div>
-                {/* <button onClick={()=> {console.log("Stats:",monsterStats)}}>stats</button> */}
-                
+                <div>
+                {showStatBlock &&
+                    <div className="flex-col justify-center">
+                    <div className=" text-3xl z-30 flex justify-center mt-3 -mb-2 font-semibold underline underline-offset-4">
+                        {monsterStats.name}
+                    </div>
+                    <div className=" bg-gray-600 z-10">
+                        <StatBlock url={monsterUrl} showBlock={true} />
+                    </div>
+                    </div>
+                    }
             </div>
-            }
-            {showModal && activeEncounter &&
-            <div className="flex justify-start">
-                <button className="mr-2 hover:text-blue-400" onClick={() => {setShowStatBlock(current => !current) }} >{showStatBlock ? <Up/> : <Down/> }</button>
-            </div>
-            }
-            {showStatBlock &&
-            <div className=" bg-gray-600 z-10">
-                <StatBlock url={monsterUrl} showBlock={true} />
-            </div>
-            }
-        </div>
+        </>
     )
 }
 

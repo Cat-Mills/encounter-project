@@ -17,7 +17,7 @@ export default function NewCampForm({campaignName, setCampaignName, setShowModal
         .post(`/api/campaigns`,{campaignName} )
         .then(res => {
             console.log(res.data)
-            alert("Campaign Created!")
+            
             setShowModal(false)
             getCampaignTables()
         })

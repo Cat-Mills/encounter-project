@@ -33,7 +33,7 @@ export default function PlayerRows({campaign, getCampaignTables}){
         )
         .then(res => {
             console.log(res.data)
-            alert("Player Added!")
+            
             getPlayerRows()
             clear()
         })
@@ -51,7 +51,7 @@ export default function PlayerRows({campaign, getCampaignTables}){
         axios.delete(`/api/campaigns/${campaign.campaignId}`)
         .then(res => {
             console.log(res) 
-            alert("Campaign Deleted!")
+            
             getCampaignTables()
         })
         .catch(err => console.log(err))

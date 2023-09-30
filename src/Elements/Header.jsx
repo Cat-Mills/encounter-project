@@ -27,7 +27,7 @@ const Header = () => {
     return (
         <>
             {userId ? (
-                <div className="flex justify-evenly pb-6 pt-6 mb-10 ">
+                <div className="flex justify-evenly pb-6 pt-6 mb-10 fixed top-0 w-full left-0 shadow-lg bg-[#3d404e]">
                     <NavLink className={currPage === 'Mons' && 'text-blue-300'} to='/monsters' onClick={() => setCurrPage('Mons')}>Monsters</NavLink>
                     <NavLink className={currPage === 'Enc' && 'text-blue-300'} to='/encounters' onClick={() => setCurrPage('Enc')}>Encounters</NavLink>
                     <NavLink className={currPage === 'Cam' && 'text-blue-300'} to='/campaigns' onClick={() => setCurrPage('Cam')}>Campaigns</NavLink>

@@ -37,7 +37,7 @@ const [filteredMonsterList, setFilteredMonsterList] = useState({})
   useEffect(()=> getMonsters(), [])
   
   return (
-    <div className='border p-5 bg-gray-700'>
+    <div className='border p-5 bg-gray-700 mt-32'>
       <div className='flex justify-center min-w-full items-center p-3 relative hover:text-blue-400'>
         <input className='block w-full p-px mb border bg-gray-600 hover:border-blue-400 hover:text-white focus:ring-transparent'
           onChange={(e) => {

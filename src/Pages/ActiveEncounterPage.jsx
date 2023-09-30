@@ -96,16 +96,19 @@ function ActiveEncounters() {
             console.log("adjustedXp",adjustedXp)
             setCalculatedXp(adjustedXp)
             setXpBudget(partyXpBudget)
-            let difficultyLevel = ''
+            let difficultyLevel = 'N.A.'
             const difficultyMultipliers = {
                 easy: 0.5, medium: 1, hard: 1.5, deadly: 2,
             }
             const ratio = adjustedXp / partyXpBudget
+            console.log("xp ratio", ratio)
             if(ratio <= difficultyMultipliers.easy){difficultyLevel = "Easy"}
             else if(ratio <= difficultyMultipliers.medium){difficultyLevel = "Medium"}
             else if(ratio <= difficultyMultipliers.hard){difficultyLevel = "Hard"}
             else if(ratio <= difficultyMultipliers.deadly){difficultyLevel = "Deadly"}
+            else if(ratio > difficultyMultipliers.deadly){difficultyLevel = "Impossible (TPK)"}
         setDifficulty(difficultyLevel)
+        console.log("difficulty",difficultyLevel)
     }
     let d20 = {
         sides: 20,
@@ -136,10 +139,10 @@ function ActiveEncounters() {
     useEffect(() => { getActiveEncounter()}, []);
     // console.log("activeEncounter",activeEncounter)
     // console.log(entities)
-    console.log(difficulty)
+    // console.log(difficulty)
     return (activeEncounter &&
         <>
-        <div className="border p-5 bg-gray-700 ">
+        <div className="border p-5 bg-gray-700 mt-32 ">
             {showStart && <div> 
             <div>
                 Campaign: {campaignName}...
@@ -150,17 +153,17 @@ function ActiveEncounters() {
             </div>}
             {!showStart &&
             <>
-            <div>Encounter Running</div>
+            <div>Running {activeEncounter.encounterName}</div>
             <div className="flex my-5">
                     <ActiveCard
                         entities={entities}
                         d20={d20} />
-                </div><p>Monsters: {numOfMonsters} </p><p>XP for this encounter: {calculatedXp} </p><p>Difficulty: {difficulty} </p><div className="flex justify-center">
+                </div><p> Select a monster to see more details </p><p>XP for this encounter: {calculatedXp} </p><p>Difficulty: {difficulty} </p><div className="flex justify-center">
                         <NavLink className="hover:text-blue-400 mt-4" to="/encounters">End Encounter</NavLink>
                     </div></>}
         </div>
         
-        {showStart && <button onClick={() => { initiativeRoll(), getChallengeRating(); setShowStart(false) } }>start</button>}
+        {showStart && <button onClick={() => { initiativeRoll(), getChallengeRating(); setShowStart(false) } }>Start and roll initiative</button>}
         
         </>
     );

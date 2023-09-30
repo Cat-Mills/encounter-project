@@ -11,7 +11,7 @@ const Profile = () => {
   
 
   return (
-    <div>Your Profile
+    <div className='mt-32'>
       <LogoutButton/>
     </div>
   )

@@ -13,7 +13,7 @@ const DisplayPlayers = ({player, campaign, getPlayerRows}) => {
         axios.delete(`/api/players/${player.playerId}`)
         .then(res => {
             console.log(res)
-            alert("Player Deleted!")
+            
             getPlayerRows()
         })
         .catch(err => console.log(err))

@@ -8,10 +8,10 @@ export default {
             const { userId } = req.session.user
             const encounters = await Encounter.findAll({
                 include: { model: EncCamp, include: { model: Campaign } },
-                where: { userId }
+                where: { userId },
+                order: [["encounterId", "ASC"]]
             })
             res.status(200).send(encounters)
-
         } catch (theseHands) {
             console.log(theseHands)
             res.sendStatus(500)
