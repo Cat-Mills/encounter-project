@@ -17,51 +17,7 @@ export default function ActiveCard({ entities }) {
     // }
 
     return (
-        <div className=" flex w-full gap-3">
-
-            
-
-            {/* <table className="w-full table-auto divide-y-8 divide-solid divide-transparent border border-solid border-separate border-spacing-2">
-                <tr className="border-solid border">
-                    <th>Initiative</th>
-                    <th>Name</th>
-                    <th>AC</th>
-                    <th>HP</th>
-                </tr>
-                {entities.map((entity, i) => (
-                    <tbody className="m-2 " key={entity.playerId ? entity.playerId : entity.id}>
-                        
-                    {entity.playerId &&
-                        
-                        <tr className=" text-center">
-                            <td className=""> {entity.initiative} </td>
-                            <td className="">{entity.playerName}</td>
-                            <td className="">{entity.playerAC} </td>
-                            <td className=" text-center self-center"><HitPointTracker totalHP={entity.playerHP}/> </td>
-                        </tr>}
-                    
-                    {entity.index && 
-                        <tr className="">
-                            <td className=""> {entity.initiative} </td>
-                            <td>
-                                <button onClick={() => {showCard===''? setShowCard(entity.id) : setShowCard(''); }} className="mr-2 hover:text-blue-400">{entity.name}</button>
-                            </td>
-                            <td className="">{entity.armor_class[0].value} </td>
-                            <td className=""><HitPointTracker totalHP={entity.hit_points}/> </td>
-                        </tr>}
-                        {showCard === entity.id &&
-                        <td>
-                            <div className=" bg-gray-600 z-10">
-                            <StatBlock url={entity.url} showBlock={true} />
-                            </div>
-                        </td>
-                        }
-                    </tbody>
-                ))}
-                
-            </table> */}
-
-
+        <div className=" flex w-full gap-3 relative">
 
             <div className=" border border-solid w-1/2 flex-col space-y-7 py-3 bg-gray-600">
                 <div className="flex w-full justify-center">
@@ -91,7 +47,8 @@ export default function ActiveCard({ entities }) {
                             <div className="w-1/4"><HitPointTracker totalHP={entity.hit_points}/> </div>
                         </div>}
                         {showCard === entity.id &&
-                        <div className=" bg-gray-600 z-10">
+                        
+                        <div className="bg-gray-600 z-10 absolute w-1/2 max-h-full left-1/2 top-0 border border-solid overflow-scroll ml-1">
                             <StatBlock url={entity.url} showBlock={true} />
                         </div>
                         }
@@ -99,7 +56,9 @@ export default function ActiveCard({ entities }) {
                 ))}
                 
             </div>
-            <div className=" border border-solid w-1/2 flex-col space-y-7 py-3 bg-gray-600"></div>
+            <div className="border border-solid w-1/2 flex-col space-y-7 py-3 bg-gray-600">
+                Select a monster to see more details
+            </div>
 
         </div>
     )

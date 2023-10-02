@@ -25,7 +25,7 @@ const CampTable = () => {
 
 
     return (
-        <div className="min-w-full">
+        <div className="min-w-full ">
             <div>
                 <div>
                     {campaignList.map(campaign => (

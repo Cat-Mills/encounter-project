@@ -26,7 +26,7 @@ export default function NewCampForm({campaignName, setCampaignName, setShowModal
 
     return (
         <form onSubmit={e => handleFormSubmit(e)}>
-            <h3>Create a New Campaign</h3>
+            <h3 className="mb-5">Create a New Campaign</h3>
             <input type="text" placeholder="Campaign Name" value={campaignName} onChange={e => setCampaignName(e.target.value)}/>
             <button>Submit</button>
         </form>

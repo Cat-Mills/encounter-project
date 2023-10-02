@@ -101,7 +101,7 @@ return (
         {/*BOOK ~~~ ~~~ ~~~ Monster Details ~~~ ~~~ ~~~*/}
 
         {showMonsterStats &&  (
-            <div className="flex-wrap m-2 my-5 p-5 justify-around bg-gray-600 z-20 shadow-inner shadow-gray-800">
+            <div className="statblock flex-wrap m-2 my-5 p-5 justify-around z-20 shadow-inner shadow-gray-800">
 
                 {monsterImage && 
                 <div className="flex justify-center h-60 mt-3 ">

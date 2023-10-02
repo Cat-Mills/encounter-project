@@ -5,6 +5,7 @@ import Register from "../Elements/Register.jsx"
 import Login from "../Elements/Login.jsx"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import '../index.css'
 
 
 const Landing = () => {   
@@ -36,7 +37,7 @@ const Landing = () => {
 
 
     return (
-        <div className="mt-32">
+        <div className="">
         { register ? 
             <Register 
                 setPassword={setPassword}
