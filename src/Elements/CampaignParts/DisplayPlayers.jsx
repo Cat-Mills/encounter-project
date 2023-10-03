@@ -21,7 +21,7 @@ const DisplayPlayers = ({player, campaign, getPlayerRows}) => {
     
 
     return(
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
             {!isEditing ?
             <div className="flex p-1 w-full">
                 <div className="p-2 w-1/6"> {player.playerName} </div>

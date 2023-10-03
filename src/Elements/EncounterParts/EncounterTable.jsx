@@ -92,9 +92,9 @@ const EncTable = () => {
         <div className="flex-col">
             <div className="flex-col" >
                 {encounterList.map((encounter) => (
-                    <div key={encounter.encounterId} className="border border-spacing-1 flex justify-between items-center m-2 p-2 bg-gray-600 relative">
+                    <div key={encounter.encounterId} className="border border-spacing-1 flex justify-between items-center m-2 p-2 bg-gray-600 relative "  >
                         {isEditing !== encounter.encounterId && <div className=" w-28 text-start self-start z-30 p-2">
-                            <h2 className="font-bold capitalize text-lg">{encounter.encounterName}</h2>
+                            <h2 className="font-bold capitalize text-xl">{encounter.encounterName}</h2>
 
                             {encounter.enccamps.length > 0 ?
                                 (<p>{encounter.enccamps.map(encCampObj => (
@@ -149,7 +149,7 @@ const EncTable = () => {
                 <form onSubmit={e => handleAddEncounter(e)}>
                     <h3>Create a new Encounter</h3>
                     <input type="text" placeholder="Encounter Name" value={encounterName} onChange={e => setEncounterName(e.target.value)} />
-                    {/* TODO render users existing campaigns and have an option for each */}
+                    
                     <div >
                         <select value={campaignKey} onChange={e => handleCampaignKey(e)} placeholder="Campaign">
                             {usersCampaigns.map(campaign => (

@@ -16,7 +16,7 @@ function App() {
   const userId = useSelector(state => state.userId)
   // console.log(userId)
   return (
-    <>
+    <div className='petrock'>
       <Header/>
       <Routes>
         <Route path='/' index element={ <Landing />} />
@@ -31,7 +31,7 @@ function App() {
 
         <Route path='/active/:id' element={<ActiveEncounters/>}/>
       </Routes>
-    </>
+    </div>
   )
 }
 

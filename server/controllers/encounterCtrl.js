@@ -22,7 +22,7 @@ export default {
         try {
             console.log("hit getActiveEncounter")
             const encounterId = req.params.encounterId
-            console.log(encounterId)
+            // console.log(encounterId)
             const activeEncounter = await Encounter.findOne({
                 include: [{ model: EncCamp, include: { model: Campaign, include: {model: Player} } }, { model: Monster }],
                 where: { encounterId }
@@ -58,11 +58,12 @@ export default {
             console.log('hit editEncounter')
             const { encounterName, campaignId } = req.body
             const { encounterId } = req.params
-            console.log(encounterId)
+            console.log("req.body")
             await Encounter.update({ encounterName }, { where: { encounterId: encounterId } })
-            if (campaignId) {
+            let currentEncCamp = await EncCamp.findOne({where: {encounterId: encounterId}})
+            if (currentEncCamp) {
                 await EncCamp.update({ campaignId }, { where: { encounterId: encounterId } })
-            }
+            } else {EncCamp.create({campaignId, encounterId})}
             const updatedEncounter = await Encounter.findOne({ include: { model: EncCamp, include: { model: Campaign } }, where: { encounterId } })
 
             res.status(200).send(updatedEncounter)

@@ -60,7 +60,7 @@ export default function PlayerRows({ campaign, getCampaignTables }) {
     return (
         <div>
             <div className="border border-spacing-1 flex justify-end m-2 p-2 py-6 bg-gray-600 relative align-middle">
-                <h2 className="font-bold capitalize text-lg absolute left-4 self-center">{campaign.campaignName}</h2>
+                <h2 className="font-bold capitalize text-2xl absolute left-4 self-center">{campaign.campaignName}</h2>
                 <p className="flex self-center mr-6"> Players: {playerRows.length} </p>
                 <button className="mx-4 hover:text-blue-400" onClick={deleteCampaign}><Trash /></button>
                 {!showPlayers && <button className="hover:text-blue-400 mr-2" onClick={() => { setShowPlayers(true) }}><Down /> </button>}
@@ -70,7 +70,7 @@ export default function PlayerRows({ campaign, getCampaignTables }) {
                 playerRows.map(player =>
                 (
 
-                    <div className=" bg-gray-600 mx-4 mb-1" key={player.playerId}>
+                    <div className=" bg-gray-600 mx-4 mb-1 exeter" key={player.playerId}>
                         <DisplayPlayers
                             setShowPlayers={setShowPlayers}
                             player={player}
@@ -88,7 +88,7 @@ export default function PlayerRows({ campaign, getCampaignTables }) {
                 </div>
             }
             {showPlayerForm &&
-                <div className="border border-spacing-1 flex-col mx-4 mb-4 p-1">
+                <div className="border border-spacing-1 flex-col mx-4 mb-4 p-1 exeter">
                     <form id="newPlayer" className="w-full flex" onSubmit={e => { addPlayer(e); setShowPlayerForm(false) }}>
                         
                         <input className=" w-1/6 py-1 my-3 text-center" type="text" placeholder="Name" value={playerName} onChange={e => setPlayerName(e.target.value)} />

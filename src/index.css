@@ -4,7 +4,7 @@
 
 
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family:Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
     background-color: #242424;
@@ -14,13 +14,32 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-    min-width: 1000px;
+    min-width: 500px;
     @apply selection:bg-slate-800 selection:bg-opacity-50;
+    
+    
+}
+.vinque {
+    font-family: "Vinque","sans-serif";
+    @apply tracking-wide
+}
+.petrock {
+    font-family: "Kingthings Petrock", "sans-serif";
+    @apply tracking-wider text-lg
+}
+.exeter {
+    font-family: "Kingthings Exeter", "sans-serif";
+    @apply tracking-wider text-lg
 }
 
 .statblock {
     background-color: #374151 ;
     background-image: url("./assets/light-paper-fibers.png");
+    box-shadow: inset 0px 0px 100px 50px #3d404e;
+}
+
+.blackPaper {
+    background-image: url("./assets/black-paper.png");
     
 }
 
@@ -60,6 +79,7 @@ body {
     justify-self: center;
     
 }
+
 
 @media (prefers-color-scheme: light) {
     :root {

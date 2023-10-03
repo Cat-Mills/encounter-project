@@ -146,7 +146,7 @@ function ActiveEncounters() {
             <div className="border p-5 bg-gray-700 mt-32 ">
                 {showStart && <div>
                     
-                    <div>
+                    <div className="vinque text-xl">
                         Pulling monsters from {activeEncounter.encounterName}...
                     </div>
                 </div>}
@@ -173,9 +173,9 @@ function ActiveEncounters() {
                             <NavLink className="hover:text-blue-400 mt-4" to="/encounters">End Encounter</NavLink>
                         </div></>}
             </div>
-
-            {showStart && <button onClick={() => { initiativeRoll(), getChallengeRating(); setShowStart(false) }}>Start and roll initiative</button>}
-
+            
+            {showStart && <button className="exeter text-2xl h-20" onClick={() => { initiativeRoll(), getChallengeRating(); setShowStart(false) }}>Start and roll initiative</button>}
+            
         </>
     );
 }

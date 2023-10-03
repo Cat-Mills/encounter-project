@@ -39,7 +39,7 @@ return(
         <div key={monster.url}>
             <div className="m-2">
                 <div className="border flex justify-between m-2 p-2 bg-gray-600 ">
-                <h2 className="font-bold capitalize text-lg">{monster.name} </h2>
+                <h2 className="vinque font-bold capitalize text-lg">{monster.name} </h2>
                 
                 </div>
                 <StatBlock url={monster.url}/>

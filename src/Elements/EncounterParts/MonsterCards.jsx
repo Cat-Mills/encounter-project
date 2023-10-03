@@ -47,7 +47,7 @@ export default function MonsterCards({ monsterUrl,monsterId, getMonsters, active
             {!activeEncounter &&
                 <button
                     onClick={() => { setShowModal(current => !current); } }
-                    className={`${showStatBlock===true ? ' hidden' : 'font-medium no-underline' } mr-3 my-4 hover:ring-gray-500 hover:text-blue-400 hover:ring-2 focus:ring-2 focus:ring-gray-300 focus: outline-none font-medium px-3 py-1  text-center flex items-center justify-between `}
+                    className={`${showStatBlock===true ? ' hidden' : 'font-medium no-underline' } mr-3 my-4 hover:ring-gray-500 hover:text-blue-400 hover:ring-2 focus:ring-2 focus:ring-gray-300 focus: outline-none font-medium px-3 py-1  text-center flex items-center justify-between vinque text-lg`}
                     type="button">{monsterStats.name}</button>}
 
             {showModal &&
@@ -62,10 +62,10 @@ export default function MonsterCards({ monsterUrl,monsterId, getMonsters, active
                 <div>
                 {showStatBlock &&
                     <div className="flex-col justify-center">
-                    <div className=" text-3xl z-30 flex justify-center mt-3 -mb-2 font-semibold underline underline-offset-4">
+                    <div className=" text-3xl z-30 flex justify-center mt-3 -mb-2 font-semibold vinque">
                         {monsterStats.name}
                     </div>
-                    <div className=" bg-gray-600 z-10">
+                    <div className=" bg-gray-600 z-10 font-exeter text-lg">
                         <StatBlock url={monsterUrl} showBlock={true} />
                     </div>
                     </div>
