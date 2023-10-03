@@ -90,15 +90,35 @@ const EncTable = () => {
 
     return (
         <div className="flex-col">
+            {showModal ? (
+                <div>
+                    <form className="exeter text-xl" onSubmit={e => handleAddEncounter(e)}>
+                        <h3>Create a new Encounter</h3>
+                        <input className="py-2" type="text" placeholder="New Encounter Name" value={encounterName} onChange={e => setEncounterName(e.target.value)} />
+                        
+                        <div >
+                            <select value={campaignKey} onChange={e => handleCampaignKey(e)} placeholder="Campaign">
+                                {usersCampaigns.map(campaign => (
+                                    <option key={campaign.campaignId} value={campaign.campaignId}>{campaign.campaignName}</option>
+                                ))}
+                            </select>
+
+                            <button className="ml-2">Submit</button>
+
+                        </div>
+                    </form>
+                    <button onClick={()=> setShowModal(false)}>Cancel</button>
+                </div>)
+                : (<button className="hover:border-blue-400 hover:text-blue-400 border border-solid border-grey-500 p-2 mb-2" onClick={() => setShowModal(true)}>Create New Encounter</button>)}
             <div className="flex-col" >
                 {encounterList.map((encounter) => (
                     <div key={encounter.encounterId} className="border border-spacing-1 flex justify-between items-center m-2 p-2 bg-gray-600 relative "  >
                         {isEditing !== encounter.encounterId && <div className=" w-28 text-start self-start z-30 p-2">
-                            <h2 className="font-bold capitalize text-xl">{encounter.encounterName}</h2>
+                            <h2 className="font-bold capitalize text-2xl leading-tight ">{encounter.encounterName}</h2>
 
                             {encounter.enccamps.length > 0 ?
                                 (<p>{encounter.enccamps.map(encCampObj => (
-                                    <span key={encCampObj.campaignId}>{encCampObj.campaign.campaignName}</span>
+                                    <span className="exeter text-base text-gray-400" key={encCampObj.campaignId}> {encCampObj.campaign.campaignName}</span>
                                 ))}</p>) : (<p></p>)
                             }
                         </div>}
@@ -145,24 +165,7 @@ const EncTable = () => {
                     </div>
                 ))}
             </div>
-            {showModal ? (
-                <form onSubmit={e => handleAddEncounter(e)}>
-                    <h3>Create a new Encounter</h3>
-                    <input type="text" placeholder="Encounter Name" value={encounterName} onChange={e => setEncounterName(e.target.value)} />
-                    
-                    <div >
-                        <select value={campaignKey} onChange={e => handleCampaignKey(e)} placeholder="Campaign">
-                            {usersCampaigns.map(campaign => (
-                                <option key={campaign.campaignId} value={campaign.campaignId}>{campaign.campaignName}</option>
-                            ))}
-                        </select>
-
-                        <button>Submit</button>
-
-                    </div>
-                </form>)
-                : (<button className="hover:border-blue-400 hover:text-blue-400 border border-solid border-grey-500 p-2 mb-2" onClick={() => setShowModal(true)}>Create New Encounter</button>)}
-
+            
         </div>
     )
 }

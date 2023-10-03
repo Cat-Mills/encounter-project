@@ -19,6 +19,9 @@
     
     
 }
+svg {
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+  }
 .vinque {
     font-family: "Vinque","sans-serif";
     @apply tracking-wide
@@ -31,22 +34,23 @@
     font-family: "Kingthings Exeter", "sans-serif";
     @apply tracking-wider text-lg
 }
+.title {
+    @apply flex font-bold flex-wrap text-xl pt-5
+}
+.desc {
+    @apply flex ml-6 font-normal text-left text-lg self-center exeter
+}
 
 .statblock {
     background-color: #374151 ;
     background-image: url("./assets/light-paper-fibers.png");
     box-shadow: inset 0px 0px 100px 50px #3d404e;
-}
-
-.blackPaper {
-    background-image: url("./assets/black-paper.png");
     
 }
 
-button:hover{
-    --tw-text-opacity: 1;
-    color: rgba(96, 165, 250, var(--tw-text-opacity));
-}
+/* button:hover{
+    color: #60a5fa
+} */
 
 :focus{
     outline: 1px solid rgb(55, 65, 81) ;
@@ -77,10 +81,10 @@ body {
     border-radius: 50%;
     display: flex;
     justify-self: center;
-    
+    @apply md:my-5
 }
 
-
+/* 
 @media (prefers-color-scheme: light) {
     :root {
         color: #213547;
@@ -94,4 +98,4 @@ body {
     button {
         background-color: #f9f9f9;
     }
-}
+} */

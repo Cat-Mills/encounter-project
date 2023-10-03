@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
+
 export default {
   content: [
     "./index.html",
@@ -24,14 +26,35 @@ export default {
       'exeter': ['Kingthings Exeter', 'sans-serif']
 
     },
+    textShadow: {
+      sm: '1px 1px 2px var(--tw-shadow-color)',
+      DEFAULT: '2px 2px 4px var(--tw-shadow-color)',
+      lg: '4px 4px 8px var(--tw-shadow-color)',
+      xl: '4px 4px 16px var(--tw-shadow-color)',
+      },
     extend: {
+      backgroundImage: theme => ({
+        'undead': "url('./src/assets/portraits/undead.svg')",
+        'paper': 'url("./src/assets/light-paper-fibers.png")',
+        'blackPaper': 'url("./src/assets/black-paper.png")'
+      }),
       colors: {
         'lightGray': '#4b5563',
         'darkGray': '#374151'
       }
     },
   },
-  plugins: [
+  plugins: [plugin(function ({ matchUtilities, theme }) {
+    matchUtilities(
+      {
+        'text-shadow': (value) => ({
+          textShadow: value,
+        }),
+      },
+      { values: theme('textShadow') }
+    )
+  }
+)
     
   ],
   

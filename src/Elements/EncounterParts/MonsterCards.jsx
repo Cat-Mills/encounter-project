@@ -62,7 +62,7 @@ export default function MonsterCards({ monsterUrl,monsterId, getMonsters, active
                 <div>
                 {showStatBlock &&
                     <div className="flex-col justify-center">
-                    <div className=" text-3xl z-30 flex justify-center mt-3 -mb-2 font-semibold vinque">
+                    <div className=" text-3xl z-30 flex justify-center mt-3 -mb-2 font-semibold vinque text-shadow-lg shadow-black">
                         {monsterStats.name}
                     </div>
                     <div className=" bg-gray-600 z-10 font-exeter text-lg">
