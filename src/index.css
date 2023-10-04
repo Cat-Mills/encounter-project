@@ -19,9 +19,20 @@
     
     
 }
-svg {
-    filter: drop-shadow(5px 5px 3px rgb(0 0 0 / 0.4));
+svg:hover {
+    filter: drop-shadow(3px 3px 3px rgb(0 0 0 / 0.4));
     
+}
+.typeButton:hover {
+    box-shadow: inset 0 0 10px rgb(0 0 0 / 0.4);
+    filter: contrast(1.3)
+}
+.typeButton {
+    @apply flex h-14 w-14 self-center bg-transparent rounded-full  
+}
+
+.typeIcons {
+    filter: drop-shadow(3px 3px 3px rgb(0 0 0 / 0.4));
 }
 .navLink:hover {
     filter: drop-shadow(5px 5px 3px rgb(0 0 0 / 0.4));

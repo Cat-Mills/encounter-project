@@ -114,9 +114,8 @@ return (
                     <img className="rounded-3xl border-2 border-double border-gray-700 shadow-md shadow-gray-900" src={monsterImage} alt={monsterImage} />
                 </div> :
                 <div className="flex justify-center h-40 mt-3 ">
-                    <div className="rounded-3xl border-2 border-double w-40 border-gray-700 shadow-md shadow-gray-900 bg-blackPaper bg-gray-700  bg-opacity-30">
+                    <div className="group rounded-3xl border-2 border-double w-40 border-gray-700 shadow-md shadow-gray-900 bg-blackPaper bg-gray-700  bg-opacity-30">
                     <PlaceholderImage type = {monsterStats.type}/>
-                    
                     </div>
                 </div>
                 }
