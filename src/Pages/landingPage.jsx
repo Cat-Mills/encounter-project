@@ -4,6 +4,8 @@ import React from "react"
 import Register from "../Elements/Register.jsx"
 import Login from "../Elements/Login.jsx"
 import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import '../index.css'
 
 
 const Landing = () => {   
@@ -14,7 +16,7 @@ const Landing = () => {
     const [togglePassword, setTogglePassword] = useState(false)
     const dispatch = useDispatch()
     //TODO make a button that toggles visual passwords in input field.
-    
+    let nav = useNavigate()
 
     const handleFormSubmit = e => {
         e.preventDefault()
@@ -27,6 +29,7 @@ const Landing = () => {
         .then(res => {
             console.log(res.data)
             dispatch({type: "LOGIN", payload: res.data.userId})
+            nav('/campaigns')
         })
         .catch(err => console.log(err))
     }
@@ -34,7 +37,7 @@ const Landing = () => {
 
 
     return (
-        <>
+        <div className="">
         { register ? 
             <Register 
                 setPassword={setPassword}
@@ -53,7 +56,7 @@ const Landing = () => {
             />
         }
         <button onClick={()=> setRegister(!register)}>Need to {register ? 'login?' : 'make an account?'} </button>
-        </>
+        </div>
     )
 }
 

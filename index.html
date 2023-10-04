@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <script>
-      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           document.documentElement.classList.add('dark');
       } else {
@@ -10,12 +9,17 @@
       }
   </script>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link href="https://fonts.cdnfonts.com/css/luminari" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/orchideelight" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/vinque" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/kingthings-petrock" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/kingthings-exeter" rel="stylesheet">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cat's App</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div className="flex justify-center" id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

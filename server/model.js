@@ -76,6 +76,7 @@ Encounter.init(
     },
 )
 //TAB Player model
+
 class Player extends Model {}
 Player.init(
     {
@@ -110,16 +111,68 @@ Player.init(
     },
 )
 
+class EncCamp extends Model {}
+EncCamp.init(
+    {
+        encCampId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        encounterId: {
+            type: DataTypes.INTEGER
+        },
+        campaignId: {
+            type: DataTypes.INTEGER
+        }
+    },
+    {
+        modelName: 'enccamp',
+        sequelize: db
+    }
+)
+
+class Monster extends Model {}
+Monster.init(
+    {
+        monsterId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        monsterUrl: {
+            type: DataTypes.STRING
+        },
+    },
+    {
+        modelName: 'monster',
+        sequelize: db
+    }
+)
+
 
 // Association methods here (relationships, foreign keys)
 User.hasMany(Campaign, {foreignKey: 'userId'})
 Campaign.belongsTo(User, {foreignKey: 'userId'})
 
-Campaign.hasMany(Encounter, {foreignKey: 'campaignId'})
-Encounter.belongsTo(Campaign, {foreignKey: 'campaignId'})
+// Campaign.hasMany(Encounter, {foreignKey: 'campaignId'})
+// Encounter.belongsTo(Campaign, {foreignKey: 'campaignId'})
+
+Campaign.hasMany(EncCamp, {foreignKey: 'campaignId'})
+EncCamp.belongsTo(Campaign, {foreignKey: 'campaignId'})
+
+Encounter.hasMany(EncCamp, {foreignKey: 'encounterId'})
+EncCamp.belongsTo(Encounter, {foreignKey: 'encounterId'})
 
 Campaign.hasMany(Player, {foreignKey: 'campaignId'})
 Player.belongsTo(Campaign, {foreignKey: 'campaignId'})
+
+User.hasMany(Encounter, {foreignKey: 'userId'})
+Encounter.belongsTo(User, {foreignKey: 'userId'})
+
+Encounter.hasMany(Monster, {foreignKey: 'encounterId'})
+Monster.belongsTo(Encounter, {foreignKey: 'encounterId'})
+
 
 
 
@@ -131,4 +184,4 @@ if(process.argv[1] === url.fileURLToPath(import.meta.url)) {
 }
 
 //export models
-export {User, Campaign, Encounter, Player}
+export {User, Campaign, Encounter, Player, EncCamp, Monster}

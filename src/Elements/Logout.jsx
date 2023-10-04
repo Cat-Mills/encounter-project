@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 export default function LogoutButton({ onLogout }) {
-
+let nav = useNavigate()
     const dispatch = useDispatch()
 
     const handleLogout = (evt) => {
@@ -17,8 +18,10 @@ export default function LogoutButton({ onLogout }) {
                     type: "LOGOUT",
                     payload: res.data.userId
                 })
+                nav('/')
             })
             .catch(err => console.log(err))
+
     }
 
     return (

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios'
-import Rows from "./Rows.jsx";
+import PlayerRows from "./PlayerRows.jsx";
 import NewCampForm from "./NewCampForm.jsx";
-import TableHeader from "./TableHeader.jsx";
 import React, { Component } from "react";
 
 
@@ -26,14 +25,13 @@ const CampTable = () => {
 
 
     return (
-        <div>
+        <div className="min-w-full text-xl ">
             <div>
                 <div>
-                    <TableHeader />
-                </div>
-                <div>
                     {campaignList.map(campaign => (
-                        <Rows key={campaign.campaignId} campaign={campaign} getCampaignTables={getCampaignTables} />
+                        <PlayerRows key={campaign.campaignId} 
+                        campaign={campaign} 
+                        getCampaignTables={getCampaignTables} />
                     ))}
                 </div>
             </div>
@@ -43,7 +41,7 @@ const CampTable = () => {
             campaignName={campaignName}
             setShowModal={setShowModal}
             getCampaignTables={getCampaignTables}
-            />) : (<button onClick={() => setShowModal(true)}>Create New Campaign</button>)}
+            />) : (<button className="hover:text-blue-400" onClick={() => setShowModal(true)}>Create New Campaign</button>)}
         </div>
     )
 

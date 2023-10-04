@@ -1,19 +1,24 @@
-import  express  from "express";
+import express from "express";
 import ViteExpress from 'vite-express'
 import session from "express-session";
 import campCtrl from './controllers/campaignCtrl.js'
 import authCtrl from './controllers/authCtrl.js'
 import playerCtrl from "./controllers/playerCtrl.js";
+import encounterCtrl from "./controllers/encounterCtrl.js";
+import monstersCtrl from "./controllers/monstersCtrl.js";
 
-const {addCampaign, getAllCampaigns, deleteCampaign} = campCtrl
-const {register, login, checkUser, logout} = authCtrl
-const {getPlayers, addPlayer, deletePlayer} = playerCtrl
+
+const { addCampaign, getAllCampaigns, deleteCampaign, editCampaign } = campCtrl
+const { register, login, checkUser, logout } = authCtrl
+const { getPlayers, addPlayer, deletePlayer, editPlayer } = playerCtrl
+const { getEncounters, addEncounter, editEncounter, deleteEncounter, getActiveEncounter } = encounterCtrl
+const {addMonster, getMonsters, deleteMonster} = monstersCtrl
 
 const app = express()
 const PORT = 2222
 
 //top level middleware
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(session({
     saveUninitialized: true,
@@ -24,21 +29,29 @@ app.use(session({
     }
 }))
 
-//TODO endpoints
+
 app.get('/api/campaigns', getAllCampaigns)
 app.post('/api/campaigns', addCampaign)
-// app.put('/api/campaigns')
+app.put('/api/campaigns/:campaignId', editCampaign)
 app.delete('/api/campaigns/:campaignId', deleteCampaign)
 
-app.get('/api/players', getPlayers)
-app.post('/api/players', addPlayer)
-app.put('/players')
+
+app.get('/api/players/:campaignId', getPlayers)
+app.post('/api/players/:campaignId', addPlayer)
+app.put('/api/players/:playerId', editPlayer)
 app.delete('/api/players/:playerId', deletePlayer)
 
-// app.get('/encounters')
-// app.post('/encounters')
-// app.put('/encounters')
-// app.delete('/encounters')
+
+app.get('/api/encounters', getEncounters)
+app.post('/api/encounters', addEncounter)
+app.put('/api/encounters/:encounterId', editEncounter)
+app.delete('/api/encounters/:encounterId', deleteEncounter)
+app.get('/api/active/:encounterId', getActiveEncounter)
+
+app.get('/api/monsters/:encounterId', getMonsters)
+app.post('/api/monsters/:encounterId', addMonster)
+app.delete('/api/monsters/:monsterId', deleteMonster)
+
 
 //authentication endpoints
 app.post('/api/register', register)
