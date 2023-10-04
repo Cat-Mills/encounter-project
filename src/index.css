@@ -20,8 +20,18 @@
     
 }
 svg {
-    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
-  }
+    filter: drop-shadow(5px 5px 3px rgb(0 0 0 / 0.4));
+    
+}
+.navLink:hover {
+    filter: drop-shadow(5px 5px 3px rgb(0 0 0 / 0.4));
+    outline: none;
+}
+.navLink:focus {
+    color: #60a5fa;
+    outline: none;
+}
+
 .vinque {
     font-family: "Vinque","sans-serif";
     @apply tracking-wide

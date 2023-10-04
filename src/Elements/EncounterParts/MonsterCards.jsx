@@ -42,7 +42,7 @@ export default function MonsterCards({ monsterUrl,monsterId, getMonsters, active
     useEffect(() => { getStats() }, [])
     // console.log(showStatBlock)
     return(
-        <><div className="flex justify-center ">
+        <><div className="flex justify-center w-full ">
 
             {!activeEncounter &&
                 <button
@@ -54,18 +54,16 @@ export default function MonsterCards({ monsterUrl,monsterId, getMonsters, active
                 <div className="flex ">
                     <button className="mr-2 hover:text-blue-400" onClick={() => { setShowStatBlock(current => !current); } }>{showStatBlock ? <p>Hide</p> : <p>Details</p>}</button>
 
-                    {!showStatBlock && <button className="ml-2 hover:text-blue-400" onClick={() => deleteMonster()}><Trash /> </button>}
+                    {!showStatBlock && <button className=" ml-2 hover:text-blue-400" onClick={() => deleteMonster()}><Trash /> </button>}
                 </div>}
 
             
                 </div>
                 <div>
                 {showStatBlock &&
-                    <div className="flex-col justify-center">
-                    <div className=" text-3xl z-30 flex justify-center mt-3 -mb-2 font-semibold vinque text-shadow-lg shadow-black">
-                        {monsterStats.name}
-                    </div>
-                    <div className=" bg-gray-600 z-10 font-exeter text-lg">
+                    <div className="">
+                    
+                    <div className=" max-h-[50vh] max-w-[50vw] overflow-scroll bg-gray-600 z-10 font-exeter text-lg">
                         <StatBlock url={monsterUrl} showBlock={true} />
                     </div>
                     </div>

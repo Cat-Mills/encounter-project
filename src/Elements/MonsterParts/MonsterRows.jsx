@@ -2,15 +2,12 @@ import React from "react"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import StatBlock from "./StatBlock"
-import { ChevronLeft, ChevronRight, Plus, More, X } from "../../icons"
+import { ChevronLeft, ChevronRight} from "../../icons"
 
 
-export default function MonsterRows({monsterList, itemsPerPage}) {
+export default function MonsterRows({monsterList, itemsPerPage, searchText}) {
     const [currentPage, setCurrentPage] = useState(1)
     
-    const [showStatBlock, setShowStatBlock] = useState(false)
-
-
     const totalPages = Math.ceil(monsterList.length / itemsPerPage)
     const indexOfLastItem = currentPage * itemsPerPage
     const indexOfFirstItem = indexOfLastItem - itemsPerPage
@@ -29,9 +26,8 @@ export default function MonsterRows({monsterList, itemsPerPage}) {
         }
     }
     
+    useEffect(()=>setCurrentPage(1),[searchText])
     
-    
-
 return(
 <div className="">
 

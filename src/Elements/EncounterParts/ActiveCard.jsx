@@ -32,7 +32,7 @@ export default function ActiveCard({ entities }) {
                         
                     {entity.playerId &&
                         
-                        <div className="flex w-full">
+                        <div className="flex w-full items-center">
                             <div className="w-1/4"> {entity.initiative} </div>
                             <div className="w-1/4">{entity.playerName}</div>
                             <div className="w-1/4 relative"> <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"><Shield/> </div><div className=" relative "> {entity.playerAC} </div></div>
@@ -40,7 +40,7 @@ export default function ActiveCard({ entities }) {
                         </div>}
                     
                     {entity.index && 
-                        <div className="flex w-full">
+                        <div className="flex w-full items-center">
                             <div className="w-1/4"> {entity.initiative} </div>
                             <button onClick={() => {showCard===''? setShowCard(entity.id) : setShowCard(''); }} className="w-1/4 hover:text-blue-400">{entity.name}</button>
                             <div className="w-1/4 relative"><div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"><Shield/> </div><div className="relative"> {entity.armor_class[0].value}</div>  </div>

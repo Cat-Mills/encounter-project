@@ -120,6 +120,9 @@ return (
                     </div>
                 </div>
                 }
+                <div className=" text-3xl z-30 flex justify-center mt-3 -mb-2 font-semibold vinque text-shadow-lg shadow-black">
+                        {monsterStats.name}
+                    </div>
                 {/*TAB  Type/Alignment  */}
                 <div className="flex justify-center my-3 capitalize text-xl gap-3 ">
                     <div>{monsterStats.size} </div>

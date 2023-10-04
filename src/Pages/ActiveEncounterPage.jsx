@@ -143,7 +143,7 @@ function ActiveEncounters() {
     // console.log(difficulty)
     return (activeEncounter &&
         <>
-            <div className="border p-5 bg-gray-700 mt-32 ">
+            <div className="border p-5 bg-gray-700 mt-32 mb-10">
                 {showStart && <div>
                     
                     <div className="vinque text-xl">

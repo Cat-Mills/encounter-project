@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import axios from "axios";
-import MonsterCards from "./monsterCards.jsx";
+import MonsterCards from "./MonsterCards.jsx";
 
 export default function MonstersInEnc({encounter}){
     const [encountersMonsters, setEncountersMonsters] = useState([])
