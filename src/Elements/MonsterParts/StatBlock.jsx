@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import MonsterRows from "./MonsterRows.jsx"
 import { More, Plus, X, Down, Up, PlaceholderImage } from "../../icons.jsx"
 
-export default function StatBlock({ url, showBlock, name, types }) {
+export default function StatBlock({ url, showBlock, name, types, monsterIn, indexOfFirstItem, indexOfLastItem, currentPage, counter, setCounter }) {
     const [monsterStats, setMonsterStats] = useState({})
     const [showMonsterStats, setShowMonsterStats] = useState(false)
     const [profs, setProfs] = useState({})
@@ -70,13 +70,24 @@ export default function StatBlock({ url, showBlock, name, types }) {
     }
     useEffect(() => { getStats(), getEncounterTables() }, [])
     // console.log(monsterStats.type)
-    return (!types || types.includes(monsterStats.type) || types.length === 0) && (
+//                                                  
+    let paginationConfirm 
+
+    if(types.length === 0){
+        if(monsterIn >= indexOfFirstItem &&  monsterIn <= indexOfLastItem) {
+            paginationConfirm = true
+        } else paginationConfirm = false
+    } else {
+        paginationConfirm = true
+    }  
+    
+    return (!types || types.includes(monsterStats.type) || types.length === 0 && paginationConfirm) && (
         <div >
             <div className="m-2">
                 {name && <div className="border flex justify-between m-2 p-2 bg-gray-600 ">
                     <h2 className="vinque font-bold capitalize text-lg">{name} </h2>
                 </div>}
-
+                {console.log(paginationConfirm)}
                 <div>
                     {!showBlock && <div className="flex relative w-11/12 ml-8">
                         {!showMonsterStats ?
