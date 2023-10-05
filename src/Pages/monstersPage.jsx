@@ -16,7 +16,7 @@ const Monsters = () => {
 
   const [filteredTypes, setFilteredTypes] =
     useState({
-      book: false,
+      all: true,
       aberration: false,
       beast: false,
       celestial: false,
@@ -49,9 +49,10 @@ const Monsters = () => {
     console.log(t)
     let obj = filteredTypes
     obj[t] = !obj[t]
+    for(let i in obj){
+      if(obj[i] === true){obj.all = false}else{obj.all === true}
+    }
     setFilteredTypes(obj)
-    
-    
   }
 
   function filterResults() {
@@ -213,6 +214,7 @@ const Monsters = () => {
         monsterList={filteredMons ? filterResults(filteredMons) : monsterList}
         setMonsterList={setMonsterList}
         searchText={filteredMons}
+        types={filteredTypes}
       />}
 
     </div>

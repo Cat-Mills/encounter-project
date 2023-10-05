@@ -5,7 +5,7 @@ import StatBlock from "./StatBlock"
 import { ChevronLeft, ChevronRight} from "../../icons"
 
 
-export default function MonsterRows({monsterList, itemsPerPage, searchText}) {
+export default function MonsterRows({monsterList, itemsPerPage, searchText, types}) {
     const [currentPage, setCurrentPage] = useState(1)
     
     const totalPages = Math.ceil(monsterList.length / itemsPerPage)
@@ -27,20 +27,13 @@ export default function MonsterRows({monsterList, itemsPerPage, searchText}) {
     }
     
     useEffect(()=>setCurrentPage(1),[searchText])
-    
+    console.log(types)
 return(
 <div className="">
 
     {currentItems.map((monster) => (
-        <div key={monster.url}>
-            <div className="m-2">
-                <div className="border flex justify-between m-2 p-2 bg-gray-600 ">
-                <h2 className="vinque font-bold capitalize text-lg">{monster.name} </h2>
-                
-                </div>
-                <StatBlock url={monster.url}/>
-            </div>
-        </div>
+        
+                <StatBlock url={monster.url} name={monster.name} types={types} key={monster.url}/>
     ))}
 
 {/* Page navigation tabs */}
