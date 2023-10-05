@@ -2,10 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import MonsterRows from '../Elements/MonsterParts/MonsterRows.jsx'
-import SearchMonsters from '../Elements/MonsterParts/StatBlock.jsx'
-import { PlaceholderImage, SearchIcon, Book } from '../icons.jsx'
-
-
+import { PlaceholderImage, SearchIcon } from '../icons.jsx'
 
 const Monsters = () => {
 
@@ -14,27 +11,8 @@ const Monsters = () => {
   const [showMonsterList, setShowMonsterList] = useState(true)
   const [filteredMons, setFilteredMons] = useState({ name: '', type: '' })
 
-  const [filteredTypes, setFilteredTypes] =
-    useState({
-      all: true,
-      aberration: false,
-      beast: false,
-      celestial: false,
-      construct: false,
-      dragon: false,
-      elemental: false,
-      fey: false,
-      fiend: false,
-      giant: false,
-      humanoid: false,
-      monstrosity: false,
-      ooze: false,
-      plant: false,
-      undead: false
-    })
-
-
-
+  const [filteredTypes, setFilteredTypes] = useState([])
+    
   function getMonsters() {
     axios
       .get(MONSTER_COLLECTION)
@@ -43,16 +21,15 @@ const Monsters = () => {
       })
       .catch(err => console.log(err))
   }
-
   function filterTypes(el) {
     let t = el.target.id
-    console.log(t)
-    let obj = filteredTypes
-    obj[t] = !obj[t]
-    for(let i in obj){
-      if(obj[i] === true){obj.all = false}else{obj.all === true}
-    }
-    setFilteredTypes(obj)
+    let index = filteredTypes.findIndex(el => {
+      return el === t
+    })
+    console.log(index)
+    if(index > -1){filteredTypes.splice(index, 1), console.log('hit if')} else {filteredTypes.push(t), console.log('hit else')}
+    // console.log(t)
+    setFilteredTypes([...filteredTypes])
   }
 
   function filterResults() {
@@ -60,9 +37,7 @@ const Monsters = () => {
       return (monster.name.toLowerCase().includes(filteredMons.name.toLowerCase()))//returning a true or false
     })
   }
-
   useEffect(() => getMonsters(), [])
-
   return (
     <div className='border p-5 bg-gray-700 mt-32 mb-10'>
       {/* TAB Search Bar */}
@@ -82,14 +57,7 @@ const Monsters = () => {
 
       {/* monster type buttons*/}
       <div className='flex w-full h-20 mt-3 justify-evenly'>
-        {/* <input type='checkbox' id='book' name='monsterType' className='hidden peer/book' onChange={filterTypes} />
-        <label
-          htmlFor='book'
-          className='typeButton hover:ring ring-gray-700 peer-checked/book:bg-gradient-to-tr from-gray-700 cursor-pointer select-none'
-        >
-          <Book />
-        </label> */}
-
+        
         <input onChange={filterTypes} type='checkbox' id='aberration' name='monsterType' className='hidden peer/aberration'/>
         <label
           htmlFor='aberration'

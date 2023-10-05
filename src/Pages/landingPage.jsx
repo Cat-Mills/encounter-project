@@ -37,7 +37,7 @@ const Landing = () => {
 
 
     return (
-        <div className="">
+        <div className="text-2xl flex flex-col border border-solid bg-gray-700 m-10 h-[50vh] relative align-middle items-center">
         { register ? 
             <Register 
                 setPassword={setPassword}
@@ -55,7 +55,7 @@ const Landing = () => {
                 handleFormSubmit={handleFormSubmit}
             />
         }
-        <button onClick={()=> setRegister(!register)}>Need to {register ? 'login?' : 'make an account?'} </button>
+        <button className=" hover:text-blue-400 text-xl w-fit mb-5" onClick={()=> setRegister(!register)}>Need to {register ? 'login?' : 'make an account?'} </button>
         </div>
     )
 }

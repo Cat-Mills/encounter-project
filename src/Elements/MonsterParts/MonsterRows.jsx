@@ -9,9 +9,13 @@ export default function MonsterRows({monsterList, itemsPerPage, searchText, type
     const [currentPage, setCurrentPage] = useState(1)
     
     const totalPages = Math.ceil(monsterList.length / itemsPerPage)
+
     const indexOfLastItem = currentPage * itemsPerPage
+
     const indexOfFirstItem = indexOfLastItem - itemsPerPage
+
     const currentItems = monsterList.slice(indexOfFirstItem, indexOfLastItem)
+    
     const paginate = pageNumber => setCurrentPage(pageNumber)
 
     const previousPage = () => {
@@ -25,9 +29,9 @@ export default function MonsterRows({monsterList, itemsPerPage, searchText, type
             setCurrentPage(currentPage + 1);
         }
     }
-    
-    useEffect(()=>setCurrentPage(1),[searchText])
-    console.log(types)
+
+    useEffect(()=>setCurrentPage(1),[searchText,types])
+    // console.log(types)
 return(
 <div className="">
 

@@ -2,12 +2,14 @@ import React from 'react'
 
 export default function Register({ username, password, setPassword, setUsername, handleFormSubmit }) {
     return (
-        <div className='flex my-5 align-middle justify-center'>
+        <div className='flex flex-col mt-5 h-full justify-center relative self-center'>
+            <h3 className='mb-10 absolute top-0 right-0 left-0'>Please Create An Account</h3>
             <form className='' onSubmit={e => handleFormSubmit(e)}>
-                <h3 className='mb-10'>Please Create An Account</h3>
-                <input type="text" placeholder='Enter your username' value={username} onChange={e => setUsername(e.target.value)} />
-                <input type="password" placeholder='Enter your password' value={password} onChange={e => setPassword(e.target.value)} />
-                <button>Submit</button>
+                <div className='vinque text-xl'>
+                    <input type="text" placeholder='Enter your username' value={username} onChange={e => setUsername(e.target.value)} />
+                    <input type="password" placeholder='Enter your password' value={password} onChange={e => setPassword(e.target.value)} />
+                    <button>Submit</button>
+                </div>
             </form>
         </div>
     )

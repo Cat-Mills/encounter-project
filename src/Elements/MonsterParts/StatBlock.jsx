@@ -69,8 +69,8 @@ export default function StatBlock({ url, showBlock, name, types }) {
             }).catch(err => console.log(err))
     }
     useEffect(() => { getStats(), getEncounterTables() }, [])
-    console.log(monsterStats.type)
-    return (types[monsterStats.type] || types.all) && (
+    // console.log(monsterStats.type)
+    return (!types || types.includes(monsterStats.type) || types.length === 0) && (
         <div >
             <div className="m-2">
                 {name && <div className="border flex justify-between m-2 p-2 bg-gray-600 ">
