@@ -1,7 +1,5 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
-import MonsterRows from "./MonsterRows.jsx"
 import { More, Plus, X, Down, Up, PlaceholderImage } from "../../icons.jsx"
 
 export default function StatBlock({ url, showBlock, name, types }) {
@@ -120,7 +118,7 @@ export default function StatBlock({ url, showBlock, name, types }) {
                                     <img className="rounded-3xl border-2 border-double border-gray-700 shadow-md shadow-gray-900" src={monsterImage} alt={monsterImage} />
                                 </div> :
                                 <div className="flex justify-center h-40 mt-3 ">
-                                    <div className="group rounded-3xl border-2 border-double w-40 border-gray-700 shadow-md shadow-gray-900 bg-blackPaper bg-gray-700  bg-opacity-30">
+                                    <div className="group rounded-3xl border-2 border-double w-40 border-gray-700 shadow-md shadow-gray-900 bg-blackPaper bg-neutral-800 backdrop-contrast-150">
                                         <PlaceholderImage type={monsterStats.type} />
                                     </div>
                                 </div>

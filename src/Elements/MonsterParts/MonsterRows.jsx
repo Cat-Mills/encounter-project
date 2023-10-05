@@ -15,7 +15,7 @@ export default function MonsterRows({monsterList, itemsPerPage, searchText, type
     const indexOfFirstItem = indexOfLastItem - itemsPerPage
 
     const currentItems = monsterList.slice(indexOfFirstItem, indexOfLastItem)
-    
+
     const paginate = pageNumber => setCurrentPage(pageNumber)
 
     const previousPage = () => {
@@ -33,7 +33,7 @@ export default function MonsterRows({monsterList, itemsPerPage, searchText, type
     useEffect(()=>setCurrentPage(1),[searchText,types])
     // console.log(types)
 return(
-<div className="">
+<div className=" max-h-[70vh] overflow-scroll overflow-x-hidden">
 
     {currentItems.map((monster) => (
         
@@ -41,7 +41,7 @@ return(
     ))}
 
 {/* Page navigation tabs */}
-    <div className="flex gap-2 justify-around mx-14 my-4">
+    {types.length < 1 && <div className="flex gap-2 justify-around mx-14 my-4">
         <button className={currentPage === 1 ? `text-gray-500`: `hover:text-blue-400`} onClick={previousPage} disabled={currentPage === 1}><ChevronLeft/></button>
         {Array.from({ length: totalPages }).map((_, index) => (
             <div key={index} className="">
@@ -51,7 +51,7 @@ return(
             </div>
         ))}
         <button className={currentPage === totalPages ? `text-gray-500`: `hover:text-blue-400`} onClick={nextPage} disabled={currentPage === totalPages} ><ChevronRight/></button>
-    </div>
+    </div>}
 </div>
     )
 }

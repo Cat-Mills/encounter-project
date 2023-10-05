@@ -16,8 +16,6 @@
     -webkit-text-size-adjust: 100%;
     min-width: 500px;
     @apply selection:bg-slate-800 selection:bg-opacity-50;
-    
-    
 }
 svg:hover {
     filter: drop-shadow(3px 3px 3px rgb(0 0 0 / 0.4));
@@ -69,10 +67,6 @@ svg:hover {
     
 }
 
-/* button:hover{
-    color: #60a5fa
-} */
-
 :focus{
     outline: 1px solid rgb(55, 65, 81) ;
     
@@ -105,18 +99,24 @@ body {
     @apply md:my-5
 }
 
-/* 
-@media (prefers-color-scheme: light) {
-    :root {
-        color: #213547;
-        background-color: #ffffff;
-    }
+/* width */
+::-webkit-scrollbar { 
+	width: 10px; 
+    
+} 
 
-    a:hover {
-        color: #747bff;
-    }
+/* Track */
+::-webkit-scrollbar-track { 
+	background: #374151; 
+} 
 
-    button {
-        background-color: #f9f9f9;
-    }
-} */
+/* Handle */
+::-webkit-scrollbar-thumb { 
+	background: #4b5563; 
+	border-radius: 5px; 
+} 
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover { 
+	background: #6b7280; 
+}
