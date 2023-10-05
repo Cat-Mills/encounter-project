@@ -17,9 +17,9 @@ export default function ActiveCard({ entities }) {
     // }
 
     return (
-        <div className=" flex w-full gap-3 relative exeter">
+        <div className=" flex w-full gap-3 relative exeter min-h-[60vh]">
 
-            <div className=" border border-solid w-1/2 flex-col space-y-7 py-3 bg-gray-600">
+            <div className=" border border-solid w-1/2 flex flex-col space-y-7 py-3 bg-gray-600 justify-evenly">
                 <div className="flex w-full justify-center">
                     <div className="w-1/4">Initiative</div>
                     <div className="w-1/4">Name</div>
