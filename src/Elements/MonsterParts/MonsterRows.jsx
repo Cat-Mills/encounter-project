@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight} from "../../icons"
 
 export default function MonsterRows({monsterList, itemsPerPage, searchText, types}) {
     const [currentPage, setCurrentPage] = useState(1)
+    const [counter, setCounter] = useState(0)
     
     const totalPages = Math.ceil(monsterList.length / itemsPerPage)
 
@@ -35,10 +36,10 @@ export default function MonsterRows({monsterList, itemsPerPage, searchText, type
 return(
 <div className=" max-h-[70vh] overflow-scroll overflow-x-hidden">
 
-    {currentItems.map((monster) => (
-        
-                <StatBlock url={monster.url} name={monster.name} types={types} key={monster.url}/>
-    ))}
+    {monsterList.map((monster, monsterIn) => {
+            return <StatBlock url={monster.url} name={monster.name} types={types} key={monster.url} monsterIn={monsterIn} indexOfFirstItem={indexOfFirstItem} indexOfLastItem={indexOfLastItem} currentPage={currentPage} counter={counter} setCounter={setCounter}/>
+
+    })}
 
 {/* Page navigation tabs */}
     {types.length < 1 && <div className="flex gap-2 justify-around mx-14 my-4">
