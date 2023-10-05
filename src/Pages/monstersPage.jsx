@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import MonsterRows from '../Elements/MonsterParts/MonsterRows.jsx'
-import { PlaceholderImage, SearchIcon } from '../icons.jsx'
+import { Grid, PlaceholderImage, Rows, SearchIcon } from '../icons.jsx'
 
 const Monsters = () => {
 
@@ -10,6 +10,7 @@ const Monsters = () => {
   const MONSTER_COLLECTION = 'https://www.dnd5eapi.co/api/monsters'
   const [showMonsterList, setShowMonsterList] = useState(true)
   const [filteredMons, setFilteredMons] = useState({ name: '', type: '' })
+  const [isRows, setIsRows] = useState(true)
 
   const [filteredTypes, setFilteredTypes] = useState([])
     
@@ -40,8 +41,9 @@ const Monsters = () => {
   useEffect(() => getMonsters(), [])
   return (
     <div className='border p-5 bg-gray-700 mt-32 mb-10'>
+      <div className='flex'>
       {/* TAB Search Bar */}
-      <div className='flex justify-center min-w-full items-center p-3 relative hover:text-blue-400'>
+      <div className='flex justify-center w-full items-center p-3 relative hover:text-blue-400'>
         <input className='block w-full p-px mb border bg-gray-600 hover:border-blue-400 hover:text-white focus:ring-transparent'
           onChange={(e) => {
             setFilteredMons({ ...filteredMons, name: e.target.value })
@@ -54,7 +56,10 @@ const Monsters = () => {
           <SearchIcon />
         </div>
       </div>
-
+      <button className='items-center justify-center flex stroke-white hover:stroke-blue-400 hover:text-blue-400' onClick={()=>setIsRows(!isRows)}>
+        {isRows ? <Grid/> : <Rows/> }
+      </button>
+      </div>
       {/* monster type buttons*/}
       <div className='flex w-full h-20 mt-3 justify-evenly'>
         
@@ -183,6 +188,7 @@ const Monsters = () => {
         setMonsterList={setMonsterList}
         searchText={filteredMons}
         types={filteredTypes}
+        isRows={isRows}
       />}
 
     </div>

@@ -5,7 +5,7 @@ import StatBlock from "./StatBlock"
 import { ChevronLeft, ChevronRight} from "../../icons"
 
 
-export default function MonsterRows({monsterList, itemsPerPage, searchText, types}) {
+export default function MonsterRows({monsterList, itemsPerPage, searchText, types, isRows}) {
     const [currentPage, setCurrentPage] = useState(1)
     const [counter, setCounter] = useState(0)
     
@@ -35,11 +35,23 @@ export default function MonsterRows({monsterList, itemsPerPage, searchText, type
     // console.log(types)
 return(
 <div className=" max-h-[70vh] overflow-scroll overflow-x-hidden">
-
+    <div className={`${isRows ? 'grid grid-cols-4 grid-rows-3 gap-4' : 'null'}`}>
     {monsterList.map((monster, monsterIn) => {
-            return <StatBlock url={monster.url} name={monster.name} types={types} key={monster.url} monsterIn={monsterIn} indexOfFirstItem={indexOfFirstItem} indexOfLastItem={indexOfLastItem} currentPage={currentPage} counter={counter} setCounter={setCounter}/>
-
-    })}
+            return <StatBlock 
+                url={monster.url} 
+                name={monster.name} 
+                types={types} 
+                key={monster.url} 
+                monsterIn={monsterIn} 
+                indexOfFirstItem={indexOfFirstItem} 
+                indexOfLastItem={indexOfLastItem} 
+                currentPage={currentPage} 
+                counter={counter} 
+                setCounter={setCounter}
+                isRows={isRows}
+            />
+        })}
+    </div>
 
 {/* Page navigation tabs */}
     {types.length < 1 && <div className="flex gap-2 justify-around mx-14 my-4">

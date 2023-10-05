@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import { More, Plus, X, Down, Up, PlaceholderImage } from "../../icons.jsx"
 
-export default function StatBlock({ url, showBlock, name, types, monsterIn, indexOfFirstItem, indexOfLastItem, currentPage, counter, setCounter }) {
+export default function StatBlock({ url, showBlock, name, types, monsterIn, indexOfFirstItem, indexOfLastItem,isRows }) {
     const [monsterStats, setMonsterStats] = useState({})
     const [showMonsterStats, setShowMonsterStats] = useState(false)
     const [profs, setProfs] = useState({})
@@ -82,12 +82,30 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
     return (!types || types.includes(monsterStats.type) || types.length === 0 && paginationConfirm) && (
         <div >
             <div className="m-2">
-                {name && <div className="border flex justify-between m-2 p-2 bg-gray-600 ">
+                {name && !isRows && 
+                <div className="border flex m-2 p-2 bg-gray-600 ">
                     <h2 className="vinque font-bold capitalize text-lg">{name} </h2>
                 </div>}
-                {console.log(paginationConfirm)}
+                {name && isRows && 
+                <div className="border flex p-2 bg-gray-600">
+                    <div className="h-60 flex flex-col justify-center items-center">
+                        <h2 className="vinque font-bold capitalize text-lg">{name}</h2>
+                    {monsterImage ?
+                                <div className="flex justify-center h-10 w-10">
+                                    <img className="rounded-3xl border-2 border-double border-gray-700" src={monsterImage} alt={monsterImage} />
+                                </div> :
+                                <div className="flex justify-center h-10 w-10">
+                                    <div className="group rounded-3xl border-2 border-double w-40 border-gray-700 bg-blackPaper bg-neutral-800 backdrop-contrast-150">
+                                        <PlaceholderImage type={monsterStats.type} />
+                                    </div>
+                                </div>
+                            }
+                    </div>
+                        
+                </div>}
+                {/* {console.log(paginationConfirm)} */}
                 <div>
-                    {!showBlock && <div className="flex relative w-11/12 ml-8">
+                    {!showBlock && !isRows && <div className="flex relative w-11/12 ml-8">
                         {!showMonsterStats ?
                             <button className="hover:text-blue-400 flex absolute justify-center  bottom-4 left-full" onClick={() => { setShowMonsterStats(!showMonsterStats); getStats(); console.log(monsterStats); console.log() }}><Down /></button>
                             :
@@ -98,7 +116,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                     </div>}
 
                     {showModal ? (
-                        <div className="flex relative w-11/12 -ml-3 ">
+                        !isRows && <div className="flex relative w-11/12 -ml-3 ">
                             <button className=" flex absolute justify-center left-full bottom-4 hover:text-blue-400" onClick={() => setShowModal(false)}><X /> </button>
 
                             <form className="ml-16 flex absolute justify-center bottom-4 left-2/3" onSubmit={(e) => { console.log(url); handleAddToEncounter(e, "asdf"); }}>
@@ -115,7 +133,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                         </div>
                     ) :
                         <div className="flex relative w-11/12 -ml-3">
-                            {!showBlock && <button onClick={() => setShowModal(true)} className="flex absolute justify-center left-full bottom-4 hover:text-blue-400"><Plus /></button>}
+                            {!showBlock && !isRows && <button onClick={() => setShowModal(true)} className="flex absolute justify-center left-full bottom-4 hover:text-blue-400"><Plus /></button>}
                         </div>
                     }
 
