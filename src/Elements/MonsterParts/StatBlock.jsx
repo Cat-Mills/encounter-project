@@ -71,7 +71,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
 //                                                  
     let paginationConfirm 
 
-    if(types.length === 0){
+    if(!types || types.length === 0){
         if(monsterIn >= indexOfFirstItem &&  monsterIn <= indexOfLastItem) {
             paginationConfirm = true
         } else paginationConfirm = false

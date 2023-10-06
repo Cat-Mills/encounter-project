@@ -10,7 +10,7 @@ const Monsters = () => {
   const MONSTER_COLLECTION = 'https://www.dnd5eapi.co/api/monsters'
   const [showMonsterList, setShowMonsterList] = useState(true)
   const [filteredMons, setFilteredMons] = useState({ name: '', type: '' })
-  const [isRows, setIsRows] = useState(true)
+  const [isRows, setIsRows] = useState(false)
 
   const [filteredTypes, setFilteredTypes] = useState([])
     
