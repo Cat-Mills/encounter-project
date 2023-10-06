@@ -40,7 +40,7 @@ const Monsters = () => {
   }
   useEffect(() => getMonsters(), [])
   return (
-    <div className='border p-5 bg-gray-700 mt-32 mb-10'>
+    <div className='border p-5 bg-gray-700 mt-32 mb-10 max-h[70vh]'>
       <div className='flex'>
       {/* TAB Search Bar */}
       <div className='flex justify-center w-full items-center p-3 relative hover:text-blue-400'>
@@ -61,7 +61,7 @@ const Monsters = () => {
       </button>
       </div>
       {/* monster type buttons*/}
-      <div className='flex w-full h-20 mt-3 justify-evenly'>
+      <div className='flex w-full h-15 mt-3 justify-evenly'>
         
         <input onChange={filterTypes} type='checkbox' id='aberration' name='monsterType' className='hidden peer/aberration'/>
         <label

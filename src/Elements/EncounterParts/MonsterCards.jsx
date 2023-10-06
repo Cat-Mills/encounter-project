@@ -63,7 +63,7 @@ export default function MonsterCards({ monsterUrl,monsterId, getMonsters, active
                 {showStatBlock &&
                     <div className="">
                     
-                    <div className=" max-h-[50vh] max-w-[50vw] overflow-scroll bg-gray-600 z-10 font-exeter text-lg">
+                    <div className=" max-h-[50vh] max-w-[50vw] overflow-scroll overflow-x-hidden bg-gray-600 z-10 font-exeter text-lg">
                         <StatBlock url={monsterUrl} showBlock={true} />
                     </div>
                     </div>

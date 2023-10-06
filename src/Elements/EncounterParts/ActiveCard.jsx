@@ -48,7 +48,7 @@ export default function ActiveCard({ entities }) {
                         </div>}
                         {showCard === entity.id &&
                         
-                        <div className="bg-gray-600 z-10 absolute w-1/2 max-h-full left-1/2 top-0 border border-solid overflow-scroll ml-1">
+                        <div className="bg-gray-600 z-10 absolute w-1/2 max-h-full left-1/2 top-0 border border-solid overflow-scroll overflow-x-hidden ml-1">
                             <StatBlock url={entity.url} showBlock={true} />
                         </div>
                         }
