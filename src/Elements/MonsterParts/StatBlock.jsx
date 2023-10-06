@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import { More, Plus, X, Down, Up, PlaceholderImage } from "../../icons.jsx"
 
-export default function StatBlock({ url, showBlock, name, types, monsterIn, indexOfFirstItem, indexOfLastItem,isRows }) {
+export default function StatBlock({ url, showBlock, name, types, monsterIn, indexOfFirstItem, indexOfLastItem, isRows }) {
     const [monsterStats, setMonsterStats] = useState({})
     const [showMonsterStats, setShowMonsterStats] = useState(false)
     const [profs, setProfs] = useState({})
@@ -68,79 +68,117 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
     }
     useEffect(() => { getStats(), getEncounterTables() }, [])
     // console.log(monsterStats.type)
-//                                                  
-    let paginationConfirm 
+    //                                                  
+    let paginationConfirm
 
-    if(!types || types.length === 0){
-        if(monsterIn >= indexOfFirstItem &&  monsterIn <= indexOfLastItem) {
+    if (!types || types.length === 0) {
+        if (monsterIn >= indexOfFirstItem && monsterIn <= indexOfLastItem) {
             paginationConfirm = true
         } else paginationConfirm = false
     } else {
         paginationConfirm = true
-    }  
-    
+    }
+
     return (!types || types.includes(monsterStats.type) || types.length === 0 && paginationConfirm) && (
         <div >
             <div className="m-2">
-                {name && !isRows && 
-                <div className="border flex m-2 p-2 bg-gray-600 ">
-                    <h2 className="vinque font-bold capitalize text-lg">{name} </h2>
-                </div>}
-                {name && isRows && 
-                <div className="border flex p-2 bg-gray-600">
-                    <div className="h-60 flex flex-col justify-center items-center">
-                        <h2 className="vinque font-bold capitalize text-lg">{name}</h2>
-                    {monsterImage ?
+                {name && isRows &&
+                    <div className="border flex justify-between m-2 p-2 px-4 bg-gray-600 ">
+                        {monsterImage ?
+                            <div className="flex justify-center h-10 w-10">
+                                <img className="rounded-3xl border border-gray-700" src={monsterImage} alt={monsterImage} />
+                            </div> :
+                            <div className="flex justify-center h-10 w-10">
+                                <div className="group rounded-3xl border w-40 border-gray-700 bg-blackPaper bg-neutral-800 backdrop-contrast-150">
+                                    <PlaceholderImage type={monsterStats.type} />
+                                </div>
+                            </div>
+                        }
+                        <h2 className="vinque font-bold capitalize text-lg text-shadow-sm shadow-black self-center ml-4 flex flex-grow-0 flex-shrink">{name} </h2>
+                        {!showBlock && <div className="flex ml-8 mr-2 flex-shrink-0 flex-grow justify-end">
+                            {(!showMonsterStats && !showModal) ?
+                                <button className="hover:text-blue-400 flex self-center" onClick={() => { setShowMonsterStats(!showMonsterStats); getStats(); console.log(monsterStats); console.log() }}><Down /></button>
+                                : !showModal &&
+                                <button className="hover:text-blue-400 flex self-center" onClick={() => setShowMonsterStats(false)}><Up /></button>
+                            }
+                        </div>}
+                        {showModal ? (
+                            <div className="flex self-center ml-2">
+                                <form className="flex" onSubmit={(e) => { console.log(url); handleAddToEncounter(e, "asdf"); }}>
+                                    <select className=" bg-gray-700 focus: outline-none" value={encounterKey} onChange={e => { handleEncounterKey(e) }} placeholder="Encounter">
+                                        {usersEncounters.map(encounter => (
+                                            <option key={encounter.encounterId} value={encounter.encounterId}>{encounter.encounterName}</option>
+                                        ))}
+                                    </select>
+                                    <button type="submit" className="mx-4 hover:text-blue-400">Add</button>
+                                </form>
+                                <button className="flex hover:text-blue-400" onClick={() => setShowModal(false)}><X /> </button>
+                            </div>
+                        ) :
+                            <div className="flex self-center ml-2">
+                                {!showBlock && <button onClick={() => setShowModal(true)} className="flex hover:text-blue-400"><Plus /></button>}
+                            </div>
+                        }
+                    </div>}
+                {name && !isRows &&
+                    <div className="border flex flex-col p-2 bg-gray-600 justify-center">
+                        <div className="h-60 flex flex-col justify-start items-center">
+                            {monsterImage ?
                                 <div className="flex justify-center h-10 w-10">
-                                    <img className="rounded-3xl border-2 border-double border-gray-700" src={monsterImage} alt={monsterImage} />
+                                    <img className="rounded-3xl border border-gray-700" src={monsterImage} alt={monsterImage} />
                                 </div> :
                                 <div className="flex justify-center h-10 w-10">
-                                    <div className="group rounded-3xl border-2 border-double w-40 border-gray-700 bg-blackPaper bg-neutral-800 backdrop-contrast-150">
+                                    <div className="group rounded-3xl border w-40 border-gray-700 bg-blackPaper bg-neutral-800 backdrop-contrast-150">
                                         <PlaceholderImage type={monsterStats.type} />
                                     </div>
                                 </div>
                             }
-                    </div>
-                        
-                </div>}
-                {/* {console.log(paginationConfirm)} */}
-                <div>
-                    {!showBlock && !isRows && <div className="flex relative w-11/12 ml-8">
-                        {!showMonsterStats ?
-                            <button className="hover:text-blue-400 flex absolute justify-center  bottom-4 left-full" onClick={() => { setShowMonsterStats(!showMonsterStats); getStats(); console.log(monsterStats); console.log() }}><Down /></button>
-                            :
-                            <div>
-                                <button className="hover:text-blue-400 flex absolute justify-center bottom-4 left-full" onClick={() => setShowMonsterStats(false)}><Up /></button>
+
+                            <h2 className="vinque font-bold capitalize text-lg flex text-shadow-sm shadow-black">{name}</h2>
+                            <div className="flex flex-col justify-evenly my-3 capitalize font-exeter text-sm 2xl:text-base">
+                                <div className="w-full flex justify-center ">
+                                    <div className="">{monsterStats.size} </div>
+                                    <div className="ml-2">{monsterStats.type} </div>
+                                </div>
+                                {monsterStats.subtype && <div className="flex justify-center text-sm">({monsterStats.subtype}) </div>}
+                                <div className="w-full">{monsterStats.alignment} </div>
+                                <div className="flex font-bold mt-3 justify-center">Challenge: <div className="font-normal ml-2 ">{` ${monsterStats.challenge_rating} (${monsterStats.xp} XP)`}</div> </div>
                             </div>
-                        }
+                        </div>
+                        {!showBlock && <div className="flex ml-8 mr-2 justify-end">
+                            {/* {(!showMonsterStats && !showModal) ?
+                                <button className="hover:text-blue-400 flex self-center" onClick={() => { setShowMonsterStats(!showMonsterStats); getStats(); console.log(monsterStats); console.log() }}><Down /></button>
+                                : !showModal &&
+                                <button className="hover:text-blue-400 flex self-center" onClick={() => setShowMonsterStats(false)}><Up /></button>
+                            } */}
+                            {showModal ? (
+                                <div className="flex self-end justify-evenly ml-2">
+                                    <form className="flex" onSubmit={(e) => { console.log(url); handleAddToEncounter(e, "asdf"); }}>
+                                        <select className=" bg-gray-700 focus: outline-none" value={encounterKey} onChange={e => { handleEncounterKey(e) }} placeholder="Encounter">
+                                            {usersEncounters.map(encounter => (
+                                                <option key={encounter.encounterId} value={encounter.encounterId}>{encounter.encounterName}</option>
+                                            ))}
+                                        </select>
+                                        <button type="submit" className="ml-1 2xl:mx-4 hover:text-blue-400">Add</button>
+                                    </form>
+                                    <button className="flex hover:text-blue-400" onClick={() => setShowModal(false)}><X /> </button>
+                                </div>
+                            ) :
+                                <div className="flex self-end ml-2">
+                                    {!showBlock && <button onClick={() => setShowModal(true)} className="flex hover:text-blue-400"><Plus /></button>}
+                                </div>
+                            }
+                        </div>}
+
                     </div>}
+                <div>
 
-                    {showModal ? (
-                        !isRows && <div className="flex relative w-11/12 -ml-3 ">
-                            <button className=" flex absolute justify-center left-full bottom-4 hover:text-blue-400" onClick={() => setShowModal(false)}><X /> </button>
 
-                            <form className="ml-16 flex absolute justify-center bottom-4 left-2/3" onSubmit={(e) => { console.log(url); handleAddToEncounter(e, "asdf"); }}>
-                                <button type="submit" className="mr-2 hover:text-blue-400">Add to</button>
-
-                                <select className=" bg-gray-700 focus: outline-none" value={encounterKey} onChange={e => { handleEncounterKey(e) }} placeholder="Encounter">
-
-                                    {usersEncounters.map(encounter => (
-                                        <option key={encounter.encounterId} value={encounter.encounterId}>{encounter.encounterName}</option>
-                                    ))}
-
-                                </select>
-                            </form>
-                        </div>
-                    ) :
-                        <div className="flex relative w-11/12 -ml-3">
-                            {!showBlock && !isRows && <button onClick={() => setShowModal(true)} className="flex absolute justify-center left-full bottom-4 hover:text-blue-400"><Plus /></button>}
-                        </div>
-                    }
 
                     {/*BOOK ~~~ ~~~ ~~~ Monster Details ~~~ ~~~ ~~~*/}
 
                     {showMonsterStats && (
-                        <div className="statblock flex-wrap m-2 my-5 p-10 md:p-20 justify-around z-20 shadow-inner shadow-gray-800">
+                        <div className="statblock flex-wrap m-2 my-5 p-10 px-20 justify-around z-20 shadow-inner shadow-gray-800">
 
                             {monsterImage ?
                                 <div className="flex justify-center h-40 md:h-60 mt-3 ">

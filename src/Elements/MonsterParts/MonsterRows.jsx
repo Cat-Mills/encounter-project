@@ -35,7 +35,7 @@ export default function MonsterRows({monsterList, itemsPerPage, searchText, type
     // console.log(types)
 return(
 <div className=" max-h-[65vh] overflow-scroll overflow-x-hidden">
-    <div className={`${isRows ? 'grid grid-cols-4 grid-rows-3 gap-4' : 'null'}`}>
+    <div className={`${!isRows ? 'grid grid-cols-3 xl:grid-cols-4 gap-4' : 'null'}`}>
     {monsterList.map((monster, monsterIn) => {
             return <StatBlock 
                 url={monster.url} 

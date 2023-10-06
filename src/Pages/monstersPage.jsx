@@ -10,7 +10,8 @@ const Monsters = () => {
   const MONSTER_COLLECTION = 'https://www.dnd5eapi.co/api/monsters'
   const [showMonsterList, setShowMonsterList] = useState(true)
   const [filteredMons, setFilteredMons] = useState({ name: '', type: '' })
-  const [isRows, setIsRows] = useState(false)
+  const [isRows, setIsRows] = useState(true)
+  const [itemsPerPage, setItemsPerPage] = useState(24)
 
   const [filteredTypes, setFilteredTypes] = useState([])
     
@@ -38,7 +39,15 @@ const Monsters = () => {
       return (monster.name.toLowerCase().includes(filteredMons.name.toLowerCase()))//returning a true or false
     })
   }
-  useEffect(() => getMonsters(), [])
+
+  let getItemsPerPage = () => {
+    let w = window.innerWidth
+    if(!isRows){return setItemsPerPage(25)}
+    else if(w >= 1280){setItemsPerPage(23)}
+    else{setItemsPerPage(20)}
+  }
+
+  useEffect(() => {getMonsters()}, [])
   return (
     <div className='border p-5 bg-gray-700 mt-32 mb-10 max-h[70vh]'>
       <div className='flex'>
@@ -56,8 +65,8 @@ const Monsters = () => {
           <SearchIcon />
         </div>
       </div>
-      <button className='items-center justify-center flex stroke-white hover:stroke-blue-400 hover:text-blue-400' onClick={()=>setIsRows(!isRows)}>
-        {isRows ? <Grid/> : <Rows/> }
+      <button className='items-center justify-center flex stroke-white hover:stroke-blue-400 hover:text-blue-400' onClick={()=>{getItemsPerPage();setIsRows(!isRows);}}>
+        {isRows ? <Rows/> : <Grid/> }
       </button>
       </div>
       {/* monster type buttons*/}
@@ -183,7 +192,7 @@ const Monsters = () => {
 
       {/*TAB Monster Rows */}
       {showMonsterList && <MonsterRows
-        itemsPerPage={25}
+        itemsPerPage={itemsPerPage}
         monsterList={filteredMons ? filterResults(filteredMons) : monsterList}
         setMonsterList={setMonsterList}
         searchText={filteredMons}
