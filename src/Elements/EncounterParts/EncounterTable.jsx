@@ -26,9 +26,8 @@ const EncTable = () => {
     }
     useEffect(() => { getEncounterTables() }, [])
 
-    //TODO fix deleteEncounter func(encounter is undefined)
+    
     const deleteEncounter = (encounter) => {
-        // console.log(encounterList)
         axios.delete(`/api/encounters/${encounter.encounterId}`)
             .then(res => {
                 console.log(res)
@@ -37,6 +36,7 @@ const EncTable = () => {
             })
             .catch(err => console.log(err))
     }
+    
     const editEncounter = (encounter) => {
         console.log(encounter.encounterId)
         axios

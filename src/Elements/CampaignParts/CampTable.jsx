@@ -41,7 +41,7 @@ const CampTable = () => {
             campaignName={campaignName}
             setShowModal={setShowModal}
             getCampaignTables={getCampaignTables}
-            />) : (<button className="hover:text-blue-400" onClick={() => setShowModal(true)}>Create New Campaign</button>)}
+            />) : (<button className="hover:text-blue-400 mt-4" onClick={() => setShowModal(true)}>Create New Campaign</button>)}
         </div>
     )
 
