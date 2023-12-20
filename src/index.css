@@ -76,8 +76,6 @@ input {
     background-color: #374151;
 }
 
-
-
 body {
     border-color: white;
     justify-content: center;
@@ -107,16 +105,19 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track { 
-	background: #374151; 
+	background: transparent; 
+    display: none;
+    width: 0px;
+    
 } 
 
 /* Handle */
 ::-webkit-scrollbar-thumb { 
-	background: #4b5563; 
+	background: #6b7280; 
 	border-radius: 5px; 
 } 
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover { 
-	background: #6b7280; 
+	background: #7b8392; 
 }

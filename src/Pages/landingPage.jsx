@@ -37,7 +37,8 @@ const Landing = () => {
 
 
     return (
-        <div className="text-2xl flex flex-col border border-solid bg-gray-700 m-10 h-[50vh] relative align-middle items-center">
+        <div className="text-2xl flex flex-col border border-solid bg-gray-700 m-10 h-[50vh] align-middle items-center">
+            <div className="absolute top-20 font-vinque text-4xl text-shadow shadow-black">Encounter Emporium</div>
         { register ? 
             <Register 
                 setPassword={setPassword}

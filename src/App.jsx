@@ -9,6 +9,7 @@ import Encounters from './Pages/encountersPage.jsx'
 import Campaigns from './Pages/campaignsPage.jsx'
 import Profile from './Pages/profilePage.jsx'
 import ActiveEncounters from './Pages/ActiveEncounterPage'
+import HelpPage from './Pages/HelpPage.jsx'
 
 
 
@@ -28,6 +29,8 @@ function App() {
         <Route path='/campaigns' element={<Campaigns/> }/>
 
         <Route path='/profile' element={<Profile/> }/>
+
+        <Route path='/help' element={<HelpPage/> }/>
 
         <Route path='/active/:id' element={<ActiveEncounters/>}/>
       </Routes>
