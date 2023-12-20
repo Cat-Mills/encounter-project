@@ -5,6 +5,7 @@ import React from "react";
 import MonstersInEnc from "./MonstersInEnc.jsx";
 import { Trash, Edit, X, Play } from "../../icons.jsx";
 import { useNavigate } from "react-router-dom";
+import DeleteAlert from "../DeleteAlert.jsx";
 
 
 
@@ -15,6 +16,7 @@ const EncTable = () => {
     const [usersCampaigns, setUsersCampaigns] = useState([])
     const [campaignKey, setCampaignKey] = useState(undefined)
     const [isEditing, setIsEditing] = useState('')
+    const [viewAlert, setViewAlert] = useState('')
 
     const navigate = useNavigate()
 
@@ -27,8 +29,8 @@ const EncTable = () => {
     useEffect(() => { getEncounterTables() }, [])
 
     
-    const deleteEncounter = (encounter) => {
-        axios.delete(`/api/encounters/${encounter.encounterId}`)
+    const deleteEncounter = (viewAlert) => {
+        axios.delete(`/api/encounters/${viewAlert}`)
             .then(res => {
                 console.log(res)
                 
@@ -85,8 +87,6 @@ const EncTable = () => {
     }
     useEffect(() => { getCampaignTables() }, [])
 
-
-    // console.log(encounterList)
 
     return (
         <div className="flex-col">
@@ -153,15 +153,17 @@ const EncTable = () => {
 
                                 <button className="hover:text-blue-400 absolute self-center right-14" onClick={() => {setIsEditing(encounter.encounterId); setEncounterName(encounter.encounterName)}}><Edit /></button>
 
-                                <button className="hover:text-blue-400 absolute self-center right-4" onClick={() => deleteEncounter(encounter)}><Trash /> </button>
+                                <button className="hover:text-blue-400 absolute self-center right-4" onClick={() => setViewAlert(encounter.encounterId)}><Trash /> </button>
                             </div>
                         }
                         {isEditing === encounter.encounterId &&
                             <div className="flex">
                                 <button className="hover:text-blue-400 absolute self-center right-14" onClick={() => setIsEditing("")}><X /></button>
-                                <button className="hover:text-blue-400 absolute self-center right-4" onClick={() => deleteEncounter(encounter)}><Trash /> </button>
+                                <button className="hover:text-blue-400 absolute self-center right-4" onClick={() => {setViewAlert(encounter.encounterId)}}><Trash /> </button>
                             </div>
                         }
+                        {viewAlert === encounter.encounterId && <DeleteAlert viewAlert={viewAlert} setViewAlert={setViewAlert} deleteFunc={deleteEncounter} 
+                itemName={encounter.encounterName}/>}
                     </div>
                 ))}
             </div>

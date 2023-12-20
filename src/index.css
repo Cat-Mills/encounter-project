@@ -106,6 +106,9 @@ body {
 /* Track */
 ::-webkit-scrollbar-track { 
 	background: transparent; 
+    display: none;
+    width: 0px;
+    
 } 
 
 /* Handle */
@@ -116,5 +119,5 @@ body {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover { 
-	background: #6b7280; 
+	background: #7b8392; 
 }

@@ -67,7 +67,7 @@ export default function PlayerRows({ campaign, getCampaignTables }) {
                 <button title="Delete Campaign" className="mx-4 hover:text-blue-400" onClick={()=> {setViewAlert(campaign.campaignId)}}><Trash /></button>
                 {!showPlayers && <button title="Show Players" className="hover:text-blue-400 mr-2" onClick={() => { setShowPlayers(true) }}><Down /> </button>}
                 {showPlayers && <button title="Hide Players" className="hover:text-blue-400 mr-2" onClick={() => setShowPlayers(false)}><Up /> </button>}
-                {viewAlert === campaign.campaignId && <DeleteAlert viewAlert={viewAlert} deleteFunc={deleteCampaign} 
+                {viewAlert === campaign.campaignId && <DeleteAlert viewAlert={viewAlert} setViewAlert={setViewAlert} deleteFunc={deleteCampaign} 
                 itemName={campaign.campaignName}/>}
             </div>
             {showPlayers && playerRows[0] &&

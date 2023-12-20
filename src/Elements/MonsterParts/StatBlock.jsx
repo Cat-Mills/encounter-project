@@ -81,7 +81,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
 
     return (!types || types.includes(monsterStats.type) || types.length === 0 && paginationConfirm) && (
         <div >
-            <div className="m-2">
+            <div>
                 {name && isRows &&
                     <div className="border flex justify-between m-2 p-2 px-4 bg-gray-600 ">
                         {monsterImage ?
@@ -103,7 +103,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                             }
                         </div>}
                         {showModal ? (
-                            <div className="flex self-center ml-2">
+                            <div className="flex self-center md:ml-1 lg:ml-2">
                                 <form className="flex" onSubmit={(e) => { console.log(url); handleAddToEncounter(e, "asdf"); }}>
                                     <select className=" bg-gray-700 focus: outline-none" value={encounterKey} onChange={e => { handleEncounterKey(e) }} placeholder="Encounter">
                                         {usersEncounters.map(encounter => (
@@ -115,7 +115,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                                 <button className="flex hover:text-blue-400" onClick={() => setShowModal(false)}><X /> </button>
                             </div>
                         ) :
-                            <div className="flex self-center ml-2">
+                            <div className="flex self-center md:ml-1 lg:ml-2">
                                 {!showBlock && <button onClick={() => setShowModal(true)} className="flex hover:text-blue-400"><Plus /></button>}
                             </div>
                         }
@@ -138,11 +138,11 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                             <div className="flex flex-col justify-evenly my-3 capitalize font-exeter text-sm 2xl:text-base">
                                 <div className="w-full flex justify-center ">
                                     <div className="">{monsterStats.size} </div>
-                                    <div className="ml-2">{monsterStats.type} </div>
+                                    <div className="md:ml-1 lg:ml-2">{monsterStats.type} </div>
                                 </div>
                                 {monsterStats.subtype && <div className="flex justify-center text-sm">({monsterStats.subtype}) </div>}
                                 <div className="w-full">{monsterStats.alignment} </div>
-                                <div className="flex font-bold mt-3 justify-center">Challenge: <div className="font-normal ml-2 ">{` ${monsterStats.challenge_rating} (${monsterStats.xp} XP)`}</div> </div>
+                                <div className="flex font-bold mt-3 justify-center">Challenge: <div className="font-normal md:ml-1 lg:ml-2 ">{` ${monsterStats.challenge_rating} (${monsterStats.xp} XP)`}</div> </div>
                             </div>
                         </div>
                         {!showBlock && <div className="flex ml-8 mr-2 justify-end">
@@ -152,7 +152,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                                 <button className="hover:text-blue-400 flex self-center" onClick={() => setShowMonsterStats(false)}><Up /></button>
                             } */}
                             {showModal ? (
-                                <div className="flex self-end justify-evenly ml-2">
+                                <div className="flex self-end justify-evenly md:ml-1 lg:ml-2">
                                     <form className="flex" onSubmit={(e) => { console.log(url); handleAddToEncounter(e, "asdf"); }}>
                                         <select className=" bg-gray-700 focus: outline-none" value={encounterKey} onChange={e => { handleEncounterKey(e) }} placeholder="Encounter">
                                             {usersEncounters.map(encounter => (
@@ -164,7 +164,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                                     <button className="flex hover:text-blue-400" onClick={() => setShowModal(false)}><X /> </button>
                                 </div>
                             ) :
-                                <div className="flex self-end ml-2">
+                                <div className="flex self-end md:ml-1 lg:ml-2">
                                     {!showBlock && <button onClick={() => setShowModal(true)} className="flex hover:text-blue-400"><Plus /></button>}
                                 </div>
                             }
@@ -178,7 +178,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                     {/*BOOK ~~~ ~~~ ~~~ Monster Details ~~~ ~~~ ~~~*/}
 
                     {showMonsterStats && (
-                        <div className="statblock flex-wrap m-2 my-5 p-10 px-20 justify-around z-20 shadow-inner shadow-gray-800">
+                        <div className="statblock flex-wrap p-3 lg:p-10 lg:px-20 justify-around z-20 shadow-inner shadow-gray-800">
 
                             {monsterImage ?
                                 <div className="flex justify-center h-40 md:h-60 mt-3 ">
@@ -196,9 +196,9 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                             {/*TAB  Type/Alignment  */}
                             <div className="flex justify-center my-3 capitalize text-xl gap-3 ">
                                 <div>{monsterStats.size} </div>
-                                <div className="ml-2">{monsterStats.type} </div>
+                                <div className="md:ml-1 lg:ml-2">{monsterStats.type} </div>
                                 {monsterStats.subtype && <div className="ml-1">({monsterStats.subtype}) </div>}
-                                <div className="ml-2">{monsterStats.alignment} </div>
+                                <div className="md:ml-1 lg:ml-2">{monsterStats.alignment} </div>
                             </div>
 
 
@@ -209,12 +209,12 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                             <div>
                                 <div className="flex justify-center font-bold text-xl">Armor Class: {(monsterStats.armor_class[0].value)}
                                     {monsterStats.armor_class[0].type &&
-                                        <div className="capitalize italic ml-2">({monsterStats.armor_class[0].type})</div>}
+                                        <div className="capitalize italic md:ml-1 lg:ml-2">({monsterStats.armor_class[0].type})</div>}
                                 </div>
 
                                 {/*TAB Hit Points */}
                                 <div className="font-bold flex justify-center text-xl">HP: {monsterStats.hit_points}
-                                    <div className="font-normal italic ml-2">({monsterStats.hit_points_roll})</div>
+                                    <div className="font-normal italic md:ml-1 lg:ml-2">({monsterStats.hit_points_roll})</div>
                                 </div>
 
                                 {/*TAB Speed */}
@@ -249,48 +249,48 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                                 <div className="flex justify-start font-bold title">Skills:
                                     {profs.map((prof) => {
                                         if (prof.save.includes("Skill")) {
-                                            return <div className="ml-2 font-normal desc" key={prof.save}>{prof.save.slice(6)} +{prof.val} </div>
+                                            return <div className="md:ml-1 lg:ml-2 font-normal desc" key={prof.save}>{prof.save.slice(6)} +{prof.val} </div>
                                         } else { return }
                                     })}
                                 </div>
                                 {/* TAB Conditions */}
                                 {monsterStats.damage_immunities[0] && <div className="flex font-bold title">Damage Immunities:
-                                    <div className="flex font-normal ml-2 desc">
+                                    <div className="flex font-normal md:ml-1 lg:ml-2 desc">
                                         {monsterStats.damage_immunities.map((type, index) => (
                                             <div className="" key={type}>{(index ? ', ' : '') + type}</div>))}
                                     </div>
                                 </div>}
 
                                 {monsterStats.condition_immunities[0] && <div className="flex font-bold title">Condition Immunities:
-                                    <div className="flex font-normal ml-2 desc">
+                                    <div className="flex font-normal md:ml-1 lg:ml-2 desc h-fit flex-wrap">
                                         {monsterStats.condition_immunities.map((type, index) => (
                                             <div className="lowercase" key={type.index}>{(index ? ', ' : '') + type.name}</div>))}
                                     </div>
                                 </div>}
 
                                 {monsterStats.damage_resistances[0] && <div className="flex font-bold title">Damage Resistances:
-                                    <div className="flex font-normal ml-2 desc">
+                                    <div className="flex font-normal md:ml-1 lg:ml-2 desc">
                                         {monsterStats.damage_resistances.map((type, index) => (
                                             <div className="" key={type}>{(index ? ', ' : '') + type}</div>))}
                                     </div>
                                 </div>}
 
                                 {monsterStats.damage_vulnerabilities[0] && <div className="flex font-bold title">Damage vulnerabilities:
-                                    <div className="flex font-normal ml-2 desc">
+                                    <div className="flex font-normal md:ml-1 lg:ml-2 desc">
                                         {monsterStats.damage_vulnerabilities.map((type, index) => (
                                             <div className="" key={type}>{(index ? ', ' : '') + type}</div>))}
                                     </div>
                                 </div>}
 
                                 {monsterStats.senses && <div className="flex font-bold title">Senses:
-                                    <div className="flex font-normal ml-2 desc">
+                                    <div className="flex font-normal md:ml-1 lg:ml-2 desc">
                                         {Object.keys(monsterStats.senses).map(sense => `${sense}: ${monsterStats.senses[sense]}`).join(", ").replaceAll('_', ' ')}
                                     </div>
                                 </div>}
 
-                                {monsterStats.languages && <div className="flex font-bold title">Languages: <div className="font-normal ml-2 desc">{monsterStats.languages}</div></div>}
+                                {monsterStats.languages && <div className="flex font-bold title">Languages: <div className="font-normal md:ml-1 lg:ml-2 desc">{monsterStats.languages}</div></div>}
 
-                                <div className="flex font-bold title pb-5">Challenge: <div className="font-normal ml-2 desc">{` ${monsterStats.challenge_rating} (${monsterStats.xp} XP)`}</div> </div>
+                                <div className="flex font-bold title pb-5">Challenge: <div className="font-normal md:ml-1 lg:ml-2 desc">{` ${monsterStats.challenge_rating} (${monsterStats.xp} XP)`}</div> </div>
 
                             </div>
                             {specials[0] && <div className="cardLine"></div>}
@@ -305,19 +305,19 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                             {/* TAB Actions */}
                             <div className="flex text-xl">ACTIONS</div>
                             {monsterStats.actions.map((action) => (
-                                <div key={action.name} className="flex font-bold my-4 flex-wrap text-xl pt-5">{action.name}. <div className="flex ml-2 font-normal text-left text-lg pl-5 exeter w-full"> {action.desc}</div></div>
+                                <div key={action.name} className="flex font-bold my-4 flex-wrap text-xl pt-5">{action.name}. <div className="flex md:ml-1 lg:ml-2 font-normal text-left text-lg pl-5 exeter w-full"> {action.desc}</div></div>
                             ))}
 
                             {monsterStats.legendary_actions[0] && <div className="cardLine"></div>}
                             {monsterStats.legendary_actions[0] && <div className="flex text-xl">LEGENDARY ACTIONS</div>}
                             {monsterStats.legendary_actions[0] && monsterStats.legendary_actions.map((action) => (
-                                <div key={action.name} className="flex font-bold my-4 flex-wrap text-xl pt-5">{action.name}. <div className="flex ml-2 font-normal text-left text-lg pl-5 exeter w-full"> {action.desc}</div></div>
+                                <div key={action.name} className="flex font-bold my-4 flex-wrap text-xl pt-5">{action.name}. <div className="flex md:ml-1 lg:ml-2 font-normal text-left text-lg pl-5 exeter w-full"> {action.desc}</div></div>
                             ))}
 
                             {monsterStats.reactions && <div className="cardLine"></div>}
                             {monsterStats.reactions && <div className="flex text-xl">REACTIONS</div>}
                             {monsterStats.reactions && monsterStats.reactions.map((reaction) => (
-                                <div key={reaction.name} className="flex font-bold my-4 flex-wrap text-xl pt-5">{reaction.name}. <div className="flex ml-2 font-normal text-left text-lg pl-5 exeter w-full"> {reaction.desc}</div></div>
+                                <div key={reaction.name} className="flex font-bold my-4 flex-wrap text-xl pt-5">{reaction.name}. <div className="flex md:ml-1 lg:ml-2 font-normal text-left text-lg pl-5 exeter w-full"> {reaction.desc}</div></div>
                             ))}
 
                             <div className="cardLine"></div>

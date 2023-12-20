@@ -19,12 +19,12 @@ export default function ActiveCard({ entities }) {
     return (
         <div className=" flex w-full gap-3 relative exeter min-h-[60vh]">
 
-            <div className=" border border-solid w-1/2 flex flex-col space-y-7 py-3 bg-gray-600 justify-evenly">
-                <div className="flex w-full justify-center">
-                    <div className="w-1/4">Initiative</div>
-                    <div className="w-1/4">Name</div>
-                    <div className="w-1/4">AC</div>
-                    <div className="w-1/4">HP:</div>
+            <div className=" border border-solid w-1/2 flex flex-col space-y-7 py-3 bg-gray-600 justify-around">
+                <div className="flex w-full justify-center border-b-[1px] border-dashed [&>*]:w-1/4 pb-2">
+                    <div >Initiative</div>
+                    <div>Name</div>
+                    <div>AC</div>
+                    <div>HP</div>
                 </div>
                 {entities.map((entity, i) => (
                     
@@ -32,7 +32,7 @@ export default function ActiveCard({ entities }) {
                         
                     {entity.playerId &&
                         
-                        <div className="flex w-full items-center">
+                        <div className="flex w-full">
                             <div className="w-1/4"> {entity.initiative} </div>
                             <div className="w-1/4">{entity.playerName}</div>
                             <div className="w-1/4 relative"> <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"><Shield/> </div><div className=" relative "> {entity.playerAC} </div></div>
@@ -42,7 +42,7 @@ export default function ActiveCard({ entities }) {
                     {entity.index && 
                         <div className="flex w-full items-center">
                             <div className="w-1/4"> {entity.initiative} </div>
-                            <button onClick={() => {showCard===''? setShowCard(entity.id) : setShowCard(''); }} className="w-1/4 hover:text-blue-400">{entity.name}</button>
+                            <button onClick={() => {setShowCard(entity.id)}} className="w-1/4 hover:text-red-600 text-red-400">{entity.name}</button>
                             <div className="w-1/4 relative"><div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"><Shield/> </div><div className="relative"> {entity.armor_class[0].value}</div>  </div>
                             <div className="w-1/4"><HitPointTracker totalHP={entity.hit_points}/> </div>
                         </div>}
@@ -56,9 +56,9 @@ export default function ActiveCard({ entities }) {
                 ))}
                 
             </div>
-            <div className="border border-solid w-1/2 flex-col space-y-7 py-3 bg-gray-600">
+            {showCard === '' && <div className="border border-solid w-1/2 flex-col space-y-7 py-3 bg-gray-600">
                 Select a monster to see more details
-            </div>
+            </div>}
 
         </div>
     )

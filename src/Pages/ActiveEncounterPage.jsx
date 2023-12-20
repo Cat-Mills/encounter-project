@@ -3,7 +3,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ActiveCard from "../Elements/EncounterParts/ActiveCard.jsx";
-
+import { ChevronLeft, ChevronRight } from "../icons.jsx";
 
 
 
@@ -152,7 +152,11 @@ function ActiveEncounters() {
                 </div>}
                 {!showStart &&
                     <>
-                        <div>Running {activeEncounter.encounterName}</div>
+                        <div className="flex">
+                            <button><ChevronLeft/></button>
+                            <div className="px-2">Active Turn</div>
+                            <button><ChevronRight/></button>
+                        </div>
                         <div className="flex my-5">
                             <ActiveCard
                                 entities={entities}
@@ -174,7 +178,7 @@ function ActiveEncounters() {
                         </div></>}
             </div>
             
-            {showStart && <button className="exeter text-2xl h-20" onClick={() => { initiativeRoll(), getChallengeRating(); setShowStart(false) }}>Start and roll initiative</button>}
+            {showStart && <button className="hover:text-blue-400 exeter border-2 hover:border-blue-400 hover:bg-black/20 rounded-md p-2" onClick={() => { initiativeRoll(), getChallengeRating(); setShowStart(false) }}>Roll initiative!</button>}
             
         </>
     );

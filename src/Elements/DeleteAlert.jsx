@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 
-export default function DeleteAlert({viewAlert,deleteFunc,itemName}) {
+export default function DeleteAlert({viewAlert,setViewAlert, deleteFunc,itemName}) {
 
     const [isOpen, setIsOpen] = useState(true)
     
@@ -24,7 +24,7 @@ export default function DeleteAlert({viewAlert,deleteFunc,itemName}) {
                     <button type="button"
                     className="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-2 py-1 text-md font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2" onClick={()=> deleteFunc(viewAlert)}>Delete</button>
                     <button type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-2 py-1 text-md font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2" onClick={() => {setIsOpen(false)}}>Cancel</button>
+                    className="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-2 py-1 text-md font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2" onClick={() => {setIsOpen(false);setViewAlert('')}}>Cancel</button>
                     </div>
                 </Dialog.Panel>
                 </div>
