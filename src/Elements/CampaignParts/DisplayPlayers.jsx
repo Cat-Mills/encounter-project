@@ -1,15 +1,16 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Trash, Edit, Check} from "../../icons.jsx"
+import DeleteAlert from "../DeleteAlert.jsx"
 
 const DisplayPlayers = ({player, campaign, getPlayerRows,setName,setLv,setHP,setAC,setInit,Name,Lv,HP,AC,Init}) => {
     
     const [isEditing, setIsEditing] = useState("")
-    
+    const [viewAlert, setViewAlert] = useState('')
 
 
-    const deletePlayer = () => {
-        axios.delete(`/api/players/${player.playerId}`)
+    const deletePlayer = (viewAlert) => {
+        axios.delete(`/api/players/${viewAlert}`)
         .then(res => {
             console.log(res)
             
@@ -53,7 +54,7 @@ const DisplayPlayers = ({player, campaign, getPlayerRows,setName,setLv,setHP,set
                         setAC(player.playerAC);
                         setInit(player.playerInit)
                         }}><Edit/></button>
-                    <button title="Delete Player" className="hover:text-blue-400" onClick={() => deletePlayer()}><Trash/> </button>
+                    <button title="Delete Player" className="hover:text-blue-400" onClick={() => {setViewAlert(player.playerId);console.log(viewAlert)}}><Trash/> </button>
                 </div>
             </div>
             :
@@ -84,6 +85,8 @@ const DisplayPlayers = ({player, campaign, getPlayerRows,setName,setLv,setHP,set
                 
             </div>
             }
+            {viewAlert === player.playerId && <DeleteAlert viewAlert={viewAlert} setViewAlert={setViewAlert} deleteFunc={deletePlayer} 
+                itemName={player.playerName}/>}
         </div>
     )
 }
