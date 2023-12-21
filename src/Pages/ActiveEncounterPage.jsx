@@ -20,6 +20,7 @@ function ActiveEncounters() {
     const [xpBudget, setXpBudget] = useState(0)
     const [difficulty, setDifficulty] = useState('')
     const [showStart, setShowStart] = useState(false)
+    const [activeEnt, setActiveEnt] = useState()
 
 
 
@@ -55,9 +56,9 @@ function ActiveEncounters() {
     }
     function getChallengeRating() {
         let adjustedXp = 0
-        console.log("players", players)
-        console.log("initialXp", initialXp)
-        console.log("numOfMonsters", numOfMonsters)
+        // console.log("players", players)
+        // console.log("initialXp", initialXp)
+        // console.log("numOfMonsters", numOfMonsters)
         if (numOfMonsters === 0) { adjustedXp }
         if (numOfMonsters === 1) { adjustedXp = initialXp }
         if (numOfMonsters === 2) { adjustedXp = initialXp * 1.5 }
@@ -93,8 +94,8 @@ function ActiveEncounters() {
             const xp = xpTable[level] || 0
             return total + xp
         }, 0)
-        console.log("partyXpBudget", partyXpBudget)
-        console.log("adjustedXp", adjustedXp)
+        // console.log("partyXpBudget", partyXpBudget)
+        // console.log("adjustedXp", adjustedXp)
         setCalculatedXp(adjustedXp)
         setXpBudget(partyXpBudget)
         let difficultyLevel = 'N.A.'
@@ -102,14 +103,14 @@ function ActiveEncounters() {
             easy: 0.5, medium: 1, hard: 1.5, deadly: 2,
         }
         const ratio = adjustedXp / partyXpBudget
-        console.log("xp ratio", ratio)
+        // console.log("xp ratio", ratio)
         if (ratio <= difficultyMultipliers.easy) { difficultyLevel = "Easy" }
         else if (ratio <= difficultyMultipliers.medium) { difficultyLevel = "Medium" }
         else if (ratio <= difficultyMultipliers.hard) { difficultyLevel = "Hard" }
         else if (ratio <= difficultyMultipliers.deadly) { difficultyLevel = "Deadly" }
         else if (ratio > difficultyMultipliers.deadly) { difficultyLevel = "Impossible (TPK)" }
         setDifficulty(difficultyLevel)
-        console.log("difficulty", difficultyLevel)
+        // console.log("difficulty", difficultyLevel)
     }
     let d20 = {
         sides: 20,
@@ -127,13 +128,20 @@ function ActiveEncounters() {
                 ent.initiative = initiative + Math.floor((ent.dexterity - 10) / 2)
             } return ent
         })
-        // console.log(calculatedEntities)
         let sortedEnts = calculatedEntities.sort((a, b) => {
             return (b.initiative - a.initiative)
         })
-        // console.log(sortedEnts)
-        // console.log(initiative)
         setEntities(sortedEnts)
+        setActiveEnt(sortedEnts[0])
+    }
+    function activateTurn(){
+        // entities = an array | activeEnt = an object
+        for(let i = 0; i <entities.length; i++){
+            let previousTurn = entities[i==0?entities.length-1:i-1]
+            let currentTurn = entities[i]
+            let next = entities[i==entities.length-1?0:i+1]
+        }
+        console.log(activeEnt)
     }
 
     // console.log(entities)
@@ -155,7 +163,7 @@ function ActiveEncounters() {
                         <div className="flex">
                             <button><ChevronLeft/></button>
                             <div className="px-2">Active Turn</div>
-                            <button><ChevronRight/></button>
+                            <button onClick={()=>{activateTurn()}}><ChevronRight/></button>
                         </div>
                         <div className="flex my-5">
                             <ActiveCard
@@ -178,7 +186,7 @@ function ActiveEncounters() {
                         </div></>}
             </div>
             
-            {showStart && <button className="hover:text-blue-400 exeter border-2 hover:border-blue-400 hover:bg-black/20 rounded-md p-2" onClick={() => { initiativeRoll(), getChallengeRating(); setShowStart(false) }}>Roll initiative!</button>}
+            {showStart && <button className="hover:text-blue-400 exeter border-2 hover:border-blue-400 hover:bg-black/20 rounded-md p-2" onClick={() => { initiativeRoll(), getChallengeRating(); setShowStart(false); }}>Roll initiative!</button>}
             
         </>
     );

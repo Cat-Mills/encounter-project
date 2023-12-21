@@ -175,7 +175,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
 
 
 
-                    {/*BOOK ~~~ ~~~ ~~~ Monster Details ~~~ ~~~ ~~~*/}
+                    {/*BOOK ~~~ ~~~ ~~~ Monster Stat Block ~~~ ~~~ ~~~*/}
 
                     {showMonsterStats && (
                         <div className="statblock flex-wrap p-3 lg:p-10 lg:px-20 justify-around z-20 shadow-inner shadow-gray-800">
@@ -226,6 +226,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                                 </div>
                             </div>
                             <div className="cardLine"></div>
+                            {/* TODO display ability modifiers under the scores */}
                             {/*TAB Ability Scores */}
                             <div className="flex justify-around my-2 text-xl text-center tracking-widest">
                                 <div className="font-bold">STR<div className="font-normal text-2xl">{monsterStats.strength}</div></div>
