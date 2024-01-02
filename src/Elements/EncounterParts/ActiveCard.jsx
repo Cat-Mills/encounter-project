@@ -4,7 +4,7 @@ import StatBlock from "../MonsterParts/StatBlock";
 import HitPointTracker from "./HitPointTracker.jsx";
 import { Shield } from "../../icons";
 
-export default function ActiveCard({ entities }) {
+export default function ActiveCard({ entities, activeEnt }) {
     // console.log(entities)
     const [showCard, setShowCard] = useState('')
     entities.map((entity, i) => {
@@ -33,6 +33,7 @@ export default function ActiveCard({ entities }) {
                     {entity.playerId &&
                         
                         <div className="flex w-full">
+                            {entity == activeEnt && <div className="arrow-right absolute"></div>}
                             <div className="w-1/4"> {entity.initiative} </div>
                             <div className="w-1/4">{entity.playerName}</div>
                             <div className="w-1/4 relative"> <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"><Shield/> </div><div className=" relative "> {entity.playerAC} </div></div>
@@ -41,6 +42,7 @@ export default function ActiveCard({ entities }) {
                     
                     {entity.index && 
                         <div className="flex w-full items-center">
+                            {entity == activeEnt && <div className="arrow-right absolute"></div>}
                             <div className="w-1/4"> {entity.initiative} </div>
                             <button onClick={() => {setShowCard(entity.id)}} className="w-1/4 hover:text-red-600 text-red-400">{entity.name}</button>
                             <div className="w-1/4 relative"><div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"><Shield/> </div><div className="relative"> {entity.armor_class[0].value}</div>  </div>

@@ -36,7 +36,6 @@ export default {
       backgroundImage: theme => ({
         'undead': "url('./src/assets/portraits/undead.svg')",
         'paper': 'url("./src/assets/light-paper-fibers.png")',
-        'blackPaper': 'url("./src/assets/black-paper.png")'
       }),
       colors: {
         'lightGray': '#4b5563',

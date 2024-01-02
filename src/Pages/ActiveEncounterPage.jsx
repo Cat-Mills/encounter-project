@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ActiveCard from "../Elements/EncounterParts/ActiveCard.jsx";
 import { ChevronLeft, ChevronRight } from "../icons.jsx";
+// import DiceWidget from "../Elements/DiceWidget.jsx";
 
 
 
@@ -21,6 +22,9 @@ function ActiveEncounters() {
     const [difficulty, setDifficulty] = useState('')
     const [showStart, setShowStart] = useState(false)
     const [activeEnt, setActiveEnt] = useState()
+    const [turn, setTurn] = useState(1)
+    const [round, setRound] = useState(1)
+    const [openWidget, setOpenWidget] = useState(false)
 
 
 
@@ -131,63 +135,84 @@ function ActiveEncounters() {
         let sortedEnts = calculatedEntities.sort((a, b) => {
             return (b.initiative - a.initiative)
         })
-        setEntities(sortedEnts)
-        setActiveEnt(sortedEnts[0])
-    }
-    function activateTurn(){
-        // entities = an array | activeEnt = an object
-        for(let i = 0; i <entities.length; i++){
-            let previousTurn = entities[i==0?entities.length-1:i-1]
-            let currentTurn = entities[i]
-            let next = entities[i==entities.length-1?0:i+1]
-        }
-        console.log(activeEnt)
+        let identifiedEnts = sortedEnts.map((ent, index) => (
+            { ...ent, initiativeId: index }
+        ))
+        setEntities(identifiedEnts)
+        setActiveEnt(identifiedEnts[0])
     }
 
-    // console.log(entities)
+    function nextTurn() {
+        console.log(activeEnt, entities[entities.length - 1].initiativeId)
+        // setTurn(turn === entities.length ? 1 : turn+1)
+        if (turn === entities.length) {
+            setTurn(1)
+            setRound(round + 1)
+        } else {
+            setTurn(turn + 1)
+        }
+        setActiveEnt(activeEnt.initiativeId === entities[entities.length - 1].initiativeId ? entities[0] : entities[turn])
+    }
     useEffect(() => { getActiveEncounter() }, []);
-    // console.log("activeEncounter",activeEncounter)
-    // console.log(entities)
-    // console.log(difficulty)
+
+
+
     return (activeEncounter &&
         <>
             <div className="border p-5 bg-gray-700 mt-32 mb-10">
                 {showStart && <div>
-                    
+
                     <div className="vinque text-xl">
                         Pulling monsters from {activeEncounter.encounterName}...
                     </div>
                 </div>}
                 {!showStart &&
                     <>
-                        <div className="flex">
-                            <button><ChevronLeft/></button>
-                            <div className="px-2">Active Turn</div>
-                            <button onClick={()=>{activateTurn()}}><ChevronRight/></button>
+                        <div className="flex w-full">
+
+                            <div className="flex w-1/2 items-center">
+
+                                {/* Next Button */}
+                                <div className="">
+                                    <button className="hover:text-blue-400 px-2 hover:border-blue-400 flex justify-center items-center mx-4 gap-1 border-solid rounded-sm border bg-slate-600" onClick={() => { nextTurn() }}>
+                                        <div>next turn</div>
+                                        <div><ChevronRight /></div>
+                                    </button>
+                                </div>
+
+                                <div className="px-4">Active Turn: {turn}/{entities.length} </div>
+
+                                {/* Round Counter */}
+                                <div className="px-4">Round: {round}</div>
+                            </div>
+
+                            {/* Dice Widget */}
+                            {/* <div className="w-1/2 px-4 self-end"><DiceWidget open={openWidget} setOpen={setOpenWidget} /></div> */}
+
                         </div>
                         <div className="flex my-5">
                             <ActiveCard
+                                activeEnt={activeEnt}
                                 entities={entities}
                                 d20={d20} />
                         </div>
                         <p className="mb-4">XP for this encounter: {calculatedXp} </p>
-                        <div className=" text-lg">Difficulty: 
-                            <p className={`${
-                                difficulty === "Easy" ? 'text-green-500':
-                                difficulty === "Medium" ? 'text-yellow-600':
-                                difficulty === "Hard" ? 'text-red-500':
-                                difficulty === "Deadly" ? 'text-red-900':
-                                'text-gray-900'
-                            }`}>{difficulty} 
+                        <div className=" text-lg">Difficulty:
+                            <p className={`${difficulty === "Easy" ? 'text-green-500' :
+                                    difficulty === "Medium" ? 'text-yellow-600' :
+                                        difficulty === "Hard" ? 'text-red-500' :
+                                            difficulty === "Deadly" ? 'text-red-900' :
+                                                'text-gray-900'
+                                }`}>{difficulty}
                             </p>
                         </div>
                         <div className="flex justify-center">
                             <NavLink className="hover:text-blue-400 mt-4" to="/encounters">End Encounter</NavLink>
                         </div></>}
             </div>
-            
+
             {showStart && <button className="hover:text-blue-400 exeter border-2 hover:border-blue-400 hover:bg-black/20 rounded-md p-2" onClick={() => { initiativeRoll(), getChallengeRating(); setShowStart(false); }}>Roll initiative!</button>}
-            
+
         </>
     );
 }
