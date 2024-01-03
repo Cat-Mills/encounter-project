@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ActiveCard from "../Elements/EncounterParts/ActiveCard.jsx";
 import { ChevronLeft, ChevronRight } from "../icons.jsx";
-// import DiceWidget from "../Elements/DiceWidget.jsx";
+import DiceWidget from "../Elements/DiceWidget.jsx";
 
 
 
@@ -24,7 +24,6 @@ function ActiveEncounters() {
     const [activeEnt, setActiveEnt] = useState()
     const [turn, setTurn] = useState(1)
     const [round, setRound] = useState(1)
-    const [openWidget, setOpenWidget] = useState(false)
 
 
 
@@ -143,7 +142,7 @@ function ActiveEncounters() {
     }
 
     function nextTurn() {
-        console.log(activeEnt, entities[entities.length - 1].initiativeId)
+        // console.log(activeEnt, entities[entities.length - 1].initiativeId)
         // setTurn(turn === entities.length ? 1 : turn+1)
         if (turn === entities.length) {
             setTurn(1)
@@ -159,7 +158,7 @@ function ActiveEncounters() {
 
     return (activeEncounter &&
         <>
-            <div className="border p-5 bg-gray-700 mt-32 mb-10">
+            <div className="border-2 p-5 bg-gray-700 mt-32 mb-10">
                 {showStart && <div>
 
                     <div className="vinque text-xl">
@@ -170,11 +169,11 @@ function ActiveEncounters() {
                     <>
                         <div className="flex w-full">
 
-                            <div className="flex w-1/2 items-center">
+                            <div className="flex w-1/3 items-center">
 
                                 {/* Next Button */}
                                 <div className="">
-                                    <button className="hover:text-blue-400 px-2 hover:border-blue-400 flex justify-center items-center mx-4 gap-1 border-solid rounded-sm border bg-slate-600" onClick={() => { nextTurn() }}>
+                                    <button className="hover:text-blue-400 border-2 hover:border-blue-400 hover:bg-black/20 rounded-md flex justify-center items-center mx-4 px-1 gap-1" onClick={() => { nextTurn() }}>
                                         <div>next turn</div>
                                         <div><ChevronRight /></div>
                                     </button>
@@ -187,7 +186,7 @@ function ActiveEncounters() {
                             </div>
 
                             {/* Dice Widget */}
-                            {/* <div className="w-1/2 px-4 self-end"><DiceWidget open={openWidget} setOpen={setOpenWidget} /></div> */}
+                            <div className="w-2/3 self-end"><DiceWidget/></div>
 
                         </div>
                         <div className="flex my-5">
@@ -196,7 +195,7 @@ function ActiveEncounters() {
                                 entities={entities}
                                 d20={d20} />
                         </div>
-                        <p className="mb-4">XP for this encounter: {calculatedXp} </p>
+                        <p className="mb-2">XP for this encounter: {calculatedXp} </p>
                         <div className=" text-lg">Difficulty:
                             <p className={`${difficulty === "Easy" ? 'text-green-500' :
                                     difficulty === "Medium" ? 'text-yellow-600' :
@@ -207,7 +206,7 @@ function ActiveEncounters() {
                             </p>
                         </div>
                         <div className="flex justify-center">
-                            <NavLink className="hover:text-blue-400 mt-4" to="/encounters">End Encounter</NavLink>
+                            <NavLink className="hover:text-blue-400 border-2 hover:border-blue-400 hover:bg-black/20 rounded-md my-2 px-2" to="/encounters">End Encounter</NavLink>
                         </div></>}
             </div>
 

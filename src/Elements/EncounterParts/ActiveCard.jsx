@@ -19,7 +19,7 @@ export default function ActiveCard({ entities, activeEnt }) {
     return (
         <div className=" flex w-full gap-3 relative exeter min-h-[60vh]">
 
-            <div className=" border border-solid w-1/2 flex flex-col space-y-7 py-3 bg-gray-600 justify-around">
+            <div className=" border-2 w-1/2 flex flex-col space-y-7 py-3 bg-gray-600 justify-around">
                 <div className="flex w-full justify-center border-b-[1px] border-dashed [&>*]:w-1/4 pb-2">
                     <div >Initiative</div>
                     <div>Name</div>
@@ -50,7 +50,7 @@ export default function ActiveCard({ entities, activeEnt }) {
                         </div>}
                         {showCard === entity.id &&
                         
-                        <div className="bg-gray-600 z-10 absolute w-1/2 max-h-full left-1/2 top-0 border border-solid overflow-scroll overflow-x-hidden ml-1">
+                        <div className="bg-gray-600 z-10 absolute w-1/2 max-h-full left-1/2 top-0 border-2 overflow-scroll overflow-x-hidden ml-1">
                             <StatBlock url={entity.url} showBlock={true} />
                         </div>
                         }
@@ -58,7 +58,7 @@ export default function ActiveCard({ entities, activeEnt }) {
                 ))}
                 
             </div>
-            {showCard === '' && <div className="border border-solid w-1/2 flex-col space-y-7 py-3 bg-gray-600">
+            {showCard === '' && <div className="border-2 w-1/2 flex-col space-y-7 py-3 bg-gray-600">
                 Select a monster to see more details
             </div>}
 

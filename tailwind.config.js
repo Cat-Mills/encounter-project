@@ -43,7 +43,8 @@ export default {
       }
     },
   },
-  plugins: [plugin(function ({ matchUtilities, theme }) {
+  plugins: [require('@headlessui/tailwindcss'),
+    plugin(function ({ matchUtilities, theme }) {
     matchUtilities(
       {
         'text-shadow': (value) => ({
