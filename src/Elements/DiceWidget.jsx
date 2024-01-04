@@ -83,39 +83,41 @@ export default function DiceWidget() {
 
     return (
         <div className='flex w-full justify-end'>
-            <Popover className="flex overflow-x-hidden rounded-e-full w-full justify-end">
+            <Popover className="flex rounded-e-full w-full justify-end">
                 <Transition
                     enter="transition ease-in-out duration-[600ms] transform"
-                    enterFrom="translate-x-full"
-                    enterTo="translate-x-0"
+                    enterFrom="translate-y-[150%]"
+                    enterTo="translate-y-0"
                     leave="transition ease-in-out duration-[600ms] transform"
-                    leaveFrom="translate-x-0"
-                    leaveTo="translate-x-full"
+                    leaveFrom="translate-y-0"
+                    leaveTo="translate-y-[150%]"
                 >
 
-                    <Popover.Panel className="flex flex-row-reverse">
+                    <Popover.Panel className="flex flex-col fixed translate-x-full left-3 m-3 mx-6 h-[50vh]">
+
                         <button
-                            className='hover:text-blue-400 hover:border-blue-400 bg-slate-500 hover:bg-black/20 border-2 focus:outline-none px-2 mr-2 rounded-full'
-                            onClick={() => handleRoll()}
-                        >Roll</button>
-                        <div className='flex gap-1 items-center mx-2 px-2 bg-slate-500 rounded-full'>
-                            <div>Modifier:</div>
-                            <input className='opacity-1 bg-slate-500 m-1 p-0.5 w-10 focus:outline-none' type="number" placeholder='0' onChange={(e) => setRollMod(e.target.value)} />
+                            className='hover:text-blue-400 hover:border-blue-400 bg-slate-500 shadow-sm shadow-black hover:bg-black/20 border-2 py-2 focus:outline-none rounded-full'
+                            onClick={() => handleRoll()}>Roll
+                        </button>
+
+                        <div className='flex flex-col justify-center my-3 py-3 shadow-sm shadow-black bg-slate-500 rounded-full'>
+                            <div>bonus:</div>
+                            <input className='opacity-1 bg-transparent w-12 focus:outline-none self-center' type="number" placeholder='0' onChange={(e) => setRollMod(e.target.value)} />
                         </div>
-                        <div className='px-4 py-2 gap-4 flex bg-slate-500 rounded-full'>
+                        <div className='px-4 py-2 flex-col h-full justify-around shadow-sm shadow-black bg-slate-500 rounded-full'>
                             {dice.map((die) => (
-                                <button key={die.name} className='relative focus:outline-none' onClick={() => { setSelectedDice(die.name) }}>
+                                <button key={die.name} className='relative focus:outline-none py-2' onClick={() => { setSelectedDice(die.name) }}>
                                     {die.name}
-                                    {selectedDice === die.name && <div className={`absolute border-4 border-blue-300 shadow-sm shadow-black rounded-full font-bold top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 `}></div>}
+                                    {selectedDice === die.name && <div className={`absolute border-4 border-blue-300 shadow-sm shadow-black rounded-full font-bold top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 `}></div>}
                                 </button>
                             ))}
                         </div>
-                        <div className='absolute bottom-0 left-1/2 -translate-x-1/2 pt-1'>Result: {selectedDice} + {rollMod} = {total}</div>
+                        <div className='w-32 fixed top-0 right-full -translate-x-28 pt-1'>Result: <div className='text-xl'> {selectedDice} + {rollMod} = {total}</div></div>
                     </Popover.Panel>
 
                 </Transition>
 
-                <Popover.Button className="hover:text-blue-400 hover:border-blue-400 shadow-inner shadow-black border-2 bg-gray-600 hover:bg-black/20 focus:outline-none rounded-full ui-open:bg-slate-500 ui-open:shadow-none p-4 my-2 z-20">Dice</Popover.Button>
+                <Popover.Button className="hover:text-blue-400 hover:border-blue-400  ui-open:shadow-black border-2 bg-gray-600 hover:bg-black/20 focus:outline-none rounded-full ui-open:bg-slate-500 ui-open:shadow-inner p-4 my-2 z-20">Dice</Popover.Button>
 
             </Popover>
         </div>
