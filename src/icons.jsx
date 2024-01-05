@@ -18,8 +18,8 @@ export const Star = () => {
     </svg>
 }
 
-export const Bookmark = () => {
-    return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" strokeWidth={0.5} stroke="currentColor" className="w-14 h-14">
+export const Bookmark = ({bookmarked, monsterPage}) => {
+    return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" strokeWidth={0.5} stroke="currentColor" className={` ${bookmarked ? 'fill-slate-300' : 'fill-none '}${monsterPage ? ' w-10 h-10 -translate-y-4 hover:-translate-y-2' : 'w-14 h-14'}`}>
         <path d="M3.75 2a.75.75 0 0 0-.75.75v10.5a.75.75 0 0 0 1.28.53L8 10.06l3.72 3.72a.75.75 0 0 0 1.28-.53V2.75a.75.75 0 0 0-.75-.75h-8.5Z" />
     </svg>
 }
@@ -121,7 +121,7 @@ export const Alert = () => {
 export const Book = () => {
     return (
         <div className="flex-1 p-0 m-1">
-            <svg className="typeIcons fill-current text-cyan-800" viewBox="-2.5 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M11.902 14.114V4.337l1.108 1.108v9.777H2.652A1.664 1.664 0 0 1 .99 13.559V4.9a1.665 1.665 0 0 1 1.662-1.663h.664V7.25l.874-.645.875.645V3.236h5.729v9.77h-7.85a.978.978 0 0 0-.626.111.56.56 0 0 0-.006.88.613.613 0 0 0 .39.117h9.2z"></path></g></svg>
+            <svg className="typeIcons fill-current text-blue-700" viewBox="-2.5 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M11.902 14.114V4.337l1.108 1.108v9.777H2.652A1.664 1.664 0 0 1 .99 13.559V4.9a1.665 1.665 0 0 1 1.662-1.663h.664V7.25l.874-.645.875.645V3.236h5.729v9.77h-7.85a.978.978 0 0 0-.626.111.56.56 0 0 0-.006.88.613.613 0 0 0 .39.117h9.2z"></path></g></svg>
         </div>
     )
 }

@@ -112,7 +112,9 @@ export default function DiceWidget() {
                                 </button>
                             ))}
                         </div>
-                        <div className='w-32 fixed top-0 right-full -translate-x-28 pt-1'>Result: <div className='text-xl'> {selectedDice} + {rollMod} = {total}</div></div>
+                        <div className='w-32 fixed top-0 right-full -translate-x-28 pt-1'>Roll Result: 
+                            {total && <div className='text-xl flex justify-center'> {selectedDice}{<div className='flex'>{rollMod >= 0 && <div>+</div>}{rollMod}</div>} = {total}</div>}
+                        </div>
                     </Popover.Panel>
 
                 </Transition>

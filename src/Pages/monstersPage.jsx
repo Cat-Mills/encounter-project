@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import MonsterRows from '../Elements/MonsterParts/MonsterRows.jsx'
-import { Grid, PlaceholderImage, Rows, SearchIcon } from '../icons.jsx'
+import { Grid, PlaceholderImage, Rows, SearchIcon, Book } from '../icons.jsx'
 
 const Monsters = () => {
 
@@ -12,7 +12,7 @@ const Monsters = () => {
   const [filteredMons, setFilteredMons] = useState({ name: '', type: '' })
   const [isRows, setIsRows] = useState(true)
   const [itemsPerPage, setItemsPerPage] = useState(24)
-
+  const [bookmarkedMonsters, setBookmarkedMonsters] = useState([])
   const [filteredTypes, setFilteredTypes] = useState([])
     
   function getMonsters() {
@@ -72,6 +72,14 @@ const Monsters = () => {
       {/* monster type buttons*/}
       <div className='flex w-full h-15 mt-3 justify-evenly'>
         
+      <input onChange={filterTypes} type='checkbox' id='bookmarked' name='monsterType' className='hidden peer/bookmarked'/>
+        <label
+          htmlFor='bookmarked'
+          className='typeButton hover:ring ring-blue-900 peer-checked/bookmarked:bg-gradient-to-tr from-indigo-900 cursor-pointer select-none'
+        >
+          <Book />
+        </label>
+
         <input onChange={filterTypes} type='checkbox' id='aberration' name='monsterType' className='hidden peer/aberration'/>
         <label
           htmlFor='aberration'
@@ -198,6 +206,8 @@ const Monsters = () => {
         searchText={filteredMons}
         types={filteredTypes}
         isRows={isRows}
+        setBookmarkedMonsters={setBookmarkedMonsters}
+        bookmarkedMonsters={bookmarkedMonsters}
       />}
 
     </div>

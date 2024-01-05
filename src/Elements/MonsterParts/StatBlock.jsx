@@ -1,8 +1,9 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { More, Plus, X, Down, Up, PlaceholderImage } from "../../icons.jsx"
+import { More, Plus, X, Down, Up, PlaceholderImage, Bookmark } from "../../icons.jsx"
 
-export default function StatBlock({ url, showBlock, name, types, monsterIn, indexOfFirstItem, indexOfLastItem, isRows }) {
+export default function StatBlock({ url, showBlock, name, types, monsterIn, indexOfFirstItem, indexOfLastItem, isRows, bookmarkedMonsters, setBookmarkedMonsters }) {
+
     const [monsterStats, setMonsterStats] = useState({})
     const [showMonsterStats, setShowMonsterStats] = useState(false)
     const [profs, setProfs] = useState({})
@@ -11,6 +12,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
     const [encounterKey, setEncounterKey] = useState(undefined)
     const [usersEncounters, setUsersEncounters] = useState([])
     const [monsterImage, setMonsterImage] = useState('')
+    const [bookmarked, setBookmarked] = useState()
 
     async function getStats() {
         let img = ''
@@ -67,8 +69,21 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
             }).catch(err => console.log(err))
     }
     useEffect(() => { getStats(), getEncounterTables() }, [])
-    // console.log(monsterStats.type)
-    //                                                  
+
+    // useEffect(() => {
+    //     const data = window.localStorage.getItem('SAVED_MONSTER');
+    //     if ( data !== null ) setBookmarkedMonsters(JSON.parse(data));
+    // }, []);
+
+    // useEffect(() => {
+    //     if(bookmarked){
+    //         // console.log('saved?', bookmarkedMonsters)
+    //         setBookmarkedMonsters([...bookmarkedMonsters,bookmarked])
+    //     }
+    //     window.localStorage.setItem('SAVED_MONSTER', JSON.stringify(bookmarkedMonsters));
+    // }, [bookmarked]);
+
+    
     let paginationConfirm
 
     if (!types || types.length === 0) {
@@ -78,12 +93,30 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
     } else {
         paginationConfirm = true
     }
+    function toggleSaved(){
+        if(!bookmarkedMonsters.includes(monsterStats.index)){
+            setBookmarkedMonsters([...bookmarkedMonsters,monsterStats.index])
+            setBookmarked(true)
+        } else {
+            setBookmarked(false)
+            setBookmarkedMonsters(monsters => {
+                return monsters.filter(mon => mon !== monsterStats.index)
+            })
+        }
+        console.log(monsterStats.index)
+        console.log(bookmarked)
+        console.log(bookmarkedMonsters)
+    }
 
     return (!types || types.includes(monsterStats.type) || types.length === 0 && paginationConfirm) && (
         <div >
             <div>
                 {name && isRows &&
-                    <div className="border flex justify-between m-2 p-2 px-4 bg-gray-600 ">
+                    <div className="border flex justify-between m-2 p-2 px-4 bg-gray-600 relative">
+                        <button onClick={()=>{toggleSaved()}}
+                        className={` rotate-90 -translate-x-14 absolute overflow-x-hidden`}>
+                            <Bookmark bookmarked={bookmarked} monsterPage={true}/>
+                        </button>
                         {monsterImage ?
                             <div className="flex justify-center h-10 w-10">
                                 <img className="rounded-3xl border border-gray-700" src={monsterImage} alt={monsterImage} />
