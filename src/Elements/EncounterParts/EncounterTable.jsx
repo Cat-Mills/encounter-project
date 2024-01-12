@@ -32,7 +32,7 @@ const EncTable = () => {
     const deleteEncounter = (viewAlert) => {
         axios.delete(`/api/encounters/${viewAlert}`)
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 
                 getEncounterTables()
             })
@@ -40,12 +40,12 @@ const EncTable = () => {
     }
     
     const editEncounter = (encounter) => {
-        console.log(encounter.encounterId)
+        // console.log(encounter.encounterId)
         axios
             .put(`/api/encounters/${encounter.encounterId}`, { encounterId: encounter.encounterId, encounterName: encounterName, campaignId: campaignKey })
             .then(res => {
                 console.log("edits saved")
-                console.log(res.data)
+                // console.log(res.data)
                 setIsEditing('')
                 getEncounterTables()
             })
@@ -57,7 +57,7 @@ const EncTable = () => {
         axios
             .post(`/api/encounters`, { encounterName, campaignId: campaignKey })
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 
                 setShowModal(false)
                 getEncounterTables()
@@ -75,14 +75,14 @@ const EncTable = () => {
 
     const handleCampaignKey = e => {
         e.preventDefault()
-        console.log('hit handleCampaignKey')
+        // console.log('hit handleCampaignKey')
         setCampaignKey(e.target.value)
-        console.log(campaignKey)
+        // console.log(campaignKey)
     }
 
     const startEncounter = (encounter) => {
-        console.log("hit start")
-        console.log(encounter.encounterName)
+        // console.log("hit start")
+        // console.log(encounter.encounterName)
         navigate(`/active/${encounter.encounterId}`)
     }
     useEffect(() => { getCampaignTables() }, [])

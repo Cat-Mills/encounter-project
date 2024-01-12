@@ -21,6 +21,13 @@ svg:hover {
     filter: drop-shadow(3px 3px 3px rgb(0 0 0 / 0.4));
     
 }
+.arrow-right {
+    width: 0; 
+    height: 0; 
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 20px solid whitesmoke;
+    }
 .typeButton:hover {
     box-shadow: inset 0 0 10px rgb(0 0 0 / 0.4);
     filter: contrast(1.3)

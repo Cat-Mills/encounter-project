@@ -2,10 +2,10 @@ import React from "react"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import StatBlock from "./StatBlock"
-import { ChevronLeft, ChevronRight} from "../../icons"
+import { ChevronLeft, ChevronRight, Bookmark} from "../../icons"
 
 
-export default function MonsterRows({monsterList, itemsPerPage, searchText, types, isRows}) {
+export default function MonsterRows({monsterList, itemsPerPage, searchText, types, isRows, bookmarkedMonsters, setBookmarkedMonsters}) {
     const [currentPage, setCurrentPage] = useState(1)
     const [counter, setCounter] = useState(0)
     
@@ -34,7 +34,7 @@ export default function MonsterRows({monsterList, itemsPerPage, searchText, type
     useEffect(()=>setCurrentPage(1),[searchText,types])
     // console.log(types)
 return(
-<div className=" max-h-[65vh] overflow-scroll overflow-x-hidden">
+<div className=" max-h-[65vh] overflow-scroll overflow-x-hidden px-5 pl-14">
     <div className={`${!isRows ? 'grid grid-cols-3 xl:grid-cols-4 gap-4' : 'null'}`}>
     {monsterList.map((monster, monsterIn) => {
             return <StatBlock 
@@ -49,6 +49,8 @@ return(
                 counter={counter} 
                 setCounter={setCounter}
                 isRows={isRows}
+                bookmarkedMonsters={bookmarkedMonsters}
+                setBookmarkedMonsters={setBookmarkedMonsters}
             />
         })}
     </div>
