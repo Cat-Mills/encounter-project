@@ -9,6 +9,8 @@ async function connectToDB(dbURI) {
             timestamps: false, // don't want created_at or updated_at columns
             underscored: true, // use snake_case rather than camelCase column names
         },
+
+        //!This is test code. If app is suddenly broken, delete this
         dialectOptions: {
             ssl: {
                 require: false,
@@ -18,6 +20,8 @@ async function connectToDB(dbURI) {
             native: true,
             passcode: true,
         },
+        //! End of test code
+
     });
 
     try {
