@@ -9,6 +9,15 @@ async function connectToDB(dbURI) {
             timestamps: false, // don't want created_at or updated_at columns
             underscored: true, // use snake_case rather than camelCase column names
         },
+        dialectOptions: {
+            ssl: {
+                require: false,
+                rejectUnauthorized: false,
+            },
+            // Explicitly set password type
+            native: true,
+            passcode: true,
+        },
     });
 
     try {
