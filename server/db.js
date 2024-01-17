@@ -11,18 +11,9 @@ async function connectToDB(dbURI) {
         },
 
         //!This is test code. If app is suddenly broken, delete this
-        username: 'ubuntu',
-        password: 'test',
-        dialect: 'postgres',
-        dialectOptions: {
-            ssl: {
-                require: false,
-                rejectUnauthorized: false,
-            },
-            // Explicitly set password type
-            native: true,
-            passcode: true,
-        },
+        
+        password: ' ',
+        
         //! End of test code
 
     });
