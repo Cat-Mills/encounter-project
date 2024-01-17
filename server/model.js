@@ -93,16 +93,16 @@ Player.init(
             type: DataTypes.STRING(2000)
         },
         playerLv: {
-            type: DataTypes.INTEGER(2)
+            type: DataTypes.INTEGER
         },
         playerHP: {
             type: DataTypes.INTEGER
         },
         playerAC: {
-            type: DataTypes.INTEGER(2)
+            type: DataTypes.INTEGER
         },
         playerInit: {
-            type: DataTypes.INTEGER(2)
+            type: DataTypes.INTEGER
         }
     },
     {
