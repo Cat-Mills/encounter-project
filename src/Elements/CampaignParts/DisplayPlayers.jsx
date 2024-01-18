@@ -71,7 +71,7 @@ const DisplayPlayers = ({player, campaign, getPlayerRows,setName,setLv,setHP,set
                     <div className="w-1/6">Init</div>
                     
                 </div> */}
-                <form className="font-bold capitalize w-full flex flex-col sm:flex-row p-2" onSubmit={e => {e.preventDefault();editPlayer(player)}}>
+                <form className="font-bold capitalize w-full flex flex-col sm:flex-row justify-between p-2" onSubmit={e => {e.preventDefault();editPlayer(player)}}>
                     <div className="flex">
                         <div className=" mx-0.5 text-center text-gray-400 flex flex-col">Name
                             <input type="text" className="text-center w-full" defaultValue={Name} onChange={e => setName(e.target.value)}/>
