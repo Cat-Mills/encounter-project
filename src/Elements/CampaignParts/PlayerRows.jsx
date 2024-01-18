@@ -18,7 +18,7 @@ export default function PlayerRows({ campaign, getCampaignTables }) {
     const [playerInit, setPlayerInit] = useState('')
     const [showPlayerForm, setShowPlayerForm] = useState(false)
     const [viewAlert, setViewAlert] = useState('')
-
+console.log(playerRows.length)
     const getPlayerRows = () => {
         axios.get(`/api/players/${campaign.campaignId}`)
             .then(res => setPlayerRows(res.data))
@@ -61,17 +61,19 @@ export default function PlayerRows({ campaign, getCampaignTables }) {
 
     return (
         <div>
-            <div className="border-2 border-spacing-1 flex justify-end m-2 p-2 py-6 bg-gray-600 relative align-middle">
-                <h2 className="font-bold capitalize text-2xl absolute left-4 self-center">{campaign.campaignName}</h2>
-                <p className="flex self-center mr-6"> Players: {playerRows.length} </p>
-                <button title="Delete Campaign" className="mx-4 hover:text-blue-400" onClick={() => { setViewAlert(campaign.campaignId) }}><Trash /></button>
-                {!showPlayers && <button title="Show Players" className="hover:text-blue-400 mr-2" onClick={() => { setShowPlayers(true) }}><Down /> </button>}
-                {showPlayers && <button title="Hide Players" className="hover:text-blue-400 mr-2" onClick={() => setShowPlayers(false)}><Up /> </button>}
-                {viewAlert === campaign.campaignId && <DeleteAlert viewAlert={viewAlert} setViewAlert={setViewAlert} deleteFunc={deleteCampaign}
-                    itemName={campaign.campaignName} />}
+            <div className="border-2 border-spacing-1 flex flex-col sm:flex-row justify-end my-2 mb-0 p-2 py-6 bg-gray-600 relative align-middle">
+                <h2 className="font-bold capitalize text-xl flex sm:text-2xl left-4 mr-auto">{campaign.campaignName}</h2>
+                <div className="flex justify-end">
+                    <div className="flex self-center mr-auto font-exeter"> Players: {playerRows.length} </div>
+                    <button title="Delete Campaign" className="mx:2 sm:mx-4 hover:text-blue-400 p-1" onClick={() => { setViewAlert(campaign.campaignId) }}><Trash /></button>
+                    {!showPlayers && <button title="Show Players" className="hover:text-blue-400 sm:mr-2" onClick={() => { setShowPlayers(true) }}><Down /> </button>}
+                    {showPlayers && <button title="Hide Players" className="hover:text-blue-400 mr-2" onClick={() => setShowPlayers(false)}><Up /> </button>}
+                    {viewAlert === campaign.campaignId && <DeleteAlert viewAlert={viewAlert} setViewAlert={setViewAlert} deleteFunc={deleteCampaign}
+                        itemName={campaign.campaignName} />}
+                </div>
             </div>
             {showPlayers && playerRows[0] &&
-                <div className=" border-solid border-2 mx-2">
+                <div className=" border-2 border-t-0 mx-2">
                     {playerRows.map(player =>
                     (
                         <div className=" bg-gray-600 exeter" key={player.playerId}>
@@ -101,8 +103,8 @@ export default function PlayerRows({ campaign, getCampaignTables }) {
             {showPlayers && !showPlayerForm &&
                 <div className="relative mb-6">
                     <button className="hover:text-blue-400  mb-2 " onClick={() => setShowPlayerForm(true)}>
-                            <PlusAlt />
-                        <div title="Add a new player" className="absolute z-10 top-0 -mt-[8px] left-1/2 transform -translate-x-1/2">
+                            <div className={`${!playerRows.length && 'absolute bottom-4 left-1/2 transform -translate-x-1/2'}`}><PlusAlt /></div>
+                        <div title="Add a new player" className={`${!playerRows.length ? '-mt-[16px]' : '-mt-[8px]'} absolute z-10 top-0 left-1/2 transform -translate-x-1/2`}>
                             <Bookmark />
                         </div>
                     </button>

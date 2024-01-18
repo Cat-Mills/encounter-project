@@ -37,8 +37,8 @@ const Landing = () => {
 
 
     return (
-        <div className="text-2xl flex flex-col border border-solid bg-gray-700 m-10 h-[50vh] align-middle items-center">
-            <div className="absolute top-20 font-vinque text-4xl text-shadow shadow-black">Encounter Emporium</div>
+        <div className="text-2xl flex flex-col border border-solid bg-gray-700 m-6 sm:m-10 h-[50vh] align-middle items-center">
+            <div className="absolute top-10 font-vinque text-4xl text-shadow shadow-black">Encounter Emporium</div>
         { register ? 
             <Register 
                 setPassword={setPassword}
@@ -56,7 +56,7 @@ const Landing = () => {
                 handleFormSubmit={handleFormSubmit}
             />
         }
-        <button className=" hover:text-blue-400 text-xl w-fit mb-5" onClick={()=> setRegister(!register)}>Need to {register ? 'login?' : 'make an account?'} </button>
+        <button className=" hover:text-blue-400 text-base sm:text-xl w-fit mb-5" onClick={()=> setRegister(!register)}>Need to {register ? 'login?' : 'make an account?'} </button>
         </div>
     )
 }

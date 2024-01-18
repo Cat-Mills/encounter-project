@@ -26,9 +26,9 @@ const Header = () => {
     }, [])
 
     return (
-        <>
+        <div>
             {userId ? (
-                <div className=" flex justify-evenly pb-6 pt-6 mb-10 absolute top-0 w-full left-0 shadow-lg bg-[#3d404e] bg-opacity-70 z-50 vinque text-xl">
+                <div className=" flex justify-evenly pb-6 pt-6 mb-10 absolute top-0 w-full left-0 shadow-lg bg-[#3d404e] bg-opacity-70 z-50 vinque text-base sm:text-xl">
                     <NavLink className="navLink" to='/monsters' onClick={() => setCurrPage('Mons')}>Monsters</NavLink>
                     <NavLink className="navLink" to='/encounters' onClick={() => setCurrPage('Enc')}>Encounters</NavLink>
                     <NavLink className="navLink" to='/campaigns' onClick={() => setCurrPage('Cam')}>Campaigns</NavLink>
@@ -36,7 +36,7 @@ const Header = () => {
                     <NavLink className="navLink absolute top-24 right-4" to='/help' onClick={() => setCurrPage('Help')}><HelpIcon/></NavLink>
                 </div>
             ) : <div></div>}
-        </>
+        </div>
     )
 }
 

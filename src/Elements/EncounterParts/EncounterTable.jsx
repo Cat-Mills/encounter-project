@@ -91,24 +91,26 @@ const EncTable = () => {
     return (
         <div className="flex-col">
             {showModal ? (
-                <div>
-                    <form className="exeter text-xl" onSubmit={e => handleAddEncounter(e)}>
+                    <form className="exeter text-base sm:text-xl" onSubmit={e => handleAddEncounter(e)}>
                         <h3>Create a new Encounter</h3>
-                        <input className="py-2" type="text" placeholder="New Encounter Name" value={encounterName} onChange={e => setEncounterName(e.target.value)} />
-                        
-                        <div >
+                        <input className="py-1 sm:py-2 m-2 border border-solid placeholder:text-center " type="text" placeholder="New Encounter Name" value={encounterName} onChange={e => setEncounterName(e.target.value)} />
+
+                        <div className=" inline-flex text-base sm:text-xl justify-center p-2">
+                            <div className="w-min">Campaign: </div>
                             <select value={campaignKey} onChange={e => handleCampaignKey(e)} placeholder="Campaign">
+                                
                                 {usersCampaigns.map(campaign => (
                                     <option key={campaign.campaignId} value={campaign.campaignId}>{campaign.campaignName}</option>
                                 ))}
                             </select>
-
-                            <button className="ml-2">Submit</button>
-
+                        </div>
+                        <div className="flex justify-center gap-x-6">
+                            <button>Submit</button>
+                            <button onClick={()=> setShowModal(false)}>Cancel</button>
                         </div>
                     </form>
-                    <button onClick={()=> setShowModal(false)}>Cancel</button>
-                </div>)
+                    )
+                    
                 : (<button className="hover:border-blue-400 hover:text-blue-400 border border-solid border-grey-500 p-2 mb-2" onClick={() => setShowModal(true)}>Create New Encounter</button>)}
             <div className="flex-col" >
                 {encounterList.map((encounter) => (

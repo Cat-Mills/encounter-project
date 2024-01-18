@@ -38,46 +38,62 @@ const DisplayPlayers = ({player, campaign, getPlayerRows,setName,setLv,setHP,set
     
 
     return(
-        <div className="flex flex-col ">
+        <div className="flex flex-col text-base sm:text-xl border border-dashed border-x-0">
             {isEditing !== player.playerId ?
-            <div className="flex p-1 w-full items-center">
-                <div className="p-2 w-1/6"> {player.playerName} </div>
-                <div className="p-2 w-1/6"> Lv: {player.playerLv} </div>
-                <div className="p-2 w-1/6"> HP: {player.playerHP} </div>
-                <div className="p-2 w-1/6"> AC: {player.playerAC} </div>
-                <div className="p-2 w-1/6"> +{player.playerInit} to initiative </div>
-                <div className="p-2 w-1/6">
-                    <button title="Edit Player" className="hover:text-blue-400 mr-6" onClick={() => {setIsEditing(player.playerId);
-                        setName(player.playerName);
-                        setLv(player.playerLv);
-                        setHP(player.playerHP);
-                        setAC(player.playerAC);
-                        setInit(player.playerInit)
+            <div className="flex flex-col p-1 w-full">
+                <div className="flex w-full justify-between sm:p-2 my-2 sm:my-0"> {player.playerName} 
+                
+                    <div className="sm:p-2 sm:w-1/6 flex justify-end gap-4">
+                        <button title="Edit Player" className="hover:text-blue-400 " onClick={() => {setIsEditing(player.playerId);
+                            setName(player.playerName);
+                            setLv(player.playerLv);
+                            setHP(player.playerHP);
+                            setAC(player.playerAC);
+                            setInit(player.playerInit)
                         }}><Edit/></button>
-                    <button title="Delete Player" className="hover:text-blue-400" onClick={() => {setViewAlert(player.playerId);console.log(viewAlert)}}><Trash/> </button>
+                        <button title="Delete Player" className="hover:text-blue-400" onClick={() => {setViewAlert(player.playerId);console.log(viewAlert)}}><Trash/> </button>
+                    </div>
+                </div>
+                <div className="flex justify-between text-sm sm:text-base">
+                    <div className="flex sm:p-2 sm:w-1/6"> Lv: {player.playerLv} </div>
+                    <div className="flex sm:p-2 sm:w-1/6"> HP: {player.playerHP} </div>
+                    <div className="flex sm:p-2 sm:w-1/6"> AC: {player.playerAC} </div>
+                    <div className="flex sm:p-2 sm:w-1/6"> +{player.playerInit} to initiative </div>
                 </div>
             </div>
             :
-            <div className="flex flex-col w-full">
-                <div className="flex items-center text-gray-400 mt-3 -mb-3 ">
-                    <div className="w-1/6">Name</div>
+            <div className="flex flex-col w-full text-sm sm:text-base">
+                {/* <div className="flex justify-center text-gray-400 mt-3 -mb-3 gap-1 ">
+                    <div className="w-1/6 ">Name</div>
                     <div className="w-1/6">Level</div>
-                    <div className="w-1/6">Hit Points</div>
-                    <div className="w-1/6">Armor Class</div>
-                    <div className="w-1/6">Initiative</div>
-                    <div className="w-1/6"></div>
-                </div>
-                <form className="font-bold capitalize w-full flex" onSubmit={e => {e.preventDefault();editPlayer(player)}}>
-                    <input type="text" className="w-1/6 p-1 mx-0.5 my-3 text-center" defaultValue={Name} onChange={e => setName(e.target.value)}/>
+                    <div className="w-1/6">HP</div>
+                    <div className="w-1/6">AC</div>
+                    <div className="w-1/6">Init</div>
+                    
+                </div> */}
+                <form className="font-bold capitalize w-full flex flex-col sm:flex-row p-2" onSubmit={e => {e.preventDefault();editPlayer(player)}}>
+                    <div className="flex">
+                        <div className=" mx-0.5 text-center text-gray-400 flex flex-col">Name
+                            <input type="text" className="text-center w-full" defaultValue={Name} onChange={e => setName(e.target.value)}/>
+                        </div>
 
-                    <input type="text" className="w-1/6 p-1 mx-0.5 my-3 text-center" defaultValue={Lv} onChange={e => setLv(e.target.value)}/>
+                        <div className=" mx-0.5 text-center text-gray-400 flex flex-col">Level
+                            <input type="text" className="text-center w-full" defaultValue={Lv} onChange={e => setLv(e.target.value)}/>
+                        </div>
 
-                    <input type="text" className="w-1/6 p-1 mx-0.5 my-3 text-center" defaultValue={HP} onChange={e => setHP(e.target.value)}/>
+                        <div className=" mx-0.5 text-center text-gray-400 flex flex-col">HP
+                            <input type="text" className="text-center w-full" defaultValue={HP} onChange={e => setHP(e.target.value)}/>
+                        </div>
 
-                    <input type="text" className="w-1/6 p-1 mx-0.5 my-3 text-center" defaultValue={AC} onChange={e => setAC(e.target.value)}/>
+                        <div className=" mx-0.5 text-center text-gray-400 flex flex-col">AC
+                            <input type="text" className="text-center w-full" defaultValue={AC} onChange={e => setAC(e.target.value)}/>
+                        </div>
 
-                    <input type="text" className="w-1/6 p-1 mx-0.5 my-3 text-center" defaultValue={Init} onChange={e => setInit(e.target.value)}/>
-                    <div className="w-1/6 flex text-center">
+                        <div className=" mx-0.5 text-center text-gray-400 flex flex-col">Init
+                            <input type="text" className="text-center w-full" defaultValue={Init} onChange={e => setInit(e.target.value)}/>
+                        </div>
+                    </div>
+                    <div className=" flex text-center justify-center">
                         <button className="m-3" type="submit" ><Check/></button>
                         <button className="m-1" onClick={() => setIsEditing("")}>Cancel</button>
                     </div>
