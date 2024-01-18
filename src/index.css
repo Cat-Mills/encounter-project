@@ -14,8 +14,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-    min-width: 500px;
-    @apply selection:bg-slate-800 selection:bg-opacity-50;
+    /* min-width: 500px; */
+    @apply selection:bg-slate-800 selection:bg-opacity-50 sm:min-w-[600px];
 }
 svg:hover {
     filter: drop-shadow(3px 3px 3px rgb(0 0 0 / 0.4));

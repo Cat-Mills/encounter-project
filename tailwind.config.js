@@ -8,6 +8,7 @@ export default {
   ],
   theme: {
     fontSize: {
+      xs: '0.80rem',
       sm: '0.88rem',  // Increased by 10%
         base: '1.1rem', // Increased by 10%
         lg: '1.25rem',  // Increased by 10%

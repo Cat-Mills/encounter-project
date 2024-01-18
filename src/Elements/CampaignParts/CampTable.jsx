@@ -25,7 +25,14 @@ const CampTable = () => {
 
 
     return (
-        <div className="min-w-full text-xl ">
+        <div className="min-w-full text-base sm:text-xl ">
+            {/* <NewCampButton/> */}
+            {showModal ? (<NewCampForm 
+            setCampaignName={setCampaignName}
+            campaignName={campaignName}
+            setShowModal={setShowModal}
+            getCampaignTables={getCampaignTables}
+            />) : (<button className="hover:border-blue-400 hover:text-blue-400 border border-solid border-grey-500 p-2 mb-2" onClick={() => setShowModal(true)}>Create New Campaign</button>)}
             <div>
                 <div>
                     {campaignList.map(campaign => (
@@ -35,13 +42,7 @@ const CampTable = () => {
                     ))}
                 </div>
             </div>
-            {/* <NewCampButton/> */}
-            {showModal ? (<NewCampForm 
-            setCampaignName={setCampaignName}
-            campaignName={campaignName}
-            setShowModal={setShowModal}
-            getCampaignTables={getCampaignTables}
-            />) : (<button className="hover:text-blue-400 mt-4" onClick={() => setShowModal(true)}>Create New Campaign</button>)}
+            
         </div>
     )
 

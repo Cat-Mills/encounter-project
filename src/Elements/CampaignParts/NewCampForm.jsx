@@ -12,7 +12,7 @@ export default function NewCampForm({campaignName, setCampaignName, setShowModal
     //axios func(like in landing page)
     const handleFormSubmit = e => {
         e.preventDefault()
-
+        
         axios
         .post(`/api/campaigns`,{campaignName} )
         .then(res => {
@@ -25,10 +25,13 @@ export default function NewCampForm({campaignName, setCampaignName, setShowModal
     }
 
     return (
-        <form onSubmit={e => handleFormSubmit(e)}>
-            <h3 className="mb-5">Create a New Campaign</h3>
-            <input type="text" placeholder="Campaign Name" value={campaignName} onChange={e => setCampaignName(e.target.value)}/>
-            <button>Submit</button>
+        <form className="exeter text-base sm:text-xl" onSubmit={e => handleFormSubmit(e)}>
+            <h3 className="">Name Your New Campaign</h3>
+            <input className="placeholder:text-center border m-2" type="text" placeholder="Campaign Name" value={campaignName} onChange={e => setCampaignName(e.target.value)}/>
+            <div className="flex justify-center gap-x-6">
+                <button>Submit</button>
+                <button onClick={()=> setShowModal(false)}>Cancel</button>
+            </div>
         </form>
     )
 }
