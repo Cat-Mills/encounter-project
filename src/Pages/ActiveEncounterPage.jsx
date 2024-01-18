@@ -158,10 +158,10 @@ function ActiveEncounters() {
 
     return (activeEncounter &&
         <>
-            <div className="border-2 p-5 bg-gray-700 mt-32 mb-10">
+            <div className="border-2 p-1 sm:p-5 bg-gray-700 mt-32 sm:mb-10">
                 {showStart && <div>
 
-                    <div className="vinque text-xl">
+                    <div className="vinque sm:text-xl">
                         Pulling monsters from {activeEncounter.encounterName}...
                     </div>
                 </div>}
@@ -169,11 +169,11 @@ function ActiveEncounters() {
                     <>
                         <div className="flex w-full">
 
-                            <div className="flex w-1/3 items-center">
+                            <div className="flex mt-3 sm:mt-0 sm:w-1/3 items-center text-sm sm:text-base">
 
                                 {/* Next Button */}
                                 <div className="">
-                                    <button className="hover:text-blue-400 border-2 hover:border-blue-400 hover:bg-black/20 rounded-md flex justify-center items-center mx-4 px-1 gap-1" onClick={() => { nextTurn() }}>
+                                    <button className="hover:text-blue-400 border sm:border-2 hover:border-blue-400 hover:bg-black/20 rounded-sm flex justify-center items-center mx-4 px-1 gap-1" onClick={() => { nextTurn() }}>
                                         <div>next turn</div>
                                         <div><ChevronRight /></div>
                                     </button>
@@ -186,7 +186,7 @@ function ActiveEncounters() {
                             </div>
 
                             {/* Dice Widget */}
-                            <div className="w-2/3 self-end"><DiceWidget/></div>
+                            <div className="w-2/3 self-end hidden sm:flex"><DiceWidget/></div>
 
                         </div>
                         <div className="flex my-5">
@@ -210,7 +210,7 @@ function ActiveEncounters() {
                         </div></>}
             </div>
 
-            {showStart && <button className="hover:text-blue-400 exeter border-2 hover:border-blue-400 hover:bg-black/20 rounded-md p-2" onClick={() => { initiativeRoll(), getChallengeRating(); setShowStart(false); }}>Roll initiative!</button>}
+            {showStart && <button className="hover:text-blue-400 exeter border-2 hover:border-blue-400 hover:bg-black/20 rounded-md mt-4 p-2" onClick={() => { initiativeRoll(), getChallengeRating(); setShowStart(false); }}>Roll initiative!</button>}
 
         </>
     );

@@ -34,7 +34,7 @@ export default function MonsterRows({monsterList, itemsPerPage, searchText, type
     useEffect(()=>setCurrentPage(1),[searchText,types])
     // console.log(types)
 return(
-<div className=" max-h-[65vh] overflow-scroll overflow-x-hidden px-5 pl-14">
+<div className=" max-h-[65vh] overflow-scroll overflow-x-hidden pl-5 sm:px-5 md:pl-14">
     <div className={`${!isRows ? 'grid grid-cols-3 xl:grid-cols-4 gap-4' : 'null'}`}>
     {monsterList.map((monster, monsterIn) => {
             return <StatBlock 

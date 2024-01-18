@@ -65,7 +65,7 @@ console.log(playerRows.length)
                 <h2 className="font-bold capitalize text-xl flex sm:text-2xl left-4 mr-auto">{campaign.campaignName}</h2>
                 <div className="flex justify-end">
                     <div className="flex self-center mr-auto font-exeter"> Players: {playerRows.length} </div>
-                    <button title="Delete Campaign" className="mx:2 sm:mx-4 hover:text-blue-400 p-1" onClick={() => { setViewAlert(campaign.campaignId) }}><Trash /></button>
+                    <button title="Delete Campaign" className="mx:2 sm:mx-4 hover:text-red-400 p-1" onClick={() => { setViewAlert(campaign.campaignId) }}><Trash /></button>
                     {!showPlayers && <button title="Show Players" className="hover:text-blue-400 sm:mr-2" onClick={() => { setShowPlayers(true) }}><Down /> </button>}
                     {showPlayers && <button title="Hide Players" className="hover:text-blue-400 mr-2" onClick={() => setShowPlayers(false)}><Up /> </button>}
                     {viewAlert === campaign.campaignId && <DeleteAlert viewAlert={viewAlert} setViewAlert={setViewAlert} deleteFunc={deleteCampaign}
@@ -112,22 +112,23 @@ console.log(playerRows.length)
                 </div>
             }
             {showPlayerForm &&
-                <div className="border-2 border-spacing-1 flex-col mx-2 mb-4 p-1 exeter">
-                    <form id="newPlayer" className="w-full flex" onSubmit={e => { addPlayer(e); setShowPlayerForm(false) }}>
+                <div className="border-2 border-spacing-1 border-t-0 flex-col mx-2 mb-4 exeter ">
+                    <form id="newPlayer" className="w-full flex flex-col lg:flex-row lg:justify-between p-1 text-sm sm:text-base lg:text-lg" onSubmit={e => { addPlayer(e); setShowPlayerForm(false) }}>
+                        <div className="flex justify-evenly text-center">
+                            <input className="w-1/4 md:w-1/6 md:text-center" type="text" placeholder="Name" value={playerName} onChange={e => setPlayerName(e.target.value)} />
 
-                        <input className=" w-1/6 py-1 my-3 text-center" type="text" placeholder="Name" value={playerName} onChange={e => setPlayerName(e.target.value)} />
+                            <input className="w-1/6 md:text-center" type="text" placeholder="Level" value={playerLv} onChange={e => setPlayerLv(e.target.value)} />
 
-                        <input className=" w-1/6 py-1 my-3 text-center" type="text" placeholder="Level" value={playerLv} onChange={e => setPlayerLv(e.target.value)} />
+                            <input className="w-1/6 md:text-center" type="text" placeholder="HP" value={playerHP} onChange={e => setPlayerHP(e.target.value)} />
 
-                        <input className=" w-1/6 py-1 my-3 text-center" type="text" placeholder="HP" value={playerHP} onChange={e => setPlayerHP(e.target.value)} />
+                            <input className="w-1/6 md:text-center" type="text" placeholder="AC" value={playerAC} onChange={e => setPlayerAC(e.target.value)} />
 
-                        <input className=" w-1/6 py-1 my-3 text-center" type="text" placeholder="AC" value={playerAC} onChange={e => setPlayerAC(e.target.value)} />
+                            <input className="w-1/4 md:w-1/6 lg:text-center" type="text" placeholder="Init Bonus" value={playerInit} onChange={e => setPlayerInit(e.target.value)} />
+                        </div>
 
-                        <input className=" w-1/6 py-1 my-3 text-center" type="text" placeholder="Initiative Bonus" value={playerInit} onChange={e => setPlayerInit(e.target.value)} />
-
-                        <div className="flex w-1/6 px-4">
-                            <button className="m-2" type="submit" ><Check /></button>
-                            <button className="m-2" onClick={() => setShowPlayerForm(false)}>Cancel</button>
+                        <div className="flex lg:w-1/6 px-4 self-center w-full justify-around">
+                            <button className="m-2 hover:text-green-400" type="submit" ><Check /></button>
+                            <button className="m-2 hover:text-red-400" onClick={() => setShowPlayerForm(false)}>Cancel</button>
                         </div>
                     </form>
                 </div>

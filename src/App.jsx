@@ -14,10 +14,10 @@ import HelpPage from './Pages/HelpPage.jsx'
 
 
 function App() {
-
+  const userId = useSelector(state => state.userId)
   return (
     <div className='petrock'>
-      <Header/>
+      {window.location.pathname !== "/" ? <Header /> : null}
       <Routes>
         <Route path='/' index element={ <Landing />} />
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Trash, More, ChevronRight, Down, Up } from "../../icons.jsx";
+import { Trash, Show, Hide } from "../../icons.jsx";
 import StatBlock from "../MonsterParts/StatBlock.jsx";
 
 export default function MonsterCards({ monsterUrl,monsterId, getMonsters, activeEncounter}) {
@@ -42,19 +42,19 @@ export default function MonsterCards({ monsterUrl,monsterId, getMonsters, active
     useEffect(() => { getStats() }, [])
     // console.log(showStatBlock)
     return(
-        <><div className="flex justify-center w-full ">
+        <><div className="flex justify-center">
 
             {!activeEncounter &&
                 <button
                     onClick={() => { setShowModal(current => !current); } }
-                    className={`${showStatBlock===true ? ' hidden' : 'font-medium no-underline' } mr-3 my-4 hover:ring-gray-500 hover:text-blue-400 hover:ring-2 focus:ring-2 focus:ring-gray-300 focus: outline-none font-medium px-3 py-1  text-center flex items-center justify-between vinque text-lg`}
+                    className={`${showStatBlock===true ? ' hidden' : 'font-medium no-underline' } my-4 hover:ring-gray-500 hover:text-blue-400 hover:ring-2 focus:ring-2 focus:ring-gray-300 focus:outline-none font-medium px-1 md:px-3 py-1  text-center flex items-center justify-between font-vinque text-base sm:text-lg`}
                     type="button">{monsterStats.name}</button>}
 
             {showModal &&
-                <div className="flex ">
-                    <button className="mr-2 hover:text-blue-400" onClick={() => { setShowStatBlock(current => !current); } }>{showStatBlock ? <p>Hide</p> : <p>Details</p>}</button>
+                <div className="flex">
+                    <button className=" self-center sm:mr-3 px-2 hover:text-blue-400 text-base sm:text-lg " onClick={() => { setShowStatBlock(current => !current); } }>{showStatBlock ? <Hide/> : <Show/>}</button>
 
-                    {!showStatBlock && <button className=" ml-2 hover:text-blue-400" onClick={() => deleteMonster()}><Trash /> </button>}
+                    {!showStatBlock && <button className=" hover:text-red-400" onClick={() => deleteMonster()}><Trash /> </button>}
                 </div>}
 
             
