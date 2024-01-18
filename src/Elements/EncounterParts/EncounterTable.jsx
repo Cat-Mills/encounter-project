@@ -28,17 +28,17 @@ const EncTable = () => {
     }
     useEffect(() => { getEncounterTables() }, [])
 
-    
+
     const deleteEncounter = (viewAlert) => {
         axios.delete(`/api/encounters/${viewAlert}`)
             .then(res => {
                 // console.log(res)
-                
+
                 getEncounterTables()
             })
             .catch(err => console.log(err))
     }
-    
+
     const editEncounter = (encounter) => {
         // console.log(encounter.encounterId)
         axios
@@ -58,7 +58,7 @@ const EncTable = () => {
             .post(`/api/encounters`, { encounterName, campaignId: campaignKey })
             .then(res => {
                 // console.log(res.data)
-                
+
                 setShowModal(false)
                 getEncounterTables()
             })
@@ -90,86 +90,101 @@ const EncTable = () => {
 
     return (
         <div className="flex-col">
+            {/* New Encounter Form */}
             {showModal ? (
-                    <form className="exeter text-base sm:text-xl" onSubmit={e => handleAddEncounter(e)}>
-                        <h3>Create a new Encounter</h3>
-                        <input className="py-1 sm:py-2 m-2 border border-solid placeholder:text-center " type="text" placeholder="New Encounter Name" value={encounterName} onChange={e => setEncounterName(e.target.value)} />
+                <form className="exeter text-base sm:text-xl" onSubmit={e => handleAddEncounter(e)}>
+                    <h3>Create a new Encounter</h3>
+                    <input className="py-1 sm:py-2 m-2 border border-solid placeholder:text-center " type="text" placeholder="New Encounter Name" value={encounterName} onChange={e => setEncounterName(e.target.value)} />
 
-                        <div className=" inline-flex text-base sm:text-xl justify-center p-2">
-                            <div className="w-min">Campaign: </div>
-                            <select value={campaignKey} onChange={e => handleCampaignKey(e)} placeholder="Campaign">
-                                
-                                {usersCampaigns.map(campaign => (
-                                    <option key={campaign.campaignId} value={campaign.campaignId}>{campaign.campaignName}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="flex justify-center gap-x-6">
-                            <button>Submit</button>
-                            <button onClick={()=> setShowModal(false)}>Cancel</button>
-                        </div>
-                    </form>
-                    )
-                    
+                    <div className=" inline-flex text-base sm:text-xl justify-center p-2">
+                        <div className="w-min">Campaign: </div>
+                        <select value={campaignKey} onChange={e => handleCampaignKey(e)} placeholder="Campaign">
+
+                            {usersCampaigns.map(campaign => (
+                                <option key={campaign.campaignId} value={campaign.campaignId}>{campaign.campaignName}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="flex justify-center gap-x-6">
+                        <button>Submit</button>
+                        <button onClick={() => setShowModal(false)}>Cancel</button>
+                    </div>
+                </form>
+            )
+
                 : (<button className="hover:border-blue-400 hover:text-blue-400 border border-solid border-grey-500 p-2 mb-2" onClick={() => setShowModal(true)}>Create New Encounter</button>)}
+
+            {/* Encounter List */}
             <div className="flex-col" >
                 {encounterList.map((encounter) => (
-                    <div key={encounter.encounterId} className="border border-spacing-1 flex justify-between items-center m-2 p-2 bg-gray-600 relative "  >
-                        {isEditing !== encounter.encounterId && <div className=" w-28 text-start self-start z-30 p-2">
-                            <h2 className="font-bold capitalize text-2xl leading-tight ">{encounter.encounterName}</h2>
+                    <div key={encounter.encounterId} className="border-2 flex justify-center my-2 sm:m-2 p-2 bg-gray-600 h-full relative"  >
+                        <div className="flex flex-col h-auto justify-between w-full md:w-1/4">
 
-                            {encounter.enccamps.length > 0 ?
-                                (<p>{encounter.enccamps.map(encCampObj => (
-                                    <span className="exeter text-base text-gray-400" key={encCampObj.campaignId}> {encCampObj.campaign.campaignName}</span>
-                                ))}</p>) : (<p></p>)
-                            }
-                        </div>}
-                        {isEditing === encounter.encounterId &&
-                            <div className="w-28 text-start left-2">
-                                <form className="font-bold capitalize text-lg w-20" onSubmit={e => { e.preventDefault(); editEncounter(encounter) }}>
-                                    <input className=" bg-gray-700" type="text" placeholder="Encounter Name" value={encounterName} onChange={e => setEncounterName(e.target.value)} />
-                                    <div >
-                                        <select className=" bg-transparent" value={campaignKey} onChange={e => handleCampaignKey(e)} placeholder="Campaign">
-                                            {usersCampaigns.map(campaign => (
-                                                <option className=" bg-gray-700" key={campaign.campaignId} value={campaign.campaignId}>{campaign.campaignName}</option>
-                                            ))}
-                                        </select>
+                            <div className="flex flex-col">
+                                {isEditing !== encounter.encounterId &&
+                                    <div className=" text-start self-start z-30 p-2">
+                                        <h2 className="font-bold capitalize text:lg sm:text-2xl">{encounter.encounterName}</h2>
 
-                                        <button>Save</button>
+                                        {encounter.enccamps.length > 0 ?
+                                            (<p>{encounter.enccamps.map(encCampObj => (
+                                                <span className="font-exeter text-base sm:text-lg text-gray-400" key={encCampObj.campaignId}> {encCampObj.campaign.campaignName}</span>
+                                            ))}</p>) : (<p></p>)
+                                        }
+                                    </div>}
+                                {isEditing === encounter.encounterId &&
+                                    <div className="w-full sm:flex text-start bg-gray-600 z-30 py-2">
+                                        <form className="font-bold capitalize text-lg w-full" onSubmit={e => { e.preventDefault(); editEncounter(encounter) }}>
+                                            <input className="w-full bg-gray-700 text-center" type="text" placeholder="Encounter Name" value={encounterName} onChange={e => setEncounterName(e.target.value)} />
+                                            <div className="mt-2 flex flex-col">
+                                                <select className="border my-4 bg-transparent w-full flex-wrap" value={campaignKey} onChange={e => handleCampaignKey(e)} placeholder="Campaign">
+                                                    {usersCampaigns.map(campaign => (
+                                                        <option className="text-center bg-gray-700" key={campaign.campaignId} value={campaign.campaignId}>{campaign.campaignName}</option>
+                                                    ))}
+                                                </select>
 
+                                                <button className="my-6 border hover:text-green-400">Save</button>
+
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
+                                }
                             </div>
-                        }
-                        <div className=" -ml-16 text-start z-20">
-                            {
-                                <MonstersInEnc key={encounter.encounterId}
-                                    encounter={encounter} />
-                            }
-                        </div>
-                        {/* TAB Buttons */}
-                        {isEditing !== encounter.encounterId &&
-                            <div className="flex z-10">
 
-                                <button className="hover:text-blue-400 absolute self-center right-24" onClick={() => startEncounter(encounter)}><Play /></button>
-
-                                <button className="hover:text-blue-400 absolute self-center right-14" onClick={() => {setIsEditing(encounter.encounterId); setEncounterName(encounter.encounterName)}}><Edit /></button>
-
-                                <button className="hover:text-blue-400 absolute self-center right-4" onClick={() => setViewAlert(encounter.encounterId)}><Trash /> </button>
-                            </div>
-                        }
-                        {isEditing === encounter.encounterId &&
+                            {/* TAB Encounter Buttons */}
                             <div className="flex">
-                                <button className="hover:text-blue-400 absolute self-center right-14" onClick={() => setIsEditing("")}><X /></button>
-                                <button className="hover:text-blue-400 absolute self-center right-4" onClick={() => {setViewAlert(encounter.encounterId)}}><Trash /> </button>
+                                {isEditing !== encounter.encounterId &&
+                                    <div className="flex justify-start z-10 w-full gap-4">
+
+                                        <button className="hover:text-blue-400  sm:self-center " title="Start Encounter" onClick={() => startEncounter(encounter)}><Play /></button>
+
+                                        <button className="hover:text-blue-400  sm:self-center " title="Edit Encounter" onClick={() => { setIsEditing(encounter.encounterId); setEncounterName(encounter.encounterName) }}><Edit /></button>
+
+                                        <button className="hover:text-red-400  sm:self-center" title="Delete Encounter" onClick={() => setViewAlert(encounter.encounterId)}><Trash /> </button>
+                                    </div>
+                                }
+                                {isEditing === encounter.encounterId &&
+                                    <div className="flex justify-start gap-2 z-10 md:self-center w-full">
+                                        <button className="hover:text-blue-400  sm:self-center " title="Close without saving" onClick={() => setIsEditing("")}><X /></button>
+                                        
+                                    </div>
+                                }
                             </div>
+                        </div>
+                        
+                        <div className="text-start z-20 self-center flex-1">
+                        {
+                            <MonstersInEnc key={encounter.encounterId}
+                                encounter={encounter} />
                         }
-                        {viewAlert === encounter.encounterId && <DeleteAlert viewAlert={viewAlert} setViewAlert={setViewAlert} deleteFunc={deleteEncounter} 
-                itemName={encounter.encounterName}/>}
+                        </div>
+                        <div className=" md:w-1/5 lg:w-1/4"></div>
+
+                        {viewAlert === encounter.encounterId &&
+                            <DeleteAlert viewAlert={viewAlert} setViewAlert={setViewAlert} deleteFunc={deleteEncounter} itemName={encounter.encounterName} />}
                     </div>
                 ))}
             </div>
-            
+
         </div>
     )
 }

@@ -49,7 +49,7 @@ const Monsters = () => {
 
   useEffect(() => {getMonsters()}, [])
   return (
-    <div className='border p-5 bg-gray-700 mt-32 mb-10 max-h[70vh]'>
+    <div className='border p-1 sm:p-5 bg-gray-700 mt-32 mb-10 max-h[70vh]'>
       <div className='flex'>
       {/* TAB Search Bar */}
       <div className='flex justify-center w-full items-center p-3 relative hover:text-blue-400'>
@@ -65,12 +65,12 @@ const Monsters = () => {
           <SearchIcon />
         </div>
       </div>
-      <button className='items-center justify-center flex stroke-white hover:stroke-blue-400 hover:text-blue-400' onClick={()=>{getItemsPerPage();setIsRows(!isRows);}}>
+      <button className='items-center justify-center hidden md:flex stroke-white hover:stroke-blue-400 hover:text-blue-400' onClick={()=>{getItemsPerPage();setIsRows(!isRows);}}>
         {isRows ? <Rows/> : <Grid/> }
       </button>
       </div>
       {/* monster type buttons*/}
-      <div className='flex w-full h-15 mt-3 justify-evenly'>
+      <div className='flex w-full h-15 mt-3 justify-evenly flex-wrap md:flex-nowrap'>
         
       <input onChange={filterTypes} type='checkbox' id='bookmarked' name='monsterType' className='hidden peer/bookmarked'/>
         <label

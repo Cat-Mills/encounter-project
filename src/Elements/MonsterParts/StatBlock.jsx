@@ -1,8 +1,8 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { More, Plus, X, Down, Up, PlaceholderImage, Bookmark } from "../../icons.jsx"
+import { More, Plus, X, Down, Up, PlaceholderImage, Bookmark, Hide } from "../../icons.jsx"
 
-export default function StatBlock({ url, showBlock, name, types, monsterIn, indexOfFirstItem, indexOfLastItem, isRows, bookmarkedMonsters, setBookmarkedMonsters }) {
+export default function StatBlock({ url, showBlock, name, types, monsterIn, indexOfFirstItem, indexOfLastItem, isRows, bookmarkedMonsters, setBookmarkedMonsters, inActiveEnc }) {
 
     const [monsterStats, setMonsterStats] = useState({})
     const [showMonsterStats, setShowMonsterStats] = useState(false)
@@ -211,8 +211,8 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                     {/*BOOK ~~~ ~~~ ~~~ Monster Stat Block ~~~ ~~~ ~~~*/}
 
                     {showMonsterStats && (
-                        <div className="statblock flex-wrap p-3 lg:p-10 lg:px-20 justify-around z-20 shadow-inner shadow-gray-800">
-
+                        <div className="statblock flex-wrap p-3 lg:p-10 lg:px-20 justify-around z-20 shadow-inner shadow-gray-800 relative">
+                            {inActiveEnc && <button className="absolute left-0 mx-4 hover:text-blue-400" title="Hide Statblock" onClick={() => setShowMonsterStats(false)}><Hide/></button>}
                             {monsterImage ?
                                 <div className="flex justify-center h-40 md:h-60 mt-3 ">
                                     <img className="rounded-3xl border-2 border-double border-gray-700 shadow-md shadow-gray-900" src={monsterImage} alt={monsterImage} />

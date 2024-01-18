@@ -40,10 +40,10 @@ const DisplayPlayers = ({player, campaign, getPlayerRows,setName,setLv,setHP,set
     return(
         <div className="flex flex-col text-base sm:text-xl border border-dashed border-x-0">
             {isEditing !== player.playerId ?
-            <div className="flex flex-col p-1 w-full">
-                <div className="flex w-full justify-between sm:p-2 my-2 sm:my-0"> {player.playerName} 
+            <div className="flex flex-col p-1 w-full relative justify-center">
+                <div className="flex w-full justify-between sm:px-2 mb-2 sm:my-0 "> {player.playerName} 
                 
-                    <div className="sm:p-2 sm:w-1/6 flex justify-end gap-4">
+                    <div className="sm:p-2 sm:w-1/6 flex justify-end gap-x-4">
                         <button title="Edit Player" className="hover:text-blue-400 " onClick={() => {setIsEditing(player.playerId);
                             setName(player.playerName);
                             setLv(player.playerLv);
@@ -51,14 +51,14 @@ const DisplayPlayers = ({player, campaign, getPlayerRows,setName,setLv,setHP,set
                             setAC(player.playerAC);
                             setInit(player.playerInit)
                         }}><Edit/></button>
-                        <button title="Delete Player" className="hover:text-blue-400" onClick={() => {setViewAlert(player.playerId);console.log(viewAlert)}}><Trash/> </button>
+                        <button title="Delete Player" className="hover:text-red-400" onClick={() => {setViewAlert(player.playerId);console.log(viewAlert)}}><Trash/> </button>
                     </div>
                 </div>
-                <div className="flex justify-between text-sm sm:text-base">
+                <div className="flex justify-between text-sm sm:text-base md:text-xl lg:justify-center lg:absolute lg:w-3/4">
                     <div className="flex sm:p-2 sm:w-1/6"> Lv: {player.playerLv} </div>
                     <div className="flex sm:p-2 sm:w-1/6"> HP: {player.playerHP} </div>
                     <div className="flex sm:p-2 sm:w-1/6"> AC: {player.playerAC} </div>
-                    <div className="flex sm:p-2 sm:w-1/6"> +{player.playerInit} to initiative </div>
+                    <div className="flex sm:p-2 sm:w-1/6 lg:whitespace-nowrap"> +{player.playerInit} to initiative </div>
                 </div>
             </div>
             :
@@ -71,8 +71,8 @@ const DisplayPlayers = ({player, campaign, getPlayerRows,setName,setLv,setHP,set
                     <div className="w-1/6">Init</div>
                     
                 </div> */}
-                <form className="font-bold capitalize w-full flex flex-col sm:flex-row justify-between p-2" onSubmit={e => {e.preventDefault();editPlayer(player)}}>
-                    <div className="flex">
+                <form className="font-bold capitalize w-full flex flex-col sm:flex-row justify-between p-2 h-full" onSubmit={e => {e.preventDefault();editPlayer(player)}}>
+                    <div className="flex h-2/3">
                         <div className=" mx-0.5 text-center text-gray-400 flex flex-col">Name
                             <input type="text" className="text-center w-full" defaultValue={Name} onChange={e => setName(e.target.value)}/>
                         </div>
@@ -93,9 +93,9 @@ const DisplayPlayers = ({player, campaign, getPlayerRows,setName,setLv,setHP,set
                             <input type="text" className="text-center w-full" defaultValue={Init} onChange={e => setInit(e.target.value)}/>
                         </div>
                     </div>
-                    <div className=" flex text-center justify-center">
-                        <button className="m-3" type="submit" ><Check/></button>
-                        <button className="m-1" onClick={() => setIsEditing("")}>Cancel</button>
+                    <div className=" flex text-center justify-center h-1/3">
+                        <button className="m-3 hover:text-green-400" type="submit" ><Check/></button>
+                        <button className="m-1 hover:text-red-400" onClick={() => setIsEditing("")}>Cancel</button>
                     </div>
                 </form>
                 
