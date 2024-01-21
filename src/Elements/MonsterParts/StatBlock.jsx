@@ -113,10 +113,10 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
             <div>
                 {name && isRows &&
                     <div className="border flex justify-between m-2 p-2 px-4 bg-gray-600 relative">
-                        <button onClick={()=>{toggleSaved()}}
+                        {/* <button onClick={()=>{toggleSaved()}}
                         className={` rotate-90 -translate-x-14 absolute overflow-x-hidden`}>
                             <Bookmark bookmarked={bookmarked} monsterPage={true}/>
-                        </button>
+                        </button> */}
                         {monsterImage ?
                             <div className="flex justify-center h-10 w-10">
                                 <img className="rounded-3xl border border-gray-700" src={monsterImage} alt={monsterImage} />

@@ -19,7 +19,7 @@ export default function ActiveCard({ entities, activeEnt }) {
     return (
         <div className="flex flex-col sm:flex-row w-full gap-3 relative exeter min-h-[60vh]">
 
-            <div className="text-sm sm:text-base border-2 w-full sm:w-1/2 flex flex-col space-y-4 sm:space-y-7 py-3 bg-gray-600 justify-around">
+            <div className="text-sm sm:text-base lg:text-lg border-2 w-full sm:w-1/2 flex flex-col space-y-4 sm:space-y-7 py-3 bg-gray-600 justify-around">
                 <div className="flex w-full justify-center border-b-[1px] border-dashed [&>*]:w-1/4 pb-2">
                     <div >Initiative</div>
                     <div>Name</div>

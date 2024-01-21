@@ -73,12 +73,12 @@ const Monsters = () => {
       <div className='flex w-full h-15 mt-3 justify-evenly flex-wrap md:flex-nowrap'>
         
       <input onChange={filterTypes} type='checkbox' id='bookmarked' name='monsterType' className='hidden peer/bookmarked'/>
-        <label
+        {/* <label
           htmlFor='bookmarked'
           className='typeButton hover:ring ring-blue-900 peer-checked/bookmarked:bg-gradient-to-tr from-indigo-900 cursor-pointer select-none'
         >
           <Book />
-        </label>
+        </label> */}
 
         <input onChange={filterTypes} type='checkbox' id='aberration' name='monsterType' className='hidden peer/aberration'/>
         <label
