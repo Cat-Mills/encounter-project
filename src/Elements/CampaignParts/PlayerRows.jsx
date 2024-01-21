@@ -103,8 +103,8 @@ console.log(playerRows.length)
             {showPlayers && !showPlayerForm &&
                 <div className="relative mb-6">
                     <button className="hover:text-blue-400  mb-2 " onClick={() => setShowPlayerForm(true)}>
-                            <div className={`${!playerRows.length && 'absolute bottom-4 left-1/2 transform -translate-x-1/2'}`}><PlusAlt /></div>
-                        <div title="Add a new player" className={`${!playerRows.length ? '-mt-[16px]' : '-mt-[8px]'} absolute z-10 top-0 left-1/2 transform -translate-x-1/2`}>
+                            <div className={`${!playerRows.length && 'absolute bottom-2 left-1/2 transform -translate-x-1/2'}`}><PlusAlt /></div>
+                        <div title="Add a new player" className={`${!playerRows.length ? '-mt-[8px]' : '-mt-[8px]'} absolute z-10 top-0 left-1/2 transform -translate-x-1/2`}>
                             <Bookmark />
                         </div>
                     </button>
