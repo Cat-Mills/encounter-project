@@ -14,6 +14,7 @@ const Monsters = () => {
   const [itemsPerPage, setItemsPerPage] = useState(24)
   const [bookmarkedMonsters, setBookmarkedMonsters] = useState([])
   const [filteredTypes, setFilteredTypes] = useState([])
+  const [savedMons, setSavedMons] = useState([])
     
   function getMonsters() {
     axios
@@ -23,31 +24,43 @@ const Monsters = () => {
       })
       .catch(err => console.log(err))
   }
-  function filterTypes(el) {
-    let t = el.target.id
-    let index = filteredTypes.findIndex(el => {
-      return el === t
-    })
-    console.log(index)
-    if(index > -1){filteredTypes.splice(index, 1), console.log('hit if')} else {filteredTypes.push(t), console.log('hit else')}
-    // console.log(t)
-    setFilteredTypes([...filteredTypes])
-  }
 
-  function filterResults() {
-    return monsterList.filter((monster) => {
-      return (monster.name.toLowerCase().includes(filteredMons.name.toLowerCase()))//returning a true or false
-    })
-  }
+  const getSavedMons = () => {
+    axios.get('/api/monsters')
+        .then(res => setSavedMons(res.data))
+        .catch(err => console.log(err))
 
-  let getItemsPerPage = () => {
-    let w = window.innerWidth
-    if(!isRows){return setItemsPerPage(25)}
-    else if(w >= 1280){setItemsPerPage(23)}
-    else{setItemsPerPage(20)}
-  }
+}
 
-  useEffect(() => {getMonsters()}, [])
+
+function filterTypes(el) {
+  let type = el.target.id
+  type === 'bookmarked' ? console.log('bookmarked') : console.log(null)
+  let index = filteredTypes.findIndex(el => {
+    return el === type
+  })
+  console.log(index)
+  if(index > -1){filteredTypes.splice(index, 1), console.log('hit if')} else {filteredTypes.push(type), console.log('hit else')}
+  // console.log(t)
+  setFilteredTypes([...filteredTypes])
+  console.log('filteredTypes',filteredTypes)
+}
+
+function filterResults() {
+  return monsterList.filter((monster) => {
+    return (monster.name.toLowerCase().includes(filteredMons.name.toLowerCase()))//returning a true or false
+  })
+}
+
+let getItemsPerPage = () => {
+  let w = window.innerWidth
+  if(!isRows){return setItemsPerPage(25)}
+  else if(w >= 1280){setItemsPerPage(23)}
+  else{setItemsPerPage(20)}
+}
+
+useEffect(()=>{getSavedMons()}, [])
+useEffect(() => {getMonsters()}, [])
   return (
     <div className='border p-1 sm:p-5 bg-gray-700 mt-32 mb-10 max-h[70vh]'>
       <div className='flex'>
@@ -69,16 +82,17 @@ const Monsters = () => {
         {isRows ? <Rows/> : <Grid/> }
       </button>
       </div>
+
       {/* monster type buttons*/}
       <div className='flex w-full h-15 mt-3 justify-evenly flex-wrap md:flex-nowrap'>
         
       <input onChange={filterTypes} type='checkbox' id='bookmarked' name='monsterType' className='hidden peer/bookmarked'/>
-        {/* <label
+        <label
           htmlFor='bookmarked'
           className='typeButton hover:ring ring-blue-900 peer-checked/bookmarked:bg-gradient-to-tr from-indigo-900 cursor-pointer select-none'
         >
           <Book />
-        </label> */}
+        </label>
 
         <input onChange={filterTypes} type='checkbox' id='aberration' name='monsterType' className='hidden peer/aberration'/>
         <label
@@ -200,6 +214,9 @@ const Monsters = () => {
 
       {/*TAB Monster Rows */}
       {showMonsterList && <MonsterRows
+        savedMons={savedMons}
+        setSavedMons={setSavedMons}
+        getSavedMons={getSavedMons}
         itemsPerPage={itemsPerPage}
         monsterList={filteredMons ? filterResults(filteredMons) : monsterList}
         setMonsterList={setMonsterList}

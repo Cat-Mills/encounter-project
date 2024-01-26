@@ -5,7 +5,7 @@ import StatBlock from "./StatBlock"
 import { ChevronLeft, ChevronRight, Bookmark} from "../../icons"
 
 
-export default function MonsterRows({monsterList, itemsPerPage, searchText, types, isRows, bookmarkedMonsters, setBookmarkedMonsters}) {
+export default function MonsterRows({monsterList, itemsPerPage, searchText, types, isRows, bookmarkedMonsters, setBookmarkedMonsters, savedMons, setSavedMons, getSavedMons}) {
     const [currentPage, setCurrentPage] = useState(1)
     const [counter, setCounter] = useState(0)
     
@@ -51,6 +51,9 @@ return(
                 isRows={isRows}
                 bookmarkedMonsters={bookmarkedMonsters}
                 setBookmarkedMonsters={setBookmarkedMonsters}
+                savedMons={savedMons}
+                setSavedMons={setSavedMons}
+                getSavedMons={getSavedMons}
             />
         })}
     </div>
