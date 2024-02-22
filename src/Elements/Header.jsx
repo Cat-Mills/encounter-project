@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import '../index.css';
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { HelpIcon } from "../icons";
+import { HelpIcon, Bug } from "../icons";
 
 
 
@@ -33,7 +33,8 @@ const Header = () => {
                     <NavLink className="navLink" to='/encounters' onClick={() => setCurrPage('Enc')}>Encounters</NavLink>
                     <NavLink className="navLink" to='/campaigns' onClick={() => setCurrPage('Cam')}>Campaigns</NavLink>
                     <NavLink className="navLink" to='/profile' onClick={() => setCurrPage('Prof')}>Profile</NavLink>
-                    <NavLink className="navLink absolute top-24 right-4" to='/help' onClick={() => setCurrPage('Help')}><HelpIcon/></NavLink>
+                    <NavLink className="navLink absolute top-24 right-14 hover:text-blue-400" to='/help' title="Help" onClick={() => setCurrPage('Help')}><HelpIcon/></NavLink>
+                    <NavLink target="_blank" to={"https://github.com/Cat-Mills/encounter-project/issues"} title="Report a bug" className="navLink absolute top-24 right-4 hover:text-blue-400"><Bug/></NavLink>
                 </div>
             ) : <div></div>}
         </div>

@@ -144,7 +144,7 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
             console.log('savedMons',savedMons)
         }
         let bookFilter = false
-    types.includes('bookmarked') ? (bookFilter = true) : bookFilter = false
+    // types.includes('bookmarked') ? (bookFilter = true) : bookFilter = false
 
 
     return (!types || types.includes(monsterStats.type) || types.length === 0 && paginationConfirm) && (
@@ -153,14 +153,14 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
                 {name && isRows &&
                     <div className="border flex justify-between m-2 p-2 px-4 bg-gray-600 relative">
 
-                        {!bookmarked && <button onClick={()=>{saveMonster(monsterSaveData)}} value={monsterSaveData}
+                        {/* {!bookmarked && <button onClick={()=>{saveMonster(monsterSaveData)}} value={monsterSaveData}
                         className={` rotate-90 -translate-x-14 absolute overflow-x-hidden`}>
                             <Bookmark bookmarked={bookmarked} monsterPage={true}/>
                         </button>}
                         {bookmarked && <button onClick={()=>{removeMonster(monsterSaveData)}} value={monsterSaveData}
                         className={` rotate-90 -translate-x-14 absolute overflow-x-hidden`}>
                             <Bookmark bookmarked={bookmarked} monsterPage={true}/>
-                        </button>}
+                        </button>} */}
 
                         {monsterImage ?
                             <div className="flex justify-center h-10 w-10">
