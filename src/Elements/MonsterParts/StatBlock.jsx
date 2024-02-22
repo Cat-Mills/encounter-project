@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import { More, Plus, X, Down, Up, PlaceholderImage, Bookmark, Hide } from "../../icons.jsx"
 
-export default function StatBlock({ url, showBlock, name, types, monsterIn, indexOfFirstItem, indexOfLastItem, isRows, bookmarkedMonsters, setBookmarkedMonsters, inActiveEnc }) {
+export default function StatBlock({ url, showBlock, name, types, monsterIn, indexOfFirstItem, indexOfLastItem, isRows, bookmarkedMonsters, setBookmarkedMonsters, inActiveEnc, savedMons, setSavedMons, getSavedMons }) {
 
     const [monsterStats, setMonsterStats] = useState({})
     const [showMonsterStats, setShowMonsterStats] = useState(false)
@@ -93,30 +93,75 @@ export default function StatBlock({ url, showBlock, name, types, monsterIn, inde
     } else {
         paginationConfirm = true
     }
-    function toggleSaved(){
-        if(!bookmarkedMonsters.includes(monsterStats.index)){
-            setBookmarkedMonsters([...bookmarkedMonsters,monsterStats.index])
-            setBookmarked(true)
-        } else {
-            setBookmarked(false)
-            setBookmarkedMonsters(monsters => {
-                return monsters.filter(mon => mon !== monsterStats.index)
-            })
-        }
-        console.log(monsterStats.index)
-        console.log(bookmarked)
-        console.log(bookmarkedMonsters)
+    // function toggleSaved(){
+    //     if(!bookmarkedMonsters.includes(monsterStats.index)){
+    //         setBookmarkedMonsters([...bookmarkedMonsters,monsterStats.index])
+    //         setBookmarked(true)
+    //     } else {
+    //         setBookmarked(false)
+    //         setBookmarkedMonsters(monsters => {
+    //             return monsters.filter(mon => mon !== monsterStats.index)
+    //         })
+    //     }
+    //     // console.log(monsterStats.index)
+    //     // console.log(bookmarked)
+    //     // console.log(bookmarkedMonsters)
+    // }
+    let monsterSaveData = {
+        monsterIndex: monsterStats.index,
+        url: monsterStats.url,
+        name: monsterStats.name
     }
+    function removeMonster(monster){
+        let id = null
+        for(let i of savedMons){
+            if(monster.monsterIndex === i.monsterIndex){
+                id = i.monsterId
+            }
+        }
+        console.log(id)
+        axios
+            .delete(`/api/monsters/${id}`)
+            .then(res => {
+                getSavedMons()
+                console.log(res.data)
+                setBookmarked(false)
+                console.log(savedMons)
+            })
+    }
+
+    function saveMonster(monster){
+        console.log(monsterStats.index === monster.monsterIndex)
+        setBookmarked(true)
+        axios
+            .post(`/api/monsters`, {monsterUrl: monster.url, monsterIndex: monster.monsterIndex})
+            .then(res => {
+                console.log(res.data)
+                getSavedMons()
+            })
+            .catch(err => console.log(err))
+            
+            console.log('savedMons',savedMons)
+        }
+        let bookFilter = false
+    // types.includes('bookmarked') ? (bookFilter = true) : bookFilter = false
+
 
     return (!types || types.includes(monsterStats.type) || types.length === 0 && paginationConfirm) && (
         <div >
             <div>
                 {name && isRows &&
                     <div className="border flex justify-between m-2 p-2 px-4 bg-gray-600 relative">
-                        {/* <button onClick={()=>{toggleSaved()}}
+
+                        {/* {!bookmarked && <button onClick={()=>{saveMonster(monsterSaveData)}} value={monsterSaveData}
                         className={` rotate-90 -translate-x-14 absolute overflow-x-hidden`}>
                             <Bookmark bookmarked={bookmarked} monsterPage={true}/>
-                        </button> */}
+                        </button>}
+                        {bookmarked && <button onClick={()=>{removeMonster(monsterSaveData)}} value={monsterSaveData}
+                        className={` rotate-90 -translate-x-14 absolute overflow-x-hidden`}>
+                            <Bookmark bookmarked={bookmarked} monsterPage={true}/>
+                        </button>} */}
+
                         {monsterImage ?
                             <div className="flex justify-center h-10 w-10">
                                 <img className="rounded-3xl border border-gray-700" src={monsterImage} alt={monsterImage} />

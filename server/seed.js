@@ -21,7 +21,7 @@ await db.sync({force: true}).then(async () => {
     const hash = bcrypt.hashSync('test', salt)
 
     await User.create({username: 'tester', hashedPass: hash})
-    await Campaign.bulkCreate(campaignData)
+    // await Campaign.bulkCreate(campaignData)
     // await Encounter.bulkCreate(encounterData)
     console.log('db has been successfully reset and seeded!')
 })

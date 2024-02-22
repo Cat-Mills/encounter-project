@@ -3,6 +3,7 @@ import axios from "axios"
 import React from "react"
 import Register from "../Elements/Register.jsx"
 import Login from "../Elements/Login.jsx"
+import { NavLink } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import '../index.css'
@@ -39,6 +40,7 @@ const Landing = () => {
     return (
         <div className="text-2xl flex flex-col border border-solid bg-gray-700 m-6 sm:m-10 h-[50vh] align-middle items-center">
             <div className="absolute top-10 font-vinque text-4xl text-shadow shadow-black">Encounter Emporium</div>
+            <div className="w-screen bg-blue-400/50 text-lg absolute top-32">Application still under development. Please report any bugs <NavLink target="_blank" to={"https://github.com/Cat-Mills/encounter-project/issues"} className="underline hover:text-blue-800">here</NavLink>. </div>
         { register ? 
             <Register 
                 setPassword={setPassword}
